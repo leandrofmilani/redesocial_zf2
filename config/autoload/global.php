@@ -43,6 +43,9 @@ return array(
             'Admin\Controller\Relacionamentos.index',
             'Admin\Controller\Relacionamentos.save',
             'Admin\Controller\Relacionamentos.delete',
+            'Admin\Controller\Sexos.index',
+            'Admin\Controller\Sexos.save',
+            'Admin\Controller\Sexos.delete',
 
 
         ),
@@ -83,6 +86,9 @@ return array(
                     'Admin\Controller\Relacionamentos.index',
                     'Admin\Controller\Relacionamentos.save',
                     'Admin\Controller\Relacionamentos.delete',
+                    'Admin\Controller\Sexos.index',
+                    'Admin\Controller\Sexos.save',
+                    'Admin\Controller\Sexos.delete',
                 )
             ),
         )

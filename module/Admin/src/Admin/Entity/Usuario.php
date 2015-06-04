@@ -72,6 +72,13 @@ class Usuario
      */
     protected $dataNasc;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Sexo")
+     * @ORM\JoinColumn(name="id_sexo", referencedColumnName="id")
+     *
+     * @var \Admin\Entity\Sexo
+     */
+    protected $sexo;
 
     /**
     *@ORM\OneToMany(targetEntity="Post", mappedBy="usuario")
@@ -176,6 +183,22 @@ class Usuario
     public function setDataNasc($dataNasc)
     {
         $this->dataNasc = $dataNasc;
+    }
+
+    /**
+     * @return Sexo
+     */
+    public function getSexo()
+    {
+        return $this->sexo;
+    }
+
+    /**
+     * @param Sexo $sexo
+     */
+    public function setSexo(\Admin\Entity\Sexo $sexo)
+    {
+        $this->sexo = $sexo;
     }
 
 

@@ -83,6 +83,25 @@ class Usuario extends Form
         ));
 
         $this->add(array(
+            'type' => 'DoctrineModule\Form\Element\ObjectRadio',
+            'name' => 'sexo',
+            'options' => array(
+                'label' => 'Sexo:*',
+                'object_manager' => $em,
+                'target_class' => 'Admin\Entity\Sexo',
+                'property' => 'descricao',
+                'is_method' => true,
+                'find_method' => array(
+                    'name' => 'findBy',
+                    'params' => array(
+                        'criteria' => array(),
+                        'orderBy' => array('descricao' => 'ASC'),
+                    ),
+                ),
+            ),
+        ));
+
+        $this->add(array(
             'name' => 'submit',
             'type' => 'submit',
             'attributes' => array(

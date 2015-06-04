@@ -82,8 +82,9 @@ class UsuariosController extends AbstractActionController
                 $usuario->setEmail($values['email']);
                 $usuario->setSenha($values['senha']);
                 $usuario->setRole($values['role']);
-                //$usuario->setDataNasc($values['dataNasc']);
                 $usuario->setDataNasc(new \DateTime($values['dataNasc']));
+                $sexo = $em->find('\Admin\Entity\Sexo', $values['sexo']);
+                $usuario->setSexo($sexo);
                 $em->persist($usuario);
 
                 try {
