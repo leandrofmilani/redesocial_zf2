@@ -40,12 +40,16 @@ return array(
             'Admin\Controller\Exibirpost.index',
             'Admin\Controller\Exibirpost.exibir',
             'Admin\Controller\Exibirpost.id',
+            'Admin\Controller\Relacionamentos.index',
+            'Admin\Controller\Relacionamentos.save',
+            'Admin\Controller\Relacionamentos.delete',
 
 
         ),
         'privilege' => array(
             'VISITANTE' => array(
                 'allow' => array(
+                    'Admin\Controller\Usuarios.save',
                     'Admin\Controller\Login.login',
                     'Admin\Controller\Comentarios.index',
                     'Admin\Controller\Comentarios.save',
@@ -76,6 +80,9 @@ return array(
                     'Admin\Controller\Usuarios.delete',
                     'Admin\Controller\Administracao.index',
                     'Admin\Controller\Posts.delete',
+                    'Admin\Controller\Relacionamentos.index',
+                    'Admin\Controller\Relacionamentos.save',
+                    'Admin\Controller\Relacionamentos.delete',
                 )
             ),
         )

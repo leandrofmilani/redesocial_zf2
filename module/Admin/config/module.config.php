@@ -13,6 +13,7 @@ return array(
             'Admin\Controller\Login' => 'Admin\Controller\LoginController',
             'Admin\Controller\Logout' => 'Admin\Controller\LogoutController',
             'Admin\Controller\Exibirpost' => 'Admin\Controller\ExibirpostController',
+            'Admin\Controller\Relacionamentos' => 'Admin\Controller\RelacionamentosController',
         ),
     ),
     //ConfiguraÃ§Ã£o doctrine
@@ -91,6 +92,19 @@ return array(
                     ),
                 ),
             ), 
+            'relacionamentos' => array(
+                'type' => 'segment',             
+                'options' => array(
+                    'route' => '/admin/relacionamentos/index/[page/:page]',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Admin\Controller',
+                        'controller'    => 'Relacionamentos',
+                        'action'        => 'index',
+                        'module'        => 'admin',
+                        'page' => 1, //exibe por pagina
+                    ),
+                ),
+            ),
             'comentarios' => array(
                 'type' => 'segment',             
                 'options' => array(

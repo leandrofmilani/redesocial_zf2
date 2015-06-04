@@ -1,0 +1,30 @@
+<button class="btn btn-success" onclick="location.href='/admin/relacionamentos/save'">Novo Relacionamento</button>
+
+<table class="table">
+    <thead>
+    <tr>
+        <td>Id</td><td>Descrição</td><td>Editar</td><td>Excluir</td>
+    </tr>
+    </thead>
+    <tbody>
+        <?php foreach($relacionamentos as $relacionamento) {
+        ?>
+            <tr>
+                <td>
+                    <?php echo $relacionamento->getId(); ?>
+                </td>
+                <td>
+                    <?php echo $relacionamento->getDescRelacionamento(); ?>
+                </td>
+                <td>
+                    <a href="/admin/relacionamentos/save/id/<?php echo $relacionamento->getId(); ?>">Editar</a>
+                </td>
+                <td>
+                    <a href="/admin/relacionamentos/delete/id/<?php echo $relacionamento->getId(); ?>">Excluir</a>
+                </td>
+            </tr>
+        <?php }
+        ?>
+    </tbody>
+
+</table>
