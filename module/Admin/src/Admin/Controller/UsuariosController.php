@@ -78,6 +78,21 @@ class UsuariosController extends AbstractActionController
                 if ( (int) $values['id'] > 0)
                     $usuario = $em->find('\Admin\Entity\Usuario', $values['id']);
 
+                //Logica para pegar idade (fazer function)
+                $data_atual = (new \DateTime("now"));
+                $datanascimento = (new \DateTime($values['dataNasc']));
+                $intervalo = date_diff($data_atual, $datanascimento);
+                $idade = $intervalo->y;
+
+                if ($idade < 18) {
+                    echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=/admin/usuarios/save'>";
+                    $this->flashMessenger()->addErrorMessage('Não é possivel cadastrar menores de 18 anos de idade!');
+                    
+                    return new ViewModel(
+                        array('form' => $form)
+                    );
+                }
+
                 $usuario->setNome($values['nome']);
                 $usuario->setSobrenome($values['sobrenome']);
                 $usuario->setEmail($values['email']);

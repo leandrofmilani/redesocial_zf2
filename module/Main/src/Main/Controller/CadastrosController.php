@@ -42,20 +42,34 @@ class CadastrosController extends AbstractActionController
                 if ( (int) $values['id'] > 0)
                     $usuario = $em->find('\Admin\Entity\Usuario', $values['id']);
 
+                //Logica para pegar idade (fazer function)
+                $data_atual = (new \DateTime("now"));
+                $datanascimento = (new \DateTime($values['dataNasc']));
+                $intervalo = date_diff($data_atual, $datanascimento);
+                $idade = $intervalo->y;
+
+                if ($idade < 18) {
+                    echo "<div class='alert alert-danger' align='center'><h1>Você é menor de idade. Impossível se cadastrar! :(</h1></div>";
+                    echo "<meta HTTP-EQUIV='refresh' CONTENT='5;URL=/'>";
+                    return new ViewModel(
+                        array('form' => $form)
+                    );
+                }
+
                 $usuario->setNome($values['nome']);
                 $usuario->setSobrenome($values['sobrenome']);
                 $usuario->setEmail($values['email']);
                 $usuario->setCelular($values['celular']);
                 $usuario->setSenha($values['senha']);
                 $usuario->setRole($values['role']);
-                $usuario->setDataNasc(new \DateTime($values['dataNasc']));
+                $usuario->setDataNasc($datanascimento);
                 $sexo = $em->find('\Admin\Entity\Sexo', $values['sexo']);
                 $usuario->setSexo($sexo);
                 $em->persist($usuario);
 
                 try {
                     $em->flush();
-                    $this->flashMessenger()->addSuccessMessage('Usuário armazenado com sucesso');
+                    $this->flashMessenger()->addSuccessMessage('Cadastro realizado com sucesso!');
                 } catch (\Exception $e) {
                     $this->flashMessenger()->addErrorMessage('Erro ao armazenar usuário');
                 }

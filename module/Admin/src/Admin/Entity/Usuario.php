@@ -247,7 +247,6 @@ class Usuario
         $this->sexo = $sexo;
     }
 
-
     /**
      * @return array
      */
