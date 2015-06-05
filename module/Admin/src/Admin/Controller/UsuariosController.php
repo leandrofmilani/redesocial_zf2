@@ -79,7 +79,9 @@ class UsuariosController extends AbstractActionController
                     $usuario = $em->find('\Admin\Entity\Usuario', $values['id']);
 
                 $usuario->setNome($values['nome']);
+                $usuario->setSobrenome($values['sobrenome']);
                 $usuario->setEmail($values['email']);
+                $usuario->setCelular($values['celular']);
                 $usuario->setSenha($values['senha']);
                 $usuario->setRole($values['role']);
                 $usuario->setDataNasc(new \DateTime($values['dataNasc']));

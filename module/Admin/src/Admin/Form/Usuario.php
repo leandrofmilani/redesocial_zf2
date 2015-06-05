@@ -33,6 +33,17 @@ class Usuario extends Form
             )
         ));
 
+        $this->add(array(
+            'name' => 'sobrenome',
+            'type' => 'text',
+            'options' => array(
+                'label' => 'Sobrenome:*'
+            ),
+            'attributes' => array(
+                'placeholder' => 'Informe o sobrenome',
+                'id' => 'sobrenome'
+            )
+        ));
 
         $this->add(array(
             'name' => 'email',
@@ -43,6 +54,18 @@ class Usuario extends Form
             'attributes' => array(
                 'placeholder' => 'Informe o e-mail',
                 'id' => 'email'
+            )
+        ));
+
+        $this->add(array(
+            'name' => 'celular',
+            'type' => 'text',
+            'options' => array(
+                'label' => 'Celular:*'
+            ),
+            'attributes' => array(
+                'placeholder' => '88 8888-8888',
+                'id' => 'celular'
             )
         ));
 

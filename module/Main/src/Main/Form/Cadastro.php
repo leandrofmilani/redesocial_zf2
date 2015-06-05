@@ -34,6 +34,18 @@ class Cadastro extends Form
         ));
 
         $this->add(array(
+            'name' => 'sobrenome',
+            'type' => 'text',
+            'options' => array(
+                'label' => 'Sobrenome:*'
+            ),
+            'attributes' => array(
+                'placeholder' => 'Informe o sobrenome',
+                'id' => 'sobrenome'
+            )
+        ));
+
+        $this->add(array(
             'type' => 'Zend\Form\Element\Email',
             'name' => 'email',
             'options' => array(
@@ -41,6 +53,18 @@ class Cadastro extends Form
             ),
             'attributes' => array(
                 'placeholder' => 'seu@email.com.br'
+            )
+        ));
+
+        $this->add(array(
+            'name' => 'celular',
+            'type' => 'text',
+            'options' => array(
+                'label' => 'Celular:*'
+            ),
+            'attributes' => array(
+                'placeholder' => '88 8888-8888',
+                'id' => 'celular'
             )
         ));
 

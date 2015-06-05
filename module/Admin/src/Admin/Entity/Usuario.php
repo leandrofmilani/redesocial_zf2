@@ -56,7 +56,21 @@ class Usuario
      *
      * @var string
      */
+    protected $sobrenome;
+
+    /**
+     * @ORM\Column (type="string")
+     *
+     * @var string
+     */
     protected $email;
+
+    /**
+     * @ORM\Column (type="string")
+     *
+     * @var string
+     */
+    protected $celular;
 
     /**
      * @ORM\Column (type="string")
@@ -139,6 +153,22 @@ class Usuario
     /**
      * @return string
      */
+    public function getSobrenome()
+    {
+        return $this->sobrenome;
+    }
+
+    /**
+     * @param string $sobrenome
+     */
+    public function setSobrenome($sobrenome)
+    {
+        $this->sobrenome = $sobrenome;
+    }
+
+    /**
+     * @return string
+     */
     public function getEmail()
     {
         return $this->email;
@@ -150,6 +180,22 @@ class Usuario
     public function setEmail($email)
     {
         $this->email = $email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCelular()
+    {
+        return $this->celular;
+    }
+
+    /**
+     * @param string $celular
+     */
+    public function setCelular($celular)
+    {
+        $this->celular = $celular;
     }
 
     /**
@@ -234,7 +280,7 @@ class Usuario
                 'validators' => array(
                     array(
                         'name' => 'NotEmpty',
-                        'options' => array('message' => 'O campo Nome nÃ£o pode estar vazio')
+                        'options' => array('message' => 'O campo Nome não pode estar vazio')
                     ),
                     array(
                         'name' => 'StringLength',
@@ -243,6 +289,33 @@ class Usuario
                             'min' => 3,
                             'max' => 255,
                             'message' => 'O campo nome deve ter mais que 3 caracteres e menos que 255',
+                        ),
+                    ),
+                ),
+                'filters' => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                    array('name' => 'StringToUpper',
+                        'options' => array('encoding' => 'UTF-8')
+                    ),
+                ),
+            )));
+            
+            $inputFilter->add($factory->createInput(array(
+                'name' => 'sobrenome',
+                'required' => true,
+                'validators' => array(
+                    array(
+                        'name' => 'NotEmpty',
+                        'options' => array('message' => 'O campo Nome não pode estar vazio')
+                    ),
+                    array(
+                        'name' => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min' => 3,
+                            'max' => 255,
+                            'message' => 'O campo sobrenome deve ter mais que 3 caracteres e menos que 255',
                         ),
                     ),
                 ),
