@@ -80,7 +80,20 @@ return array(
                         'page' => 1, //exibe por pagina
                     ),
                 ),
-            ),  
+            ), 
+            'cadastros' => array(
+                'type' => 'segment',             
+                'options' => array(
+                    'route' => '/main/cadastros/novo',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Main\Controller',
+                        'controller'    => 'Cadastros',
+                        'action'        => 'novo',
+                        'module'        => 'main',
+                        'page' => 1, //exibe por pagina
+                    ),
+                ),
+            ), 
         ),
     ),
     'service_manager' => array(
@@ -106,6 +119,7 @@ return array(
         'invokables' => array(
             'Main\Controller\Index' => 'Main\Controller\IndexController',
             'Main\Controller\Pesquisas' => 'Main\Controller\PesquisasController',
+            'Main\Controller\Cadastros' => 'Main\Controller\CadastrosController',
         ),
     ),
     'view_manager' => array(
