@@ -47,12 +47,12 @@ class Usuario extends Form
 
         $this->add(array(
             'name' => 'email',
-            'type' => 'text',
+            'type' => 'Zend\Form\Element\Email',
             'options' => array(
                 'label' => 'E-mail:*'
             ),
             'attributes' => array(
-                'placeholder' => 'Informe o e-mail',
+                'placeholder' => 'seu@email.com.br',
                 'id' => 'email'
             )
         ));
@@ -83,7 +83,7 @@ class Usuario extends Form
 
          $this->add(array(
             'name' => 'dataNasc',
-            'type' => 'date',
+            'type' => 'Zend\Form\Element\Date',
             'options' => array(
                 'label' => 'Data Nasc:*'
             ),

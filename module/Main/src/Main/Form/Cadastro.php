@@ -52,7 +52,8 @@ class Cadastro extends Form
                 'label' => 'Email'
             ),
             'attributes' => array(
-                'placeholder' => 'seu@email.com.br'
+                'placeholder' => 'seu@email.com.br',
+                'id' => 'email'
             )
         ));
 
