@@ -77,6 +77,35 @@ class Usuario
      *
      * @var string
      */
+    protected $profissao;
+
+    /**
+     * @ORM\Column (type="string")
+     *
+     * @var string
+     */
+    protected $localtrabalho;
+
+    /**
+     * @ORM\Column (type="string")
+     *
+     * @var string
+     */
+    protected $endereco;
+
+    /**
+     * @ORM\Column (type="string")
+     *
+     * @var string
+     */
+    protected $formacao;
+
+
+    /**
+     * @ORM\Column (type="string")
+     *
+     * @var string
+     */
     protected $senha;
 
     /**
@@ -204,6 +233,70 @@ class Usuario
     public function setCelular($celular)
     {
         $this->celular = $celular;
+    }
+
+    /**
+     * @return string
+     */
+    public function getProfissao()
+    {
+        return $this->profissao;
+    }
+
+    /**
+     * @param string $profissao
+     */
+    public function setProfissao($profissao)
+    {
+        $this->profissao = $profissao;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLocaltrabalho()
+    {
+        return $this->localtrabalho;
+    }
+
+    /**
+     * @param string $localtrabalho
+     */
+    public function setLocaltrabalho($localtrabalho)
+    {
+        $this->localtrabalho = $localtrabalho;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEndereco()
+    {
+        return $this->endereco;
+    }
+
+    /**
+     * @param string $endereco
+     */
+    public function setEndereco($endereco)
+    {
+        $this->endereco = $endereco;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFormacao()
+    {
+        return $this->formacao;
+    }
+
+    /**
+     * @param string $formacao
+     */
+    public function setFormacao($formacao)
+    {
+        $this->formacao = $formacao;
     }
 
     /**
