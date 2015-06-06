@@ -84,9 +84,9 @@ class UsuariosController extends AbstractActionController
                 $intervalo = date_diff($data_atual, $datanascimento);
                 $idade = $intervalo->y;
 
-                if ($idade < 18) {
+                if ($idade < 16) {
                     echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=/admin/usuarios/save'>";
-                    $this->flashMessenger()->addErrorMessage('Não é possivel cadastrar menores de 18 anos de idade!');
+                    $this->flashMessenger()->addErrorMessage('Não é possivel cadastrar menores de 16 anos de idade!');
                     
                     return new ViewModel(
                         array('form' => $form)

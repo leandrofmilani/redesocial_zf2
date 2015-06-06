@@ -48,8 +48,8 @@ class CadastrosController extends AbstractActionController
                 $intervalo = date_diff($data_atual, $datanascimento);
                 $idade = $intervalo->y;
 
-                if ($idade < 18) {
-                    echo "<div class='alert alert-danger' align='center'><h1>Você é menor de idade. Impossível se cadastrar! :(</h1></div>";
+                if ($idade < 16) {
+                    echo "<div class='alert alert-danger' align='center'><h1>Você é menor de 16 anos. Impossível se cadastrar! :(</h1></div>";
                     echo "<meta HTTP-EQUIV='refresh' CONTENT='5;URL=/'>";
                     return new ViewModel(
                         array('form' => $form)
