@@ -64,10 +64,10 @@ class Usuario extends \Admin\Entity\Usuario implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'id', 'role', 'inputFilter', 'nome', 'email', 'senha', 'dataNasc', 'posts');
+            return array('__isInitialized__', 'id', 'role', 'inputFilter', 'nome', 'sobrenome', 'email', 'celular', 'senha', 'dataNasc', 'sexo', 'relacionamento', 'posts');
         }
 
-        return array('__isInitialized__', 'id', 'role', 'inputFilter', 'nome', 'email', 'senha', 'dataNasc', 'posts');
+        return array('__isInitialized__', 'id', 'role', 'inputFilter', 'nome', 'sobrenome', 'email', 'celular', 'senha', 'dataNasc', 'sexo', 'relacionamento', 'posts');
     }
 
     /**
@@ -246,6 +246,28 @@ class Usuario extends \Admin\Entity\Usuario implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
+    public function getSobrenome()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getSobrenome', array());
+
+        return parent::getSobrenome();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setSobrenome($sobrenome)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setSobrenome', array($sobrenome));
+
+        return parent::setSobrenome($sobrenome);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getEmail()
     {
 
@@ -263,6 +285,28 @@ class Usuario extends \Admin\Entity\Usuario implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setEmail', array($email));
 
         return parent::setEmail($email);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCelular()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCelular', array());
+
+        return parent::getCelular();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setCelular($celular)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCelular', array($celular));
+
+        return parent::setCelular($celular);
     }
 
     /**
@@ -307,6 +351,50 @@ class Usuario extends \Admin\Entity\Usuario implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setDataNasc', array($dataNasc));
 
         return parent::setDataNasc($dataNasc);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getSexo()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getSexo', array());
+
+        return parent::getSexo();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setSexo(\Admin\Entity\Sexo $sexo)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setSexo', array($sexo));
+
+        return parent::setSexo($sexo);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getRelacionamento()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getRelacionamento', array());
+
+        return parent::getRelacionamento();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setRelacionamento(\Admin\Entity\Relacionamento $relacionamento)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setRelacionamento', array($relacionamento));
+
+        return parent::setRelacionamento($relacionamento);
     }
 
     /**

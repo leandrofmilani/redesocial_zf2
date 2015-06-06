@@ -20,14 +20,14 @@ class Relacionamento extends Form
 		));
 
 		$this->add(array(
-			'name' => 'desc_relacionamento',
+			'name' => 'descricao',
 			'type' => 'text',
 			'options' => array(
 				'label' => 'Descricao:'
 			),
 			'attributes' => array(
 				'placeholder' => 'Informe a descricao',
-				'id' => 'desc_relacionamento'
+				'id' => 'descricao'
 			)
 		));
 

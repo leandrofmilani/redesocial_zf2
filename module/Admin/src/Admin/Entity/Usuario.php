@@ -95,6 +95,14 @@ class Usuario
     protected $sexo;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Relacionamento")
+     * @ORM\JoinColumn(name="id_relacionamento", referencedColumnName="id")
+     *
+     * @var \Admin\Entity\Relacionamento
+     */
+    protected $relacionamento;
+
+    /**
     *@ORM\OneToMany(targetEntity="Post", mappedBy="usuario")
     *
     */
@@ -245,6 +253,22 @@ class Usuario
     public function setSexo(\Admin\Entity\Sexo $sexo)
     {
         $this->sexo = $sexo;
+    }
+
+    /**
+     * @return Relacionamento
+     */
+    public function getRelacionamento()
+    {
+        return $this->relacionamento;
+    }
+
+    /**
+     * @param Relacionamento $relacionamento
+     */
+    public function setRelacionamento(\Admin\Entity\Relacionamento $relacionamento)
+    {
+        $this->relacionamento = $relacionamento;
     }
 
     /**

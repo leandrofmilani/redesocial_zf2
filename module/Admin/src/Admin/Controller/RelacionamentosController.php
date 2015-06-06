@@ -64,7 +64,7 @@ class RelacionamentosController extends AbstractActionController
                 if ((int)$values['id']>0)
                     $relacionamento = $em->find('\Admin\Entity\Relacionamento', $values['id']);
                 
-                $relacionamento->setDescRelacionamento($values['desc_relacionamento']);
+                $relacionamento->setDescricao($values['descricao']);
                 $em->persist($relacionamento);
 
                 try{

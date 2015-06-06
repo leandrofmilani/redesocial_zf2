@@ -31,27 +31,27 @@ class Relacionamento
 	*/
 	protected $inputFilter;
 
-    /**
+     /**
      * @ORM\Column (type="string")
      *
      * @var string
      */
-    protected $desc_relacionamento;
+    protected $descricao;
 
     /**
      * @return string
      */
-    public function getDescRelacionamento()
+    public function getDescricao()
     {
-        return $this->desc_relacionamento;
+        return $this->descricao;
     }
 
     /**
-     * @param string $desc_interesse
+     * @param string $descricao
      */
-    public function setDescRelacionamento($desc_relacionamento)
+    public function setDescricao($descricao)
     {
-        $this->desc_relacionamento = $desc_relacionamento;
+        $this->descricao = $descricao;
     }
 
     /**
