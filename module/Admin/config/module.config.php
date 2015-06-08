@@ -15,6 +15,7 @@ return array(
             'Admin\Controller\Exibirpost' => 'Admin\Controller\ExibirpostController',
             'Admin\Controller\Relacionamentos' => 'Admin\Controller\RelacionamentosController',
             'Admin\Controller\Sexos' => 'Admin\Controller\SexosController',
+            'Admin\Controller\Perfil' => 'Admin\Controller\PerfilController',
         ),
     ),
     //ConfiguraÃ§Ã£o doctrine

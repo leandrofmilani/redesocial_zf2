@@ -51,6 +51,8 @@ return array(
             'Admin\Controller\Sexos.index',
             'Admin\Controller\Sexos.save',
             'Admin\Controller\Sexos.delete',
+            'Admin\Controller\Perfil.save',
+            'Admin\Controller\Perfil.delete',
 
         ),
         'privilege' => array(
@@ -81,6 +83,7 @@ return array(
                     'Main\Controller\Atualizacoes.index',
                     'Main\Controller\Atualizacoes.save',
                     'Main\Controller\Atualizacoes.delete',
+                    'Admin\Controller\Perfil.save',
                 )
             ),
             'ADMIN' => array(
