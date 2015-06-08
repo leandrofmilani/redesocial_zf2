@@ -27,7 +27,7 @@ class PesquisasController extends AbstractActionController
         }
 
         $em =  $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-        $query = $em->createQuery("SELECT Post FROM \Admin\Entity\Post Post WHERE Post.titulo LIKE :pesquisa or Post.minText LIKE :pesquisa or Post.postComp LIKE :pesquisa or Post.dataPost LIKE :pesquisa ");
+        $query = $em->createQuery("SELECT Usuario FROM \Admin\Entity\Usuario Usuario WHERE Usuario.nome LIKE :pesquisa or Usuario.sobrenome LIKE :pesquisa");
         $query->setParameter('pesquisa', '%'.$pesquisa.'%');
 
         // Logica para verificar se obteve resultado
