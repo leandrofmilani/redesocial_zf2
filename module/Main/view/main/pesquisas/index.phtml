@@ -13,13 +13,13 @@
               <a class="story-img" href="#"><img src="/img/postdefault.jpg" style="width:100px;height:100px" class="img-circle"></a>
             </div>
             <div class="col-md-10 col-sm-9">
-              <h3><?php echo $pesquisa->getTitulo(); ?></h3>
+              <h3><?php echo $pesquisa->getNome(); ?></h3>
               <div class="row">
                 <div class="col-xs-9">
-                  <p><?php echo $pesquisa->getMinText(); ?></p>
+                  <p><?php echo $pesquisa->getSobrenome(); ?></p>
                   <p class="lead"><a class="btn btn-default" href="/admin/exibirpost/index/id/<?php echo $pesquisa->getId(); ?>">Visualizar</a></p>
                   <p class="pull-right"><span class="label label-default">keyword</span> <span class="label label-default">tag</span> <span class="label label-default">pesquisa</span></p>
-                  <ul class="list-inline"><li><i>Ultima Edição:</i><?php echo $pesquisa->getDataPost(); ?></li><li><a href="/admin/exibirpost/index/id/<?php echo $pesquisa->getId(); ?>"><i class="glyphicon glyphicon-comment"></i> <?php echo count($pesquisa->getComentarios()); ?> Comentários</a></li></ul>
+                  <ul class="list-inline"><li><i>Ultima Edição:</i><?php echo $pesquisa->getNome(); ?></li><li><a href="/admin/exibirpost/index/id/<?php echo $pesquisa->getId(); ?>"><i class="glyphicon glyphicon-comment"></i> <?php //echo count($pesquisa->getComentarios()); ?> Comentários</a></li></ul>
                   </div>
                   </div>
                 <div class="col-xs-3"></div>
