@@ -13,6 +13,7 @@ return array(
             'Admin\Controller\Login' => 'Admin\Controller\LoginController',
             'Admin\Controller\Logout' => 'Admin\Controller\LogoutController',
             'Admin\Controller\Exibirpost' => 'Admin\Controller\ExibirpostController',
+            'Admin\Controller\Exibirevento' => 'Admin\Controller\ExibireventoController',
             'Admin\Controller\Relacionamentos' => 'Admin\Controller\RelacionamentosController',
             'Admin\Controller\Sexos' => 'Admin\Controller\SexosController',
             'Admin\Controller\Perfil' => 'Admin\Controller\PerfilController',
@@ -90,6 +91,19 @@ return array(
                         '__NAMESPACE__' => 'Admin\Controller',
                         'controller'    => 'Posts',
                         'action'        => 'index',
+                        'module'        => 'admin',
+                        'page' => 1, //exibe por pagina
+                    ),
+                ),
+            ),
+            'novocomentevento' => array(
+                'type' => 'segment',             
+                'options' => array(
+                    'route' => '/admin/comentarios/novocomentevento/[page/:page]',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Admin\Controller',
+                        'controller'    => 'Comentarios',
+                        'action'        => 'novocomentevento',
                         'module'        => 'admin',
                         'page' => 1, //exibe por pagina
                     ),

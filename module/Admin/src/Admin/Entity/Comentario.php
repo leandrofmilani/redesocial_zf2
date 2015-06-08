@@ -51,6 +51,14 @@ class Comentario
     protected $post;
 
      /**
+     * @ORM\ManyToOne(targetEntity="\Admin\Entity\Evento")
+     * @ORM\JoinColumn(name="id_evento", referencedColumnName="id")
+     * 
+     * @var \Admin\Entity\Evento
+     */
+    protected $evento;
+
+     /**
      * @ORM\Column (type="datetime")
      *
      * @var datetime
@@ -105,6 +113,21 @@ class Comentario
         $this->comentario = $comentario;
     }
 
+    /**
+     * @param Usuario $evento
+     */
+    public function setEvento(\Admin\Entity\Evento $evento)
+    {
+        $this->evento = $evento;
+    }
+
+    /**
+     * @return Evento
+     */
+    public function getEvento()
+    {
+        return $this->evento;
+    }
 
     /**
      * @param Usuario $post

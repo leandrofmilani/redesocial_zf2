@@ -8,6 +8,7 @@ use \Admin\Form\Comentario as ComentarioForm;
 use \Admin\Form\Comentarioadmin as ComentarioadminForm;
 use \Admin\Entity\Comentario as Comentario;
 use \Admin\Entity\Post as Post;
+use \Admin\Entity\Evento as Evento;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
 use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
 use Zend\Paginator\Paginator;
@@ -174,6 +175,38 @@ class ComentariosController extends AbstractActionController
                 
                 return $this->redirect()->toUrl('/admin/exibirpost/index/id/'.$id_post);
     }  
+
+    public function novocomenteventoAction()
+    {   
+
+         $em =  $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+       
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+             $comentario = new Comentario();
+            $values = $request->getPost();
+        }
+   
+       
+        $comentario->setEmail($values['email']);
+        $comentario->setComentario($values['comentario']);
+        $comentario->setDataComentario(new \DateTime('now'));
+        $id_evento = $request->getPost('id_evento');
+        $evento = new Evento();
+        $evento = $em->find('\Admin\Entity\Evento', (int)$id_evento);
+        $comentario->setEvento($evento);       
+        $em->persist($comentario);
+    
+
+                try {
+                    $em->flush();
+                    $this->flashMessenger()->addSuccessMessage('Comentario armazenado com sucesso');
+                } catch (\Exception $e) {
+                    $this->flashMessenger()->addErrorMessage($e, 'Erro ao armazenar Comentario');
+                }
+                
+                return $this->redirect()->toUrl('/admin/exibirevento/index/id/'.$id_evento);
+    } 
 
     /**
      * Exclui um post

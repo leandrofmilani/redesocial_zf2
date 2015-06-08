@@ -31,6 +31,7 @@ return array(
             'Admin\Controller\Comentarios.save',
             'Admin\Controller\Comentarios.delete',
             'Admin\Controller\Comentarios.novo',
+            'Admin\Controller\Comentarios.novocomentevento',
             'Admin\Controller\Login.index',
             'Admin\Controller\Login.login',
             'Admin\Controller\Login.logout',
@@ -45,6 +46,7 @@ return array(
             'Admin\Controller\Exibirpost.index',
             'Admin\Controller\Exibirpost.exibir',
             'Admin\Controller\Exibirpost.id',
+            'Admin\Controller\Exibirevento.index',
             'Admin\Controller\Relacionamentos.index',
             'Admin\Controller\Relacionamentos.save',
             'Admin\Controller\Relacionamentos.delete',
@@ -57,6 +59,7 @@ return array(
             'Admin\Controller\Eventos.save',
             'Admin\Controller\Eventos.delete',
 
+
         ),
         'privilege' => array(
             'VISITANTE' => array(
@@ -66,10 +69,12 @@ return array(
                     'Admin\Controller\Comentarios.index',
                     'Admin\Controller\Comentarios.save',
                     'Admin\Controller\Comentarios.novo',
+                    'Admin\Controller\Comentarios.novocomentevento',
                     'Admin\Controller\Login.index',
                     'Admin\Controller\Exibirpost.index',
                     'Admin\Controller\Exibirpost.exibir',
                     'Admin\Controller\Exibirpost.id',
+                    'Admin\Controller\Exibirevento.index',
                     'Main\Controller\Index.index',
                     'Main\Controller\Pesquisas.index',
                     'Main\Index.index',

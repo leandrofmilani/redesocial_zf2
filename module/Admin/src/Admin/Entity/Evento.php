@@ -66,7 +66,7 @@ class Evento
     protected $usuario;
 
     /**
-    *@ORM\OneToMany(targetEntity="Comentario", mappedBy="post")
+    *@ORM\OneToMany(targetEntity="Comentario", mappedBy="evento")
     *
     */
     protected $comentarios;
