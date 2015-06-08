@@ -64,10 +64,10 @@ class Usuario extends \Admin\Entity\Usuario implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'id', 'role', 'inputFilter', 'nome', 'sobrenome', 'email', 'celular', 'profissao', 'localtrabalho', 'endereco', 'formacao', 'senha', 'dataNasc', 'sexo', 'relacionamento', 'posts');
+            return array('__isInitialized__', 'id', 'role', 'inputFilter', 'nome', 'sobrenome', 'email', 'celular', 'senha', 'dataNasc', 'sexo', 'relacionamento', 'posts');
         }
 
-        return array('__isInitialized__', 'id', 'role', 'inputFilter', 'nome', 'sobrenome', 'email', 'celular', 'profissao', 'localtrabalho', 'endereco', 'formacao', 'senha', 'dataNasc', 'sexo', 'relacionamento', 'posts');
+        return array('__isInitialized__', 'id', 'role', 'inputFilter', 'nome', 'sobrenome', 'email', 'celular', 'senha', 'dataNasc', 'sexo', 'relacionamento', 'posts');
     }
 
     /**
@@ -307,94 +307,6 @@ class Usuario extends \Admin\Entity\Usuario implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCelular', array($celular));
 
         return parent::setCelular($celular);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getProfissao()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getProfissao', array());
-
-        return parent::getProfissao();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setProfissao($profissao)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setProfissao', array($profissao));
-
-        return parent::setProfissao($profissao);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getLocaltrabalho()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getLocaltrabalho', array());
-
-        return parent::getLocaltrabalho();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setLocaltrabalho($localtrabalho)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setLocaltrabalho', array($localtrabalho));
-
-        return parent::setLocaltrabalho($localtrabalho);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getEndereco()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getEndereco', array());
-
-        return parent::getEndereco();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setEndereco($endereco)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setEndereco', array($endereco));
-
-        return parent::setEndereco($endereco);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getFormacao()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getFormacao', array());
-
-        return parent::getFormacao();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setFormacao($formacao)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setFormacao', array($formacao));
-
-        return parent::setFormacao($formacao);
     }
 
     /**

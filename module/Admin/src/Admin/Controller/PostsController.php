@@ -82,13 +82,9 @@ class PostsController extends AbstractActionController
         ou 2- é somente o admin editado o post, onde o mesmo terá acesso a tudo inclusive ativar/desativar.
         */
         $id = $this->params()->fromRoute('id', 0);
-        $session = $this->getServiceLocator()->get('Session');
-        if ($role = $session->offsetGet('role') == 'EDITOR'){
-            $form = new PostEditorForm($em);
-        }
-        if ($role = $session->offsetGet('role') == 'ADMIN'){
-            $form = new PostForm($em);
-        }
+        
+        $form = new PostForm($em);
+        
         $request = $this->getRequest();
 
         //minha alteracao
@@ -114,7 +110,6 @@ class PostsController extends AbstractActionController
                 $post->setTitulo($values['titulo']);
                 $post->setMinText($values['minText']);
                 $post->setPostComp($values['postComp']);
-                $post->setAtivo($values['ativo']);
                // $user = $session->offsetGet('user');
 
                 /*

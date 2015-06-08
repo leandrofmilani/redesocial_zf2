@@ -80,7 +80,7 @@ return array(
                         'page' => 1, //exibe por pagina
                     ),
                 ),
-            ), 
+            ),  
             'cadastros' => array(
                 'type' => 'segment',             
                 'options' => array(

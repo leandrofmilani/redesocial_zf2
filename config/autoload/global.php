@@ -24,6 +24,9 @@ return array(
             'Main\Controller\Pesquisas.index',
             'Main\Controller\Cadastros.index',
             'Main\Controller\Cadastros.novo',
+            'Main\Controller\Atualizacoes.index',
+            'Main\Controller\Atualizacoes.save',
+            'Main\Controller\Atualizacoes.delete',
             'Admin\Controller\Comentarios.index',
             'Admin\Controller\Comentarios.save',
             'Admin\Controller\Comentarios.delete',
@@ -48,7 +51,6 @@ return array(
             'Admin\Controller\Sexos.index',
             'Admin\Controller\Sexos.save',
             'Admin\Controller\Sexos.delete',
-
 
         ),
         'privilege' => array(
@@ -76,6 +78,9 @@ return array(
                     'Admin\Controller\Logout.index',
                     'Admin\Controller\Posts.index',
                     'Admin\Controller\Posts.save',
+                    'Main\Controller\Atualizacoes.index',
+                    'Main\Controller\Atualizacoes.save',
+                    'Main\Controller\Atualizacoes.delete',
                 )
             ),
             'ADMIN' => array(

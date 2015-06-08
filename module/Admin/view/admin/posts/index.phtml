@@ -7,7 +7,7 @@
 <table class="table">
     <thead>
     <tr>
-       <b> <td>Id</td><td>Título</td><td>Mini Texto</td><td>Post Completo</td><td>Ativo</td><td>Data Post.</td><td>Editar</td><?php if ($role == "ADMIN") echo "<td>Excluir</td>"; ?></tr></b>
+       <b> <td>Id</td><td>Título</td><td>Mini Texto</td><td>Post Completo</td><td>Data Post.</td><td>Editar</td><?php if ($role == "ADMIN") echo "<td>Excluir</td>"; ?></tr></b>
     </tr>
     </thead>
     <tbody>
@@ -25,9 +25,6 @@
             </td>
             <td>
                 <?php echo $post->getPostComp(); ?>
-            </td>
-            <td>
-                <?php echo $post->getAtivo(); ?>
             </td>
             <td>
                 <?php echo $post->getDataPost(); ?>

@@ -28,49 +28,39 @@ class Post extends Form
                 'label' => 'Titulo:*'
             ),
             'attributes' => array(
-                'placeholder' => 'Informe o titulo',
-                'id' => 'titulo'
+                'placeholder'=>'Por favor, insira um titulo.',
+                'id' => 'titulo',
             )
         ));
 
          $this->add(array(
             'name' => 'minText',
-            'type' => 'text',
+            'type' => 'textarea',
             'options' => array(
                 'label' => 'Mini Texto:*'
             ),
             'attributes' => array(
                 'placeholder' => 'Informe o mini texto',
+                'rows'=>'2',
+                'class'=>'form-control',
                 'id' => 'minText'
             )
         ));
 
           $this->add(array(
             'name' => 'postComp',
-            'type' => 'text',
+            'type' => 'textarea',
             'options' => array(
                 'label' => 'Post Completo:*'
             ),
             'attributes' => array(
                 'placeholder' => 'Digite o post Completo',
+                'rows'=>'10',
+                'class'=>'form-control',
                 'id' => 'postComp'
             )
         ));
           
-            $this->add(array(
-            'type' => 'Zend\Form\Element\Radio',
-            'name' => 'ativo',
-                'options' => array(
-                    'label' => 'Ativo:*',
-                    'value_options' => array(
-                    '1' => 'Ativo',
-                    '0' => 'Inativo',
-                    ),
-                ),
-            'attributes' => array(
-                'value' => '1',
-                ),
-            ));
 
         $this->add(array(
             'name' => 'submit',

@@ -50,13 +50,6 @@ class Post
      */
     protected $postComp;
 
-    /**
-     * @ORM\Column (type="string")
-     *
-     * @var string
-     */
-    protected $ativo;
-
      /**
      * @ORM\Column (type="datetime")
      *
@@ -144,25 +137,6 @@ class Post
         $this->postComp = $postComp;
     }
 
-    /**
-     * @return int
-     */
-    public function getAtivo()
-    {
-        if ($this->ativo == 1)
-            return "Sim";
-        else
-            return "Não";
-        //return $this->ativo;
-    }
-
-    /**
-     * @param int $ativo
-     */
-    public function setAtivo($ativo)
-    {
-        $this->ativo = $ativo;
-    }
 
     /**
      * @return datetime

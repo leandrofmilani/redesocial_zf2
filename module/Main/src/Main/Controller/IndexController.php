@@ -20,7 +20,7 @@ class IndexController extends AbstractActionController
     public function indexAction()
     {
         $em =  $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-        $query = $em->createQuery("SELECT Post FROM \Admin\Entity\Post Post WHERE Post.ativo like '1' order by Post.id DESC");         
+        $query = $em->createQuery("SELECT Post FROM \Admin\Entity\Post Post order by Post.id DESC");         
 
         $paginator = new Paginator(
             new DoctrinePaginator(new ORMPaginator($query))
