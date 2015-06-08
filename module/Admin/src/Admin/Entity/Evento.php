@@ -9,13 +9,13 @@ use Zend\InputFilter\InputFilter;
 
 /**
  * @ORM\Entity
- * @ORM\Table (name = "post")
+ * @ORM\Table (name = "evento")
  *
  * @author Cezar Junior de Souza <cezar08@unochapeco.edu.br>
  * @category Admin
  * @package Entity
  */
-class Post
+class Evento
 {
     /**
      * @ORM\Id
@@ -48,14 +48,14 @@ class Post
      *
      * @var text
      */
-    protected $postComp;
+    protected $eventoComp;
 
      /**
      * @ORM\Column (type="datetime")
      *
      * @var datetime
      */
-    protected $dataPost;
+    protected $dataEvento;
 
     /**
      * @ORM\ManyToOne(targetEntity="Usuario")
@@ -124,35 +124,35 @@ class Post
     /**
      * @return text
      */
-    public function getPostComp()
+    public function getEventoComp()
     {
-        return $this->postComp;
+        return $this->eventoComp;
     }
 
     /**
-     * @param text $postComp
+     * @param text $eventoComp
      */
-    public function setPostComp($postComp)
+    public function setEventoComp($eventoComp)
     {
-        $this->postComp = $postComp;
+        $this->eventoComp = $eventoComp;
     }
 
 
     /**
      * @return datetime
      */
-    public function getDataPost()
+    public function getDataEvento()
     {
-        $data = $this->dataPost;
+        $data = $this->dataEvento;
         return $data->format('Y-m-d H:i');
     }
 
     /**
-     * @param datetime $dataPost
+     * @param datetime $dataEvento
      */
-    public function setDataPost($dataPost)
+    public function setDataEvento($dataEvento)
     {
-        $this->dataPost = $dataPost;
+        $this->dataEvento = $dataEvento;
     }
 
 

@@ -5,7 +5,7 @@ namespace Admin\Form;
 use \Zend\Form\Form as Form;
 use \Zend\Form\Element;
 
-class Post extends Form
+class Evento extends Form
 {
 
     public function __construct(\Doctrine\ORM\EntityManager $em)
@@ -25,7 +25,7 @@ class Post extends Form
             'name' => 'titulo',
             'type' => 'text',
             'options' => array(
-                'label' => 'Titulo:*'
+                'label' => 'Titulo do Evento:*'
             ),
             'attributes' => array(
                 'placeholder'=>'Por favor, insira um titulo.',
@@ -48,16 +48,16 @@ class Post extends Form
         ));
 
           $this->add(array(
-            'name' => 'postComp',
+            'name' => 'eventoComp',
             'type' => 'textarea',
             'options' => array(
-                'label' => 'Post Completo:*'
+                'label' => 'Evento Completo:*'
             ),
             'attributes' => array(
-                'placeholder' => 'Digite o post Completo',
+                'placeholder' => 'Digite o Evento Completo',
                 'rows'=>'10',
                 'class'=>'form-control',
-                'id' => 'postComp'
+                'id' => 'eventoComp'
             )
         ));
           

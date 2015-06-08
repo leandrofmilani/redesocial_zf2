@@ -53,6 +53,9 @@ return array(
             'Admin\Controller\Sexos.delete',
             'Admin\Controller\Perfil.save',
             'Admin\Controller\Perfil.delete',
+            'Admin\Controller\Eventos.index',
+            'Admin\Controller\Eventos.save',
+            'Admin\Controller\Eventos.delete',
 
         ),
         'privilege' => array(
@@ -84,6 +87,9 @@ return array(
                     'Main\Controller\Atualizacoes.save',
                     'Main\Controller\Atualizacoes.delete',
                     'Admin\Controller\Perfil.save',
+                    'Admin\Controller\Eventos.index',
+                    'Admin\Controller\Eventos.save',
+                    'Admin\Controller\Eventos.delete',
                 )
             ),
             'ADMIN' => array(

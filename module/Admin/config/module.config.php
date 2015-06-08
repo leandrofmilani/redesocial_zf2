@@ -16,6 +16,7 @@ return array(
             'Admin\Controller\Relacionamentos' => 'Admin\Controller\RelacionamentosController',
             'Admin\Controller\Sexos' => 'Admin\Controller\SexosController',
             'Admin\Controller\Perfil' => 'Admin\Controller\PerfilController',
+            'Admin\Controller\Eventos' => 'Admin\Controller\EventosController',
         ),
     ),
     //ConfiguraÃ§Ã£o doctrine
@@ -66,6 +67,19 @@ return array(
                         ),
                     ),
                     
+                ),
+            ),
+            'eventos' => array(
+                'type' => 'segment',             
+                'options' => array(
+                    'route' => '/admin/eventos/index/[page/:page]',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Admin\Controller',
+                        'controller'    => 'Eventos',
+                        'action'        => 'index',
+                        'module'        => 'admin',
+                        'page' => 1, //exibe por pagina
+                    ),
                 ),
             ),
             'posts' => array(

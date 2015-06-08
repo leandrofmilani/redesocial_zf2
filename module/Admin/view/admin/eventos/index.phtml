@@ -2,42 +2,42 @@
     $role = $this->session()->offsetGet('user')->getRole();
 ?>
 
-<button class="btn btn-success" onclick="location.href='/admin/posts/save'">Novo Post</button>
+<button class="btn btn-success" onclick="location.href='/admin/eventos/save'">Novo Evento</button>
 
 <table class="table">
     <thead>
     <tr>
-       <b> <td>Id</td><td>Título</td><td>Mini Texto</td><td>Post Completo</td><td>Data Post.</td><td>Editar</td><?php if ($role == "ADMIN") echo "<td>Excluir</td>"; ?></tr></b>
+       <b> <td>Id</td><td>Título</td><td>Mini Texto</td><td>Evento Completo</td><td>Ultima Edição</td><td>Editar</td><?php if ($role == "ADMIN") echo "<td>Excluir</td>"; ?></tr></b>
     </tr>
     </thead>
     <tbody>
-    <?php foreach($posts as $post) {
+    <?php foreach($eventos as $evento) {
         ?>
         <tr>
             <td>
-                <?php echo $post->getId(); ?>
+                <?php echo $evento->getId(); ?>
             </td>
             <td>
-                <?php echo $post->getTitulo(); ?>
+                <?php echo $evento->getTitulo(); ?>
             </td>
             <td>
-                <?php echo $post->getMintext(); ?>
+                <?php echo $evento->getMintext(); ?>
             </td>
             <td>
-                <?php echo $post->getPostComp(); ?>
+                <?php echo $evento->getEventoComp(); ?>
             </td>
             <td>
-                <?php echo $post->getDataPost(); ?>
+                <?php echo $evento->getDataEvento(); ?>
                
             </td>
             <td>
-                <a class="btn btn-success" href="/admin/posts/save/id/<?php echo $post->getId(); ?>">Editar</a>
+                <a class="btn btn-success" href="/admin/eventos/save/id/<?php echo $evento->getId(); ?>">Editar</a>
             </td>
             <?php
                 if ($role == "ADMIN") {
             ?>
             <td>
-                <a class="btn btn-danger" href="/admin/posts/delete/id/<?php echo $post->getId(); ?>">Excluir</a>
+                <a class="btn btn-danger" href="/admin/eventos/delete/id/<?php echo $evento->getId(); ?>">Excluir</a>
             </td>
             <?php } ?>
         </tr>
@@ -51,14 +51,14 @@
 
 echo $this->paginationControl(
     // o objeto de paginacao
-    $posts,
+    $eventos,
     //tipos de paginacao (elastic, all, sliding, Juping) mais em zend/paginator exemple-pagination-controls
     'sliding',
     // a parcial usada para gerar o html para a paginacao
     'admin/partials/paginator/paginator.phtml',
     //a rota utulizada na paginacao
     array(
-        'route' => 'posts'
+        'route' => 'eventos'
     )
 );
 ?>

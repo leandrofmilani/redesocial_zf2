@@ -4,9 +4,8 @@ namespace Admin\Controller;
 
 use Zend\View\Model\ViewModel;
 use Zend\Mvc\Controller\AbstractActionController;
-use \Admin\Form\Post as PostForm;
-use \Admin\Form\PostEditor as PostEditorForm;
-use \Admin\Entity\Post as Post;
+use \Admin\Form\Evento as EventoForm;
+use \Admin\Entity\Evento as Evento;
 use \Admin\Entity\Comentario as Comentario;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
 use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
@@ -20,7 +19,7 @@ use Zend\Paginator\Paginator;
  * @package Controller
  * @author  Cezar Junior de Souza <cezar08@unochapeco.edu.br>
  */
-class PostsController extends AbstractActionController
+class EventosController extends AbstractActionController
 {
 
     /**
@@ -44,9 +43,9 @@ class PostsController extends AbstractActionController
         $em =  $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
 
         if ($role = $session->offsetGet('role') == 'ADMIN'){
-            $query = $em->createQuery('SELECT Post FROM \Admin\Entity\Post Post order by Post.id DESC');
+            $query = $em->createQuery('SELECT Evento FROM \Admin\Entity\Evento Evento order by Evento.id DESC');
         }else {        
-            $query = $em->createQuery('SELECT Post FROM \Admin\Entity\Post Post WHERE Post.usuario = :id order by Post.id DESC');
+            $query = $em->createQuery('SELECT Evento FROM \Admin\Entity\Evento Evento WHERE Evento.usuario = :id order by Evento.id DESC');
             $query->setParameters(array('id' => $id));
         }
         
@@ -62,7 +61,7 @@ class PostsController extends AbstractActionController
 
         return new ViewModel(
             array(
-                'posts' => $paginator
+                'eventos' => $paginator
             )
         );
     }
@@ -83,7 +82,7 @@ class PostsController extends AbstractActionController
         */
         $id = $this->params()->fromRoute('id', 0);
         
-        $form = new PostForm($em);
+        $form = new EventoForm($em);
         
         $request = $this->getRequest();
 
@@ -95,7 +94,7 @@ class PostsController extends AbstractActionController
        // die();
 
         if ($request->isPost()) {
-            $post = new Post();
+            $evento = new Evento();
             $values = $request->getPost();
             //$form->setInputFilter($post->getInputFilter());
             $form->setData($values);
@@ -105,11 +104,11 @@ class PostsController extends AbstractActionController
 
 
                 if ( (int) $values['id'] > 0)
-                $post = $em->find('\Admin\Entity\Post', $values['id']);
+                $evento = $em->find('\Admin\Entity\Evento', $values['id']);
 
-                $post->setTitulo($values['titulo']);
-                $post->setMinText($values['minText']);
-                $post->setPostComp($values['postComp']);
+                $evento->setTitulo($values['titulo']);
+                $evento->setMinText($values['minText']);
+                $evento->setEventoComp($values['eventoComp']);
                // $user = $session->offsetGet('user');
 
                 /*
@@ -120,20 +119,20 @@ class PostsController extends AbstractActionController
                      // se for edição nao mudará autor..
                 }else{
                   $autor = $em->find('\Admin\Entity\Usuario', $session->offsetGet('user'));
-                  $post->setUsuario($autor);
+                  $evento->setUsuario($autor);
                 }
               
-                $post->setDataPost(new \DateTime('now'));
-                $em->persist($post);
+                $evento->setDataEvento(new \DateTime('now'));
+                $em->persist($evento);
 
                 try {
                     $em->flush();
-                    $this->flashMessenger()->addSuccessMessage('Post armazenado com sucesso');
+                    $this->flashMessenger()->addSuccessMessage('Evento armazenado com sucesso');
                 } catch (\Exception $e) {
-                    $this->flashMessenger()->addErrorMessage($e,'Erro ao armazenar post');
+                    $this->flashMessenger()->addErrorMessage($e,'Erro ao armazenar evento');
                 }
 
-                return $this->redirect()->toUrl('/admin/posts/index');
+                return $this->redirect()->toUrl('/admin/eventos/index');
             }
             else{
                 echo"<center><b>FORM INVALIDO</b></center>";
@@ -143,8 +142,8 @@ class PostsController extends AbstractActionController
         $id = $this->params()->fromRoute('id', 0);
 
         if ((int) $id > 0) {
-            $post = $em->find('\Admin\Entity\Post', $id);
-            $form->bind($post);
+            $evento = $em->find('\Admin\Entity\Evento', $id);
+            $form->bind($evento);
         }
 
         return new ViewModel(
@@ -162,7 +161,7 @@ class PostsController extends AbstractActionController
         $em =  $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
 
         if ($id > 0) {
-            $post = $em->find('\Admin\Entity\Post', $id);
+            $post = $em->find('\Admin\Entity\Evento', $id);
 
             $contComents=(count($post->getComentarios()));
             $comentarios=$post->getComentarios();
@@ -179,13 +178,13 @@ class PostsController extends AbstractActionController
 
             try {
                 $em->flush();
-                $this->flashMessenger()->addSuccessMessage("Post e seus ".$contComents." comentarios excluidos com sucesso");
+                $this->flashMessenger()->addSuccessMessage("Evento e seus ".$contComents." comentarios excluidos com sucesso");
             } catch (\Exception $e) {
-                $this->flashMessenger()->addErrorMessage('Erro ao excluir Post');
+                $this->flashMessenger()->addErrorMessage('Erro ao excluir evento');
             }
         }
 
-        return $this->redirect()->toUrl('/admin/posts/index');
+        return $this->redirect()->toUrl('/admin/eventos/index');
     }
 
 }
