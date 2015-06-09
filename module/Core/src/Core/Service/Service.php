@@ -14,6 +14,11 @@ abstract class Service implements ServiceManagerAwareInterface {
     protected $serviceManager;
 
     /**
+     * @var \Doctrine\ORM\EntityManager
+     */
+    protected $em;
+
+    /**
      * @param ServiceManager $serviceManager
      */
     public function setServiceManager(ServiceManager $serviceManager) {
@@ -30,5 +35,14 @@ abstract class Service implements ServiceManagerAwareInterface {
         return $this->serviceManager;
     }
 
+    /**
+     * @return \Doctrine\ORM\EntityManager
+     */
+    public function getEm()
+    {
+        $this->em = $this->getServiceManager()->get('Doctrine\Orm\EntityManager');
+
+        return $this->em;
+    }
     
 }
