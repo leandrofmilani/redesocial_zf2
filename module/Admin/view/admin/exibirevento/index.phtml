@@ -58,23 +58,50 @@
         <div class="col-md-4">
     <div class="well">
      
-        <h4>Confirmar Presença</h4>
+       
      
-        <form method="POST" action="/admin/usuarios/confirmarpresenca" role="form" class="clearfix">
-     
-            <div class="col-md-4 form-group">
-            <select name="opcao">
-              <option value="sim">Sim</option>
-              <option value="nao">Não</option>
-            </select>
-            </div>
-     
-            <div class="col-md-4 form-group text-right">
+     <?php       
+
+        $flag="naoconfirmou";
+
+        foreach($evento->getParticipantes() as $participante) {
+                    if($participante->getId() == $this->session()->offsetGet('user')->getId()){
+                      //echo $eventoComparar->getId();
+                      $flag="confirmou";
+                    }
+                }
+
+          if($flag=="naoconfirmou"){     
+              ?>
+
+        <h4>Confirmar Presença?</h4>
+        <form method="POST" action="/admin/eventos/confirmarpresenca" role="form" class="clearfix">
+            <div class="col-md-6 form-group">
+            <input type="hidden" name="opcao" value="confirmar"  id="opcao">
                 <input type="hidden" name="id_evento" value=<?php echo $evento->getId(); ?>  id="id_evento">
-                <button type="submit" class="btn btn-primary">OK</button>
+                <button type="submit" class="btn btn-primary">Sim</button>
             </div>
-     
-        </form>                   
+        </form>  
+
+        <?php     
+
+          }
+
+          if($flag=="confirmou"){
+          ?>
+            <h5>Atenção!, vc ja confirmou presença nesse evento.</h5>
+           <h4>Remover Presença?</h4>
+        <form method="POST" action="/admin/eventos/confirmarpresenca" role="form" class="clearfix">
+            <div class="col-md-6 form-group">
+            <input type="hidden" name="opcao" value="remover"  id="opcao">
+                <input type="hidden" name="id_evento" value=<?php echo $evento->getId(); ?>  id="id_evento">
+                <button type="submit" class="btn btn-primary">Sim</button>
+            </div>
+        </form> 
+
+          <?php
+        }
+            ?>
     </div>
 </div>
 </div>

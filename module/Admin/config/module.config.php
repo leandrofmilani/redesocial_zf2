@@ -99,10 +99,10 @@ return array(
             'confirmarpresenca' => array(
                 'type' => 'segment',             
                 'options' => array(
-                    'route' => '/admin/usuario/confirmarpresenca/[page/:page]',
+                    'route' => '/admin/eventos/confirmarpresenca/[page/:page]',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Admin\Controller',
-                        'controller'    => 'Usuarios',
+                        'controller'    => 'Eventos',
                         'action'        => 'confirmarpresenca',
                         'module'        => 'admin',
                         'page' => 1, //exibe por pagina

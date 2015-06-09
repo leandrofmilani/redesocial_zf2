@@ -35,15 +35,15 @@ class Usuario
 
 
    /**
-     * @ORM\ManyToMany(targetEntity="\Admin\Entity\Evento")
-     *  * @ORM\JoinTable(name="usuario_evento",
+     * @ORM\ManyToMany(targetEntity="\Admin\Entity\Usuario")
+     *  * @ORM\JoinTable(name="usuario_amigo",
      *      joinColumns={@ORM\JoinColumn(name="id_usuario", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="id_evento", referencedColumnName="id")}
+     *      inverseJoinColumns={@ORM\JoinColumn(name="id_amigo", referencedColumnName="id")}
      *      )
      *
-     * @var \Admin\Entity\Evento
+     * @var \Admin\Entity\Usuario
      */
-    protected $eventos;
+    protected $amigos;
   
     protected $inputFilter;
 

@@ -187,4 +187,58 @@ class EventosController extends AbstractActionController
         return $this->redirect()->toUrl('/admin/eventos/index');
     }
 
+    /**
+     * Exibe os usuÃ¡rios
+     * @return void
+     */
+    public function confirmarpresencaAction()
+    {
+        $em =  $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+        $request = $this->getRequest();
+        $session = $this->getServiceLocator()->get('Session');
+        $usuario = $session->offsetGet('user');
+        $usuario = $em->find('\Admin\Entity\Usuario', $usuario->getId());    
+        $values = $request->getPost();
+    
+            
+            if($values['opcao']=="confirmar"){
+
+                    $evento = $em->find('\Admin\Entity\Evento', $values['id_evento']);
+                    //IF CONSTEIN SE JA TIVER ACEITADO..
+                    $evento->getParticipantes()->add($usuario);
+                     $em->persist($evento);
+
+                try {
+                    $em->flush();
+                    $this->flashMessenger()->addSuccessMessage('Presenca confirmada com sucesso');
+                } catch (\Exception $e) {
+                    
+                    $this->flashMessenger()->addErrorMessage('Erro ao armazenar presenca');
+                }
+                
+                return $this->redirect()->toUrl('/admin/exibirevento/index/id/'.$values['id_evento']);
+
+            }
+             if($values['opcao']=="remover"){
+
+                 $evento = $em->find('\Admin\Entity\Evento', $values['id_evento']);
+                    //IF CONSTEIN SE JA TIVER ACEITADO..
+                    $evento->getParticipantes()->remove($usuario);
+                //} PEDIR COMO FAZER O REMOVE PARA REMOVER PRESENCA
+                     $em->persist($evento);
+
+                try {
+                    $em->flush();
+                    $this->flashMessenger()->addSuccessMessage('Presenca removida com sucesso');
+                } catch (\Exception $e) {
+                    
+                    $this->flashMessenger()->addErrorMessage('Erro ao remover presenca');
+                }
+                
+                return $this->redirect()->toUrl('/admin/exibirevento/index/id/'.$values['id_evento']);
+
+            }     
+
+    }
+
 }

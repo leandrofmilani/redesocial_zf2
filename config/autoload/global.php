@@ -61,6 +61,9 @@ return array(
             'Admin\Controller\Eventos.delete',
 
 
+            'Admin\Controller\Eventos.confirmarpresenca',
+
+
         ),
         'privilege' => array(
             'VISITANTE' => array(
@@ -98,6 +101,9 @@ return array(
                     'Admin\Controller\Eventos.index',
                     'Admin\Controller\Eventos.save',
                     'Admin\Controller\Eventos.delete',
+
+
+                    'Admin\Controller\Eventos.confirmarpresenca',
 
                 )
             ),

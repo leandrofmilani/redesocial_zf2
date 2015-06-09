@@ -29,6 +29,18 @@ class Evento
 
     protected $inputFilter;
 
+
+    /**
+     * @ORM\ManyToMany(targetEntity="\Admin\Entity\Usuario")
+     *  * @ORM\JoinTable(name="evento_participantes",
+     *      joinColumns={@ORM\JoinColumn(name="id_evento", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="id_usuario", referencedColumnName="id")}
+     *      )
+     *
+     * @var \Admin\Entity\Usuario
+     */
+    protected $participantes;
+
     /**
      * @ORM\Column (type="string")
      *
@@ -73,12 +85,21 @@ class Evento
 
     public function __construct()
     {
+    $this->participantes = new ArrayCollection();
 	$this->comentarios = new ArrayCollection();
     }
 
     public function getComentarios()
     {
 	return $this->comentarios;
+    }
+
+    /**
+     * @return Usuario
+     */
+    public function getParticipantes()
+    {
+        return $this->participantes;
     }
     
     /**
