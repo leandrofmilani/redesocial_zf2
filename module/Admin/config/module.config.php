@@ -96,6 +96,19 @@ return array(
                     ),
                 ),
             ),
+            'confirmarpresenca' => array(
+                'type' => 'segment',             
+                'options' => array(
+                    'route' => '/admin/usuario/confirmarpresenca/[page/:page]',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Admin\Controller',
+                        'controller'    => 'Usuarios',
+                        'action'        => 'confirmarpresenca',
+                        'module'        => 'admin',
+                        'page' => 1, //exibe por pagina
+                    ),
+                ),
+            ),
             'novocomentevento' => array(
                 'type' => 'segment',             
                 'options' => array(

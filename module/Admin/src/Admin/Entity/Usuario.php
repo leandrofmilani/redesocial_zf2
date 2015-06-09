@@ -34,14 +34,17 @@ class Usuario
     protected $role;
 
 
-    ///**
-    //* @ORM\Column (type="string")
-    //*
-    //* @var string
-    //*/
-    //protected $role;
-
-
+   /**
+     * @ORM\ManyToMany(targetEntity="\Admin\Entity\Evento")
+     *  * @ORM\JoinTable(name="usuario_evento",
+     *      joinColumns={@ORM\JoinColumn(name="id_usuario", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="id_evento", referencedColumnName="id")}
+     *      )
+     *
+     * @var \Admin\Entity\Evento
+     */
+    protected $eventos;
+  
     protected $inputFilter;
 
     /**
@@ -116,7 +119,7 @@ class Usuario
     protected $dataNasc;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Sexo")
+     * @ORM\ManyToOne(targetEntity="\Admin\Entity\Sexo")
      * @ORM\JoinColumn(name="id_sexo", referencedColumnName="id")
      *
      * @var \Admin\Entity\Sexo
@@ -139,12 +142,21 @@ class Usuario
 
     public function __construct()
     {
+    $this->eventos = new ArrayCollection();
     $this->posts = new ArrayCollection();
     }
 
     public function getPosts()
     {
     return $this->posts;
+    }
+
+     /**
+     * @return Eventos
+     */
+    public function getEventos()
+    {
+        return $this->eventos;
     }
 
      /**

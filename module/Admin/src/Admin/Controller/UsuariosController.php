@@ -178,4 +178,54 @@ class UsuariosController extends AbstractActionController
         return $this->redirect()->toUrl('/admin/usuarios');
     }
 
+    /**
+     * Exibe os usuÃ¡rios
+     * @return void
+     */
+    public function confirmarpresencaAction()
+    {
+        $em =  $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+       
+        $request = $this->getRequest();
+        //if ($request->isPost()) {
+            $session = $this->getServiceLocator()->get('Session');
+            $usuario = $session->offsetGet('user');
+            $usuario = $em->find('\Admin\Entity\Usuario', $usuario->getId());    
+            $values = $request->getPost();
+        //}
+            
+            if($values['opcao']=="sim"){
+       
+                //$usuario->getEventos()->clear();
+
+
+                //foreach ($values['id_evento'] as $evento) {
+                    $evento = $em->find('\Admin\Entity\Evento', $values['id_evento']);
+                    //echo $evento;
+                    //die(); 
+                    //IF CONSTEIN SE JA TIVER ACEITADO..
+                    $usuario->getEventos()->add($evento);
+                //} PEDIR COMO FAZER O REMOVE PARA DESCONFIRMAR PRESENCA
+
+                     $em->persist($usuario);
+
+                try {
+                    $em->flush();
+                    $this->flashMessenger()->addSuccessMessage('Presenca confirmada com sucesso');
+                } catch (\Exception $e) {
+                    
+                    $this->flashMessenger()->addErrorMessage('Erro ao armazenar presenca');
+                }
+                
+                return $this->redirect()->toUrl('/admin/exibirevento/index/id/'.$values['id_evento']);
+
+            }
+             if($values['opcao']=="nao"){
+                echo "ENTROUUUU";
+                die();
+
+            }     
+
+    }
+
 }

@@ -64,10 +64,10 @@ class Usuario extends \Admin\Entity\Usuario implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'id', 'role', 'inputFilter', 'nome', 'sobrenome', 'email', 'celular', 'profissao', 'localtrabalho', 'endereco', 'formacao', 'senha', 'dataNasc', 'sexo', 'relacionamento', 'posts');
+            return array('__isInitialized__', 'id', 'role', 'eventos', 'inputFilter', 'nome', 'sobrenome', 'email', 'celular', 'profissao', 'localtrabalho', 'endereco', 'formacao', 'senha', 'dataNasc', 'sexo', 'relacionamento', 'posts');
         }
 
-        return array('__isInitialized__', 'id', 'role', 'inputFilter', 'nome', 'sobrenome', 'email', 'celular', 'profissao', 'localtrabalho', 'endereco', 'formacao', 'senha', 'dataNasc', 'sexo', 'relacionamento', 'posts');
+        return array('__isInitialized__', 'id', 'role', 'eventos', 'inputFilter', 'nome', 'sobrenome', 'email', 'celular', 'profissao', 'localtrabalho', 'endereco', 'formacao', 'senha', 'dataNasc', 'sexo', 'relacionamento', 'posts');
     }
 
     /**
@@ -182,6 +182,17 @@ class Usuario extends \Admin\Entity\Usuario implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getPosts', array());
 
         return parent::getPosts();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getEventos()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getEventos', array());
+
+        return parent::getEventos();
     }
 
     /**
