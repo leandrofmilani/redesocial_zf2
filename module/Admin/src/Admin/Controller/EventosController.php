@@ -223,7 +223,7 @@ class EventosController extends AbstractActionController
 
                  $evento = $em->find('\Admin\Entity\Evento', $values['id_evento']);
                     //IF CONSTEIN SE JA TIVER ACEITADO..
-                    $evento->getParticipantes()->remove($usuario);
+                    $evento->getParticipantes()->removeElement($usuario);
                 //} PEDIR COMO FAZER O REMOVE PARA REMOVER PRESENCA
                      $em->persist($evento);
 
