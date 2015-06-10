@@ -44,6 +44,17 @@ class Usuario
      * @var \Admin\Entity\Usuario
      */
     protected $amigos;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="\Admin\Entity\Usuario")
+     *  * @ORM\JoinTable(name="usuario_solicitacao",
+     *      joinColumns={@ORM\JoinColumn(name="id_usuario", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="id_amigo", referencedColumnName="id")}
+     *      )
+     *
+     * @var \Admin\Entity\Usuario
+     */
+    protected $solicitacoes;
   
     protected $inputFilter;
 
@@ -142,7 +153,8 @@ class Usuario
 
     public function __construct()
     {
-    $this->eventos = new ArrayCollection();
+    $this->amigos = new ArrayCollection();
+    $this->solicitacoes = new ArrayCollection();
     $this->posts = new ArrayCollection();
     }
 
@@ -152,11 +164,19 @@ class Usuario
     }
 
      /**
-     * @return Eventos
+     * @return Usuario
      */
-    public function getEventos()
+    public function getAmigos()
     {
-        return $this->eventos;
+        return $this->amigos;
+    }
+
+     /**
+     * @return Usuario
+     */
+    public function getSolicitacoes()
+    {
+        return $this->solicitacoes;
     }
 
      /**

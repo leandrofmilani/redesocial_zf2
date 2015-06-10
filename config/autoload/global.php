@@ -40,6 +40,7 @@ return array(
             'Admin\Controller\Usuarios.save',
             'Admin\Controller\Usuarios.delete',
             'Admin\Controller\Usuarios.confirmarpresenca',
+            'Admin\Controller\Usuarios.solicitaramizade',
             'Admin\Controller\Posts.index',
             'Admin\Controller\Posts.save',
             'Admin\Controller\Posts.delete',
@@ -59,9 +60,8 @@ return array(
             'Admin\Controller\Eventos.index',
             'Admin\Controller\Eventos.save',
             'Admin\Controller\Eventos.delete',
-
-
             'Admin\Controller\Eventos.confirmarpresenca',
+            'Admin\Controller\Exibirperfil.index',
 
 
         ),
@@ -85,7 +85,6 @@ return array(
                     'Main\Controller\Cadastros.index',
                     'Main\Controller\Cadastros.novo',
 
-                    'Admin\Controller\Usuarios.confirmarpresenca',
                 )
             ),
             'EDITOR' => array(
@@ -101,9 +100,9 @@ return array(
                     'Admin\Controller\Eventos.index',
                     'Admin\Controller\Eventos.save',
                     'Admin\Controller\Eventos.delete',
-
-
+                    'Admin\Controller\Exibirperfil.index',
                     'Admin\Controller\Eventos.confirmarpresenca',
+                    'Admin\Controller\Usuarios.solicitaramizade',
 
                 )
             ),

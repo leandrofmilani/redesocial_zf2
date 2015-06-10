@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="row">
+    
+    <div class="col-md-12"> 
+      
+      <div class="panel">
+        <div class="panel-body">     
+
+     <?php foreach($usuarios as $usuario) { ?>
+      <div class="row">    
+            <br>
+            <div class="col-md-10 col-sm-9">
+              <h3>Nome: <?php echo $usuario->getNome(); ?></h3>
+              <br><br>
+              <h3>Sobrenome: <?php echo $usuario->getSobrenome(); ?></h3>
+            </div>
+          </div>
+          <hr>
+
+    <?php } ?>       
+          
+        </div>
+      </div>
+                                      
+    </div><!--/col-12-->
+  </div>
+</div>
+</hr>
+
+<?php echo $usuario->getId();?>
+<br><br>
+
+<?php       
+
+        $flag="naoeamigo";
+
+         foreach($this->session()->offsetGet('user')->getAmigos() as $amigo ) {
+                    if($this->session()->offsetGet('user')->getId() == $amigo->getId()){
+                      //echo $solicitacao->getId();
+                      $flag="eamigo";
+                    }
+                }
+
+          if($flag=="naoeamigo"){     
+              ?>
+
+        <h4>Solicitar amizade?</h4>
+        <form method="POST" action="/admin/usuarios/solicitaramizade" role="form" class="clearfix">
+            <div class="col-md-6 form-group">
+            <input type="hidden" name="opcao" value="solicitar"  id="opcao">
+                <input type="hidden" name="id_usuario" value=<?php echo $usuario->getId(); ?>  id="id_usuario">
+                <button type="submit" class="btn btn-primary">Sim</button>
+            </div>
+        </form>  
+
+        <?php     
+
+          }
+
+          if($flag=="eamigo"){
+          ?>
+            <h5>Atenção!, vc ja é amigo dessa pessoa.</h5>
+           <h4>Remover amizade?</h4>
+        <form method="POST" action="/admin/usuarios/solicitaramizade" role="form" class="clearfix">
+            <div class="col-md-6 form-group">
+            <input type="hidden" name="opcao" value="remover"  id="opcao">
+                <input type="hidden" name="id_usuario" value=<?php echo $usuario->getId(); ?>  id="id_usuario">
+                <button type="submit" class="btn btn-primary">Sim</button>
+            </div>
+        </form> 
+
+          <?php
+        }
+            ?>
+
+<?php echo $flag;?>

@@ -178,4 +178,54 @@ class UsuariosController extends AbstractActionController
         return $this->redirect()->toUrl('/admin/usuarios');
     }
 
+    public function solicitaramizadeAction()
+    {
+        $em =  $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+        $request = $this->getRequest();
+        $session = $this->getServiceLocator()->get('Session');
+        $usuario = $session->offsetGet('user');
+        $usuario = $em->find('\Admin\Entity\Usuario', $usuario->getId());    
+        $values = $request->getPost();
+    
+            
+            if($values['opcao']=="solicitar"){
+
+                    $usuarioSolicitar = $em->find('\Admin\Entity\Usuario', $values['id_usuario']);
+                    //IF CONSTEIN SE JA TIVER ACEITADO..
+                    $usuario->getAmigos()->add($usuarioSolicitar);
+                     $em->persist($usuario);
+
+                try {
+                    $em->flush();
+                    $this->flashMessenger()->addSuccessMessage('Solicitaçãp envidada com sucesso');
+                } catch (\Exception $e) {
+                    
+                    $this->flashMessenger()->addErrorMessage('Erro ao armazenar soslicitacao');
+                }
+                
+                return $this->redirect()->toUrl('/admin/exibirperfil/index/id/'.$values['id_usuario']);
+
+            }
+             if($values['opcao']=="remover"){
+
+                 $evento = $em->find('\Admin\Entity\Evento', $values['id_evento']);
+                    //IF CONSTEIN SE JA TIVER ACEITADO..
+                    $evento->getParticipantes()->removeElement($usuario);
+                //} PEDIR COMO FAZER O REMOVE PARA REMOVER PRESENCA
+                     $em->persist($evento);
+
+                try {
+                    $em->flush();
+                    $this->flashMessenger()->addSuccessMessage('Presenca removida com sucesso');
+                } catch (\Exception $e) {
+                    
+                    $this->flashMessenger()->addErrorMessage('Erro ao remover presenca');
+                }
+                
+                return $this->redirect()->toUrl('/admin/exibirperfil/index/id/'.$values['id_usuario']);
+
+            }     
+
+    }
+
 }

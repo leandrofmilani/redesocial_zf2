@@ -13,6 +13,7 @@ return array(
             'Admin\Controller\Login' => 'Admin\Controller\LoginController',
             'Admin\Controller\Logout' => 'Admin\Controller\LogoutController',
             'Admin\Controller\Exibirpost' => 'Admin\Controller\ExibirpostController',
+            'Admin\Controller\Exibirperfil' => 'Admin\Controller\ExibirperfilController',
             'Admin\Controller\Exibirevento' => 'Admin\Controller\ExibireventoController',
             'Admin\Controller\Relacionamentos' => 'Admin\Controller\RelacionamentosController',
             'Admin\Controller\Sexos' => 'Admin\Controller\SexosController',
