@@ -192,15 +192,15 @@ class UsuariosController extends AbstractActionController
 
                     $usuarioSolicitar = $em->find('\Admin\Entity\Usuario', $values['id_usuario']);
                     //IF CONSTEIN SE JA TIVER ACEITADO..
-                    $usuario->getAmigos()->add($usuarioSolicitar);
-                     $em->persist($usuario);
+                    $usuarioSolicitar->getAmigos()->add($usuario);
+                     $em->persist($usuarioSolicitar);
 
                 try {
                     $em->flush();
-                    $this->flashMessenger()->addSuccessMessage('Solicitaçãp envidada com sucesso');
+                    $this->flashMessenger()->addSuccessMessage('Solicitação envidada com sucesso');
                 } catch (\Exception $e) {
                     
-                    $this->flashMessenger()->addErrorMessage('Erro ao armazenar soslicitacao');
+                    $this->flashMessenger()->addErrorMessage('Erro ao armazenar solicitacao');
                 }
                 
                 return $this->redirect()->toUrl('/admin/exibirperfil/index/id/'.$values['id_usuario']);
@@ -208,18 +208,17 @@ class UsuariosController extends AbstractActionController
             }
              if($values['opcao']=="remover"){
 
-                 $evento = $em->find('\Admin\Entity\Evento', $values['id_evento']);
+                 $usuarioDesfazer = $em->find('\Admin\Entity\Usuario', $values['id_usuario']);
                     //IF CONSTEIN SE JA TIVER ACEITADO..
-                    $evento->getParticipantes()->removeElement($usuario);
-                //} PEDIR COMO FAZER O REMOVE PARA REMOVER PRESENCA
-                     $em->persist($evento);
+                    $usuarioDesfazer->getAmigos()->removeElement($usuario);
+                     $em->persist($usuarioDesfazer);
 
                 try {
                     $em->flush();
-                    $this->flashMessenger()->addSuccessMessage('Presenca removida com sucesso');
+                    $this->flashMessenger()->addSuccessMessage('Amizade desfeita com sucesso');
                 } catch (\Exception $e) {
                     
-                    $this->flashMessenger()->addErrorMessage('Erro ao remover presenca');
+                    $this->flashMessenger()->addErrorMessage('Erro ao desfazer amizade');
                 }
                 
                 return $this->redirect()->toUrl('/admin/exibirperfil/index/id/'.$values['id_usuario']);

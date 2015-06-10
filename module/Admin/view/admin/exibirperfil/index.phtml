@@ -27,19 +27,25 @@
 </div>
 </hr>
 
-<?php echo $usuario->getId();?>
+<?php echo"Perfil ID: ".$usuario->getId();?>
+<?php echo "<br>Meu ID: ".$this->session()->offsetGet('user')->getId();?> 
 <br><br>
 
 <?php       
 
         $flag="naoeamigo";
 
-         foreach($this->session()->offsetGet('user')->getAmigos() as $amigo ) {
-                    if($this->session()->offsetGet('user')->getId() == $amigo->getId()){
-                      //echo $solicitacao->getId();
+        if($usuario->getId()==$this->session()->offsetGet('user')->getId()){
+          $flag="evc";
+        }
+
+          foreach($usuario->getAmigos() as $amigo) {
+                    if($amigo->getId() == $this->session()->offsetGet('user')->getId()){
+                      //echo $usuario->getId();
                       $flag="eamigo";
                     }
                 }
+
 
           if($flag=="naoeamigo"){     
               ?>
@@ -70,6 +76,10 @@
         </form> 
 
           <?php
+        }
+
+        if($flag=="evc"){
+           echo"<h4>Esse é seu perfil</h4>"; 
         }
             ?>
 
