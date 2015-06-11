@@ -477,6 +477,30 @@ class Usuario
             )));
 
             $inputFilter->add($factory->createInput(array(
+                'name' => 'sexo',
+                'required' => true,
+                'validators' => array(
+                    array(
+                        'name' => 'NotEmpty',
+                        'options' => array('message' => 'O campo Sexo não pode estar vazio')
+                    )
+                ),
+            )));
+
+            $inputFilter->add($factory->createInput(array(
+                'name' => 'relacionamento',
+                'required' => false,
+                'validators' => array(
+                    array(
+                        'name' => 'NotEmpty',
+                        'options' => array(
+                            'messages' => array('isEmpty' => 'O campo relacionamento nao pode estar vazio'),
+                        ),
+                    ),
+                ),
+            )));
+
+            $inputFilter->add($factory->createInput(array(
                 'name' => 'email',
                 'required' => true,
                 'validators' => array(
@@ -525,36 +549,6 @@ class Usuario
                             ) 
                 )));
 
-            /*$inputFilter->add($factory->createInput(array(
-                'name' => 'celular',
-                    array(
-                        'name' => 'Int',
-                        'options' => array(
-                            'min' => 8,
-                            'max' => 11,
-                            'message' => 'O campo celular deve ter maximo 11 digitos',
-                        )
-                    )
-                )
-            ));*/
-            
-            /*$inputFilter->add($factory->createInput(array( 
-                'name' => 'celular', 
-                'required' => true, 
-                'filters'  => array( 
-                    array('name' => 'Int'), 
-                ), 
-                'validators' => array( 
-                    array( 
-                        'name' => 'Between', 
-                        'options' => array( 
-                            'min' => 8, 
-                            'max' => 10, 
-                        ), 
-                    ), 
-                ), 
-            )));*/
-
             $inputFilter->add($factory->createInput(array(
                 'name' => 'senha',
                 'required' => true,
@@ -576,6 +570,168 @@ class Usuario
                 'filters' => array(
                     array('name' => 'StripTags'),
                     array('name' => 'StringTrim'),
+                ),
+            )));
+
+            $inputFilter->add($factory->createInput(array(
+                'name' => 'celular',
+                'required' => false,
+                'validators' => array(
+                    array(
+                        'name' => 'NotEmpty',
+                        'options' => array('message' => 'O campo celular não pode estar vazio')
+                    ),
+                    array(
+                        'name' => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min' => 3,
+                            'max' => 255,
+                            'message' => 'O campo celular deve ter mais que 3 caracteres e menos que 255',
+                        ),
+                    ),
+                ),
+                'filters' => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                    array('name' => 'StringToUpper',
+                        'options' => array('encoding' => 'UTF-8')
+                    ),
+                ),
+            )));
+
+            $inputFilter->add($factory->createInput(array(
+                'name' => 'profissao',
+                'required' => false,
+                'validators' => array(
+                    array(
+                        'name' => 'NotEmpty',
+                        'options' => array('message' => 'O campo profissao não pode estar vazio')
+                    ),
+                    array(
+                        'name' => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min' => 3,
+                            'max' => 255,
+                            'message' => 'O campo profissao deve ter mais que 3 caracteres e menos que 255',
+                        ),
+                    ),
+                ),
+                'filters' => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                    array('name' => 'StringToUpper',
+                        'options' => array('encoding' => 'UTF-8')
+                    ),
+                ),
+            )));
+            
+            $inputFilter->add($factory->createInput(array(
+                'name' => 'localtrabalho',
+                'required' => false,
+                'validators' => array(
+                    array(
+                        'name' => 'NotEmpty',
+                        'options' => array('message' => 'O campo localtrabalho não pode estar vazio')
+                    ),
+                    array(
+                        'name' => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min' => 3,
+                            'max' => 255,
+                            'message' => 'O campo localtrabalho deve ter mais que 3 caracteres e menos que 255',
+                        ),
+                    ),
+                ),
+                'filters' => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                    array('name' => 'StringToUpper',
+                        'options' => array('encoding' => 'UTF-8')
+                    ),
+                ),
+            )));
+
+            $inputFilter->add($factory->createInput(array(
+                'name' => 'endereco',
+                'required' => false,
+                'validators' => array(
+                    array(
+                        'name' => 'NotEmpty',
+                        'options' => array('message' => 'O campo endereco não pode estar vazio')
+                    ),
+                    array(
+                        'name' => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min' => 3,
+                            'max' => 255,
+                            'message' => 'O campo endereco deve ter mais que 3 caracteres e menos que 255',
+                        ),
+                    ),
+                ),
+                'filters' => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                    array('name' => 'StringToUpper',
+                        'options' => array('encoding' => 'UTF-8')
+                    ),
+                ),
+            )));
+
+            $inputFilter->add($factory->createInput(array(
+                'name' => 'formacao',
+                'required' => false,
+                'validators' => array(
+                    array(
+                        'name' => 'NotEmpty',
+                        'options' => array('message' => 'O campo formacao não pode estar vazio')
+                    ),
+                    array(
+                        'name' => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min' => 3,
+                            'max' => 255,
+                            'message' => 'O campo formacao deve ter mais que 3 caracteres e menos que 255',
+                        ),
+                    ),
+                ),
+                'filters' => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                    array('name' => 'StringToUpper',
+                        'options' => array('encoding' => 'UTF-8')
+                    ),
+                ),
+            )));
+            
+            $inputFilter->add($factory->createInput(array(
+                'name' => 'role',
+                'required' => true,
+                'validators' => array(
+                    array(
+                        'name' => 'NotEmpty',
+                        'options' => array('message' => 'O campo perfil não pode estar vazio')
+                    ),
+                    array(
+                        'name' => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min' => 3,
+                            'max' => 255,
+                            'message' => 'O campo perfil deve ter mais que 3 caracteres e menos que 255',
+                        ),
+                    ),
+                ),
+                'filters' => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                    array('name' => 'StringToUpper',
+                        'options' => array('encoding' => 'UTF-8')
+                    ),
                 ),
             )));
 

@@ -54,23 +54,24 @@ class Perfil extends Service
             throw new \InvalidArgumentException('Dados inválidos');
 
         $data = $filters->getValues();
-
+       /* var_dump($data);
+        die();*/   
         if ( (int) $data['id'] > 0)
             $usuario = $this->getEm()->find($this->entity, $data['id']);
-
-        $usuario->setNome($values['nome']);
-        $usuario->setSobrenome($values['sobrenome']);
-        $usuario->setEmail($values['email']);
-        $usuario->setCelular($values['celular']);
-        $usuario->setSenha($values['senha']);
-        $usuario->setEndereco($values['endereco']);
-        $usuario->setProfissao($values['profissao']);
-        $usuario->setLocaltrabalho($values['localtrabalho']);
-        $usuario->setFormacao($values['formacao']);
-        $usuario->setRole($values['role']);
-        $usuario->setDataNasc(new \DateTime($values['dataNasc']));
-        $sexo = $this->getEm()->find('\Admin\Entity\Sexo', $values['sexo']);
-        $relacionamento = $this->getEm()->find('\Admin\Entity\Relacionamento', $values['relacionamento']);
+        
+        $usuario->setNome($data['nome']);
+        $usuario->setSobrenome($data['sobrenome']);
+        $usuario->setEmail($data['email']);
+        $usuario->setCelular($data['celular']);
+        $usuario->setSenha($data['senha']);
+        $usuario->setEndereco($data['endereco']);
+        $usuario->setProfissao($data['profissao']);
+        $usuario->setLocaltrabalho($data['localtrabalho']);
+        $usuario->setFormacao($data['formacao']);
+        $usuario->setRole($data['role']);
+        $usuario->setDataNasc(new \DateTime($data['dataNasc']));
+        $sexo = $this->getEm()->find('\Admin\Entity\Sexo', $data['sexo']);
+        $relacionamento = $this->getEm()->find('\Admin\Entity\Relacionamento', $data['relacionamento']);
         $usuario->setSexo($sexo);
         $usuario->setRelacionamento($relacionamento);
 
