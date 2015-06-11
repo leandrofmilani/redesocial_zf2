@@ -87,28 +87,28 @@ class Usuario
     protected $celular;
 
     /**
-     * @ORM\Column (type="string")
+     * @ORM\Column (type="string", nullable=true)
      *
      * @var string
      */
     protected $profissao;
 
     /**
-     * @ORM\Column (type="string")
+     * @ORM\Column (type="string", nullable=true)
      *
      * @var string
      */
     protected $localtrabalho;
 
     /**
-     * @ORM\Column (type="string")
+     * @ORM\Column (type="string", nullable=true)
      *
      * @var string
      */
     protected $endereco;
 
     /**
-     * @ORM\Column (type="string")
+     * @ORM\Column (type="string", nullable=true)
      *
      * @var string
      */
