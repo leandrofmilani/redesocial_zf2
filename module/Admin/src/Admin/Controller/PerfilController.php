@@ -71,7 +71,6 @@ class PerfilController extends AbstractActionController
             $values = $request->getPost();
             $form->setInputFilter($usuario->getInputFilter());
             $form->setData($values);
-            $idade = NULL;
             
             if ($form->isValid()) {             
                 $values = $form->getData();
@@ -126,7 +125,7 @@ class PerfilController extends AbstractActionController
             $em->remove($posts[$i]);
             $i++;
             }
-            
+
             $em->remove($usuario);
 
             try {
