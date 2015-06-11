@@ -84,7 +84,7 @@ return array(
                     ),
                 ),
             ),
-            'mostrartodos' => array(
+            'todos_eventos' => array(
                 'type' => 'segment',             
                 'options' => array(
                     'route' => '/admin/eventos/mostrartodos/[page/:page]',
