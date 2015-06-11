@@ -71,15 +71,10 @@ class PerfilController extends AbstractActionController
             $values = $request->getPost();
             $form->setInputFilter($usuario->getInputFilter());
             $form->setData($values);
+            $idade = NULL;
             
             if ($form->isValid()) {             
                 $values = $form->getData();
-
-                //Logica para pegar idade (fazer function)
-                $data_atual = (new \DateTime("now"));
-                $datanascimento = (new \DateTime($values['dataNasc']));
-                $intervalo = date_diff($data_atual, $datanascimento);
-                $idade = $intervalo->y;
 
                 try {
                     $this->getServiceUser()->save($values);
@@ -131,9 +126,7 @@ class PerfilController extends AbstractActionController
             $em->remove($posts[$i]);
             $i++;
             }
-
-
-
+            
             $em->remove($usuario);
 
             try {
