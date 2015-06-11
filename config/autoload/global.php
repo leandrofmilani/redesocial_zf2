@@ -61,6 +61,7 @@ return array(
             'Admin\Controller\Eventos.save',
             'Admin\Controller\Eventos.delete',
             'Admin\Controller\Eventos.confirmarpresenca',
+            'Admin\Controller\Eventos.mostrartodos',
             'Admin\Controller\Exibirperfil.index',
 
 
@@ -100,6 +101,7 @@ return array(
                     'Admin\Controller\Eventos.index',
                     'Admin\Controller\Eventos.save',
                     'Admin\Controller\Eventos.delete',
+                    'Admin\Controller\Eventos.mostrartodos',
                     'Admin\Controller\Exibirperfil.index',
                     'Admin\Controller\Eventos.confirmarpresenca',
                     'Admin\Controller\Usuarios.solicitaramizade',

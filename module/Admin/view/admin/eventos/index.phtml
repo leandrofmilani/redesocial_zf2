@@ -7,7 +7,7 @@
 <table class="table">
     <thead>
     <tr>
-       <b> <td>Id</td><td>Título</td><td>Mini Texto</td><td>Evento Completo:</td><td>Ultima Edição</td><td>Editar</td><?php if ($role == "ADMIN") echo "<td>Excluir</td>"; ?></tr></b>
+       <b> <td>Id</td><td>Título</td><td>Mini Texto</td><td>Ultima Edição</td><td>Ver Evento</td><td>Editar</td><?php if ($role == "ADMIN") echo "<td>Excluir</td>"; ?></tr></b>
     </tr>
     </thead>
     <tbody>
@@ -23,12 +23,12 @@
             <td>
                 <?php echo $evento->getMintext(); ?>
             </td>
-            <td>
-                <?php echo $evento->getEventoComp(); ?>
-            </td>
-            <td>
+             <td>
                 <?php echo $evento->getDataEvento(); ?>
                
+            </td>
+            <td>
+                <a class="btn btn-success" href="/admin/exibirevento/index/id/<?php echo $evento->getId(); ?>">Ver</a>
             </td>
             <td>
                 <a class="btn btn-success" href="/admin/eventos/save/id/<?php echo $evento->getId(); ?>">Editar</a>

@@ -241,4 +241,45 @@ class EventosController extends AbstractActionController
 
     }
 
+    /**
+     * Exibe os posts
+     * @return void
+     */
+    public function mostrartodosAction()
+    {
+      
+        $session = $this->getServiceLocator()->get('Session');
+
+        if (!$session->offsetGet('user')) {
+            $this->flashMessenger()
+            ->addErrorMessage('Voce precisa logar'); 
+
+            return $this->redirect()->toUrl('/admin/login');                       
+        }
+        
+        //var para fazer consulta no DB
+        $id = $session->offsetGet('id');
+        $em =  $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+
+       
+        $query = $em->createQuery('SELECT Evento FROM \Admin\Entity\Evento Evento order by Evento.id DESC');
+    
+        
+
+        $paginator = new Paginator(
+            new DoctrinePaginator(new ORMPaginator($query))
+        );
+
+
+        $paginator
+        ->setCurrentPageNumber($this->params()->fromRoute('page'))
+        ->setItemCountPerPage(10);
+
+        return new ViewModel(
+            array(
+                'eventos' => $paginator
+            )
+        );
+    }
+
 }

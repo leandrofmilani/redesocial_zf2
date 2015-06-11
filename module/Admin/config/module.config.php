@@ -84,6 +84,19 @@ return array(
                     ),
                 ),
             ),
+            'mostrartodos' => array(
+                'type' => 'segment',             
+                'options' => array(
+                    'route' => '/admin/eventos/mostrartodos/[page/:page]',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Admin\Controller',
+                        'controller'    => 'Eventos',
+                        'action'        => 'index',
+                        'module'        => 'admin',
+                        'page' => 1, //exibe por pagina
+                    ),
+                ),
+            ),
             'posts' => array(
                 'type' => 'segment',             
                 'options' => array(

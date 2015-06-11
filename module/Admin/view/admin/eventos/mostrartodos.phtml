@@ -1,0 +1,54 @@
+<?php 
+    $role = $this->session()->offsetGet('user')->getRole();
+?>
+
+<button class="btn btn-success" onclick="location.href='/admin/eventos/save'">Novo Evento</button>
+
+<table class="table">
+    <thead>
+    <tr>
+       <b> <td>Id</td><td>Título</td><td>Mini Texto</td><td>Ultima Edição</td><td>Ver Evento</td></b>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach($eventos as $evento) {
+        ?>
+        <tr>
+            <td>
+                <?php echo $evento->getId(); ?>
+            </td>
+            <td>
+                <?php echo $evento->getTitulo(); ?>
+            </td>
+            <td>
+                <?php echo $evento->getMintext(); ?>
+            </td>
+             <td>
+                <?php echo $evento->getDataEvento(); ?>
+               
+            </td>
+            <td>
+                <a class="btn btn-success" href="/admin/exibirevento/index/id/<?php echo $evento->getId(); ?>">Ver</a>
+            </td>
+        </tr>
+    <?php }
+    ?>
+    </tbody>
+
+</table>
+
+<?php
+
+echo $this->paginationControl(
+    // o objeto de paginacao
+    $eventos,
+    //tipos de paginacao (elastic, all, sliding, Juping) mais em zend/paginator exemple-pagination-controls
+    'sliding',
+    // a parcial usada para gerar o html para a paginacao
+    'admin/partials/paginator/paginator.phtml',
+    //a rota utulizada na paginacao
+    array(
+        'route' => 'eventos'
+    )
+);
+?>
