@@ -35,7 +35,15 @@
       <div class="panel">
         <div class="panel-body">     
 
-     <?php foreach($posts as $post) { ?>
+       <?php
+      
+      foreach($this->session()->offsetGet('user')->getSolicitacoes() as $solicitou) {
+                    ?>
+                    <h3>Quer ser seu amigo: href="/admin/exibirerfil/index/id/ <?php echo $solicitou->getId(); ?>"</h3>
+                    <?php
+                }
+
+      foreach($posts as $post) { ?>
       <div class="row">    
             <br>
             <div class="col-md-2 col-sm-3 text-center">

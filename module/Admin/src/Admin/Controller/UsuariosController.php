@@ -192,7 +192,9 @@ class UsuariosController extends AbstractActionController
 
                     $usuarioSolicitar = $em->find('\Admin\Entity\Usuario', $values['id_usuario']);
                     //IF CONSTEIN SE JA TIVER ACEITADO..
-                    $usuarioSolicitar->getAmigos()->add($usuario);
+                    $usuarioSolicitar->getSolicitacoes()->add($usuario);
+                   // $usuario->getSolicitacoes()->add($usuarioSolicitar);
+                     //$em->persist($usuario);
                      $em->persist($usuarioSolicitar);
 
                 try {
@@ -206,11 +208,34 @@ class UsuariosController extends AbstractActionController
                 return $this->redirect()->toUrl('/admin/exibirperfil/index/id/'.$values['id_usuario']);
 
             }
+            if($values['opcao']=="aceitar"){
+
+                    $usuarioSolicitar = $em->find('\Admin\Entity\Usuario', $values['id_usuario']);
+                    //IF CONSTEIN SE JA TIVER ACEITADO..
+                    $usuario->getSolicitacoes()->removeElement($usuarioSolicitar);
+                    $usuarioSolicitar->getAmigos()->add($usuario);
+                    $usuario->getAmigos()->add($usuarioSolicitar);
+                    $em->persist($usuario);
+                     $em->persist($usuarioSolicitar);
+
+                try {
+                    $em->flush();
+                    $this->flashMessenger()->addSuccessMessage('Amizade aceita com sucesso');
+                } catch (\Exception $e) {
+                    
+                    $this->flashMessenger()->addErrorMessage('Erro ao armazenar solicitacao');
+                }
+                
+                return $this->redirect()->toUrl('/admin/exibirperfil/index/id/'.$values['id_usuario']);
+
+            }
              if($values['opcao']=="remover"){
 
                  $usuarioDesfazer = $em->find('\Admin\Entity\Usuario', $values['id_usuario']);
                     //IF CONSTEIN SE JA TIVER ACEITADO..
                     $usuarioDesfazer->getAmigos()->removeElement($usuario);
+                    $usuario->getAmigos()->removeElement($usuarioDesfazer);
+                     $em->persist($usuario);
                      $em->persist($usuarioDesfazer);
 
                 try {

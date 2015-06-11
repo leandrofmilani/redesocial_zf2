@@ -48,8 +48,8 @@ class Usuario
     /**
      * @ORM\ManyToMany(targetEntity="\Admin\Entity\Usuario")
      *  * @ORM\JoinTable(name="usuario_solicitacao",
-     *      joinColumns={@ORM\JoinColumn(name="id_usuario", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="id_amigo", referencedColumnName="id")}
+     *      joinColumns={@ORM\JoinColumn(name="id_amigo", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="id_usuario", referencedColumnName="id")}
      *      )
      *
      * @var \Admin\Entity\Usuario

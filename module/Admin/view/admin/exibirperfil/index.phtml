@@ -26,9 +26,6 @@
   </div>
 </div>
 </hr>
-
-<?php echo"Perfil ID: ".$usuario->getId();?>
-<?php echo "<br>Meu ID: ".$this->session()->offsetGet('user')->getId();?> 
 <br><br>
 
 <?php       
@@ -39,9 +36,20 @@
           $flag="evc";
         }
 
+        foreach($usuario->getSolicitacoes() as $solicitou) {
+                    if($solicitou->getId() == $this->session()->offsetGet('user')->getId()){
+                      $flag="jasolicitou";
+                    }
+                }
+
+        foreach($this->session()->offsetGet('user')->getSolicitacoes() as $jasolicitou) {
+                    if($jasolicitou->getId() == $usuario->getId()){
+                      $flag="usuariojasolicitou";
+                    }
+                }        
+
           foreach($usuario->getAmigos() as $amigo) {
                     if($amigo->getId() == $this->session()->offsetGet('user')->getId()){
-                      //echo $usuario->getId();
                       $flag="eamigo";
                     }
                 }
@@ -78,9 +86,29 @@
           <?php
         }
 
+        if($flag=="jasolicitou"){
+           echo"<h4>Vc ja solicitou amizade com essa pessoa</h4>"; 
+        }
+        
+
         if($flag=="evc"){
            echo"<h4>Esse é seu perfil</h4>"; 
         }
-            ?>
 
-<?php echo $flag;?>
+
+        if($flag=="usuariojasolicitou"){     
+              ?>
+        <h5>Atenção!, essa pessoa ja solicitou sua amizade.</h5>
+        <h4>aceitar amizade?</h4>
+        <form method="POST" action="/admin/usuarios/solicitaramizade" role="form" class="clearfix">
+            <div class="col-md-6 form-group">
+            <input type="hidden" name="opcao" value="aceitar"  id="opcao">
+                <input type="hidden" name="id_usuario" value=<?php echo $usuario->getId(); ?>  id="id_usuario">
+                <button type="submit" class="btn btn-primary">Sim</button>
+            </div>
+        </form>  
+
+        <?php     
+
+          }
+            ?>
