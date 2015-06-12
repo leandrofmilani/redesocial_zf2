@@ -27,6 +27,7 @@
             <div class="col-md-10 col-sm-9">
               <h2>Amigos:</h2>
               <?php
+              echo "<h1>".count($usuario->getAmigos())."</h1>";
               foreach($usuario->getAmigos() as $amigo) {
                    ?>
                    <h4><br>Amigo: <a href="/admin/exibirperfil/index/id/<?php echo $amigo->getId() ?>">Ver Perfil</a></h4>

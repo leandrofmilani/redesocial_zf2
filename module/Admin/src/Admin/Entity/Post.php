@@ -65,20 +65,61 @@ class Post
      */
     protected $usuario;
 
+     /**
+     * @ORM\ManyToMany(targetEntity="\Admin\Entity\Usuario")
+     *  * @ORM\JoinTable(name="post_curtiram",
+     *      joinColumns={@ORM\JoinColumn(name="id_post", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="id_usuario", referencedColumnName="id")}
+     *      )
+     *
+     * @var \Admin\Entity\Usuario
+     */
+    protected $curtiram;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="\Admin\Entity\Usuario")
+     *  * @ORM\JoinTable(name="post_naocurtiram",
+     *      joinColumns={@ORM\JoinColumn(name="id_post", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="id_usuario", referencedColumnName="id")}
+     *      )
+     *
+     * @var \Admin\Entity\Usuario
+     */
+    protected $naocurtiram;
+
     /**
     *@ORM\OneToMany(targetEntity="Comentario", mappedBy="post")
     *
     */
     protected $comentarios;
 
+
     public function __construct()
     {
+    $this->curtiram = new ArrayCollection();
+    $this->naocurtiram = new ArrayCollection();
 	$this->comentarios = new ArrayCollection();
     }
 
     public function getComentarios()
     {
 	return $this->comentarios;
+    }
+
+    /**
+     * @return Usuario
+     */
+    public function getCurtiram()
+    {
+        return $this->curtiram;
+    }
+
+     /**
+     * @return Usuario
+     */
+    public function getNaocurtiram()
+    {
+        return $this->naocurtiram;
     }
     
     /**
@@ -164,6 +205,13 @@ class Post
         $this->usuario = $usuario;
     }
 
+    /**
+     * @return text
+     */
+    public function getDono()
+    {
+        return $this->usuario;
+    }
 
     /**
      * @return array

@@ -35,6 +35,116 @@
   </div>
 </div>
 </hr>
+<br><br>
+
+<?php 
+
+$flag="nada";// padrao, se nao for pessoa logada ou se nao tiver curtido/nao curtido
+
+if($post->getDono()->getId()==$this->session()->offsetGet('user')->getId()){
+  $flag="postDoUserLogado";
+}
+
+//começo verifica se ja curtiu ou se ja nao curtiu o post
+  foreach($post->getCurtiram() as $curtiu) { 
+        if($curtiu->getId()==$this->session()->offsetGet('user')->getId()){
+          $flag="jaCurtiu";
+        }
+  } 
+ 
+  foreach($post->getNaocurtiram() as $naoCurtiu) {
+        if($naoCurtiu->getId()==$this->session()->offsetGet('user')->getId()){
+          $flag="jaNaoCurtiu";
+        } 
+  } 
+//fim verifica se ja curtiu ou se ja nao curtiu o post  
+
+if($flag=="postDoUserLogado"){ ?>
+  <div class="col-md-12"> 
+    <div class="well">
+        <h4>Esse é seu post</h4>                 
+    </div>
+</div>
+<?php
+} /*fim do if flag postDoUserLogado*/ 
+
+if($flag=="nada"){
+?>
+<!-- likes -->
+    <div class="col-md-12"> 
+    <div class="well">
+        <h4>Curta ou nao o post</h4>
+        <form method="POST" action="/admin/posts/curtidas/" role="form" class="clearfix"> 
+          <input type="hidden" name="opcao" value="curtir"  id="opcao">          
+          <input type="hidden" name="id_post" value=<?php echo $post->getId(); ?>  id="id_post">
+          <button type="submit" class="btn btn-primary">Curtir</button>
+        </form>  
+        <form method="POST" action="/admin/posts/curtidas" role="form" class="clearfix"> 
+          <input type="hidden" name="opcao" value="naocurtir"  id="opcao">          
+          <input type="hidden" name="id_post" value=<?php echo $post->getId(); ?>  id="id_post">
+          <button type="submit" class="btn btn-primary">Nao Curtir</button>
+        </form>                  
+    </div>
+</div>
+<?php }/*fim do if flag nada*/  
+
+if($flag=="jaCurtiu"){
+?>
+<!-- likes -->
+    <div class="col-md-12"> 
+    <div class="well">
+         <h5>Atenção!, vc ja curtiu esse post</h5>
+        <h4>remover curtida?</h4>
+        <form method="POST" action="/admin/posts/curtidas" role="form" class="clearfix">
+            <div class="col-md-6 form-group">
+            <input type="hidden" name="opcao" value="removercurtida"  id="opcao">
+                <input type="hidden" name="id_post" value=<?php echo $post->getId(); ?>  id="id_post">
+                <button type="submit" class="btn btn-primary">Sim</button>
+            </div>
+        </form>                  
+    </div>
+</div>
+<?php }/*fim do if flag jaCurtiu*/ 
+
+if($flag=="jaNaoCurtiu"){
+?>
+<!-- likes -->
+    <div class="col-md-12"> 
+    <div class="well">
+        <h5>Atenção!, vc ja nao curtiu esse post</h5>
+        <h4>remover nao curtida?</h4>
+        <form method="POST" action="/admin/posts/curtidas" role="form" class="clearfix">
+            <div class="col-md-6 form-group">
+            <input type="hidden" name="opcao" value="removernaocurtida"  id="opcao">
+                <input type="hidden" name="id_post" value=<?php echo $post->getId(); ?>  id="id_post">
+                <button type="submit" class="btn btn-primary">Sim</button>
+            </div>
+        </form>                 
+    </div>
+</div>
+<?php }/*fim do if flag jaNaoCurtiu*/ ?> 
+
+<!-- likes -->
+<div class="row">
+<div class="col-md-10 col-sm-9">
+<?php foreach($post->getCurtiram() as $curtiu) { ?>
+<h5>Quem Curtiu:</h5>
+    <?php echo "<h4>".$curtiu->getNome()."</h4>"; ?>
+
+<?php } ?>
+</div>
+</div>
+
+<!-- likes -->
+<div class="row">
+<div class="col-md-10 col-sm-9">
+<?php foreach($post->getNaocurtiram() as $naoCurtiu) { ?>
+<h5>Quem Não Curtiu:</h5>
+    <?php echo "<h4>".$naoCurtiu->getNome()."</h4>"; ?>
+
+<?php } ?>
+</div>
+</div>
 
 <!-- Posted Comments -->
 <!-- Comment -->

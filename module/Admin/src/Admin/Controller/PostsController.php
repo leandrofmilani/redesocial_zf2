@@ -188,4 +188,94 @@ class PostsController extends AbstractActionController
         return $this->redirect()->toUrl('/admin/posts/index');
     }
 
+    /**
+     * Exibe os usuÃ¡rios
+     * @return void
+     */
+    public function curtidasAction()
+    {
+        $em =  $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+        $request = $this->getRequest();
+        $session = $this->getServiceLocator()->get('Session');
+        $usuario = $session->offsetGet('user');
+        $usuario = $em->find('\Admin\Entity\Usuario', $usuario->getId());    
+        $values = $request->getPost();
+    
+            
+            if($values['opcao']=="curtir"){
+
+                    $post = $em->find('\Admin\Entity\Post', $values['id_post']);
+                    //IF CONSTEIN SE JA TIVER ACEITADO..
+                    $post->getCurtiram()->add($usuario);
+                     $em->persist($post);
+
+                try {
+                    $em->flush();
+                    $this->flashMessenger()->addSuccessMessage('Curtida armazenada com sucesso');
+                } catch (\Exception $e) {
+                    
+                    $this->flashMessenger()->addErrorMessage('Erro ao armazenar curtida');
+                }
+                
+                return $this->redirect()->toUrl('/admin/exibirpost/index/id/'.$values['id_post']);
+
+            }
+             if($values['opcao']=="naocurtir"){
+
+                 $post = $em->find('\Admin\Entity\Post', $values['id_post']);
+                    //IF CONSTEIN SE JA TIVER ACEITADO..
+                    $post->getNaocurtiram()->add($usuario);
+                //} PEDIR COMO FAZER O REMOVE PARA REMOVER PRESENCA
+                     $em->persist($post);
+
+                try {
+                    $em->flush();
+                    $this->flashMessenger()->addSuccessMessage('Nao-curti armazenada com sucesso');
+                } catch (\Exception $e) {
+                    
+                    $this->flashMessenger()->addErrorMessage('Erro ao armazenar nao curti');
+                }
+                
+                return $this->redirect()->toUrl('/admin/exibirpost/index/id/'.$values['id_post']);
+
+            }
+            if($values['opcao']=="removercurtida"){
+
+                    $post = $em->find('\Admin\Entity\Post', $values['id_post']);
+                    //IF CONSTEIN SE JA TIVER ACEITADO..
+                    $post->getCurtiram()->removeElement($usuario);
+                     $em->persist($post);
+
+                try {
+                    $em->flush();
+                    $this->flashMessenger()->addSuccessMessage('Curtida removida com sucesso');
+                } catch (\Exception $e) {
+                    
+                    $this->flashMessenger()->addErrorMessage('Erro ao remover curtida');
+                }
+                
+                return $this->redirect()->toUrl('/admin/exibirpost/index/id/'.$values['id_post']);
+
+            }
+            if($values['opcao']=="removernaocurtida"){
+
+                    $post = $em->find('\Admin\Entity\Post', $values['id_post']);
+                    //IF CONSTEIN SE JA TIVER ACEITADO..
+                    $post->getNaocurtiram()->removeElement($usuario);
+                     $em->persist($post);
+
+                try {
+                    $em->flush();
+                    $this->flashMessenger()->addSuccessMessage('Nao-Curtida removida com sucesso');
+                } catch (\Exception $e) {
+                    
+                    $this->flashMessenger()->addErrorMessage('Erro ao remover nao-curtida');
+                }
+                
+                return $this->redirect()->toUrl('/admin/exibirpost/index/id/'.$values['id_post']);
+
+            }     
+
+    }
+
 }

@@ -123,6 +123,19 @@ return array(
                     ),
                 ),
             ),
+            'curtidas' => array(
+                'type' => 'segment',             
+                'options' => array(
+                    'route' => '/admin/posts/curtidas/[page/:page]',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Admin\Controller',
+                        'controller'    => 'Posts',
+                        'action'        => 'curtidas',
+                        'module'        => 'admin',
+                        'page' => 1, //exibe por pagina
+                    ),
+                ),
+            ),
             'novocomentevento' => array(
                 'type' => 'segment',             
                 'options' => array(
