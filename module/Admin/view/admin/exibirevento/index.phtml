@@ -40,7 +40,7 @@
 <!-- Comment -->
 <?php foreach($evento->getComentarios() as $comentario) { ?>
 <div class="media">
-    <a class="pull-left" href="#">
+    <a class="pull-left" href="/admin/exibirperfil/index/id/<?php echo $comentario->getUsuario()->getId(); ?>">
         <img class="media-object" style="width:64px;height:64px" src="/img/profile.jpg" alt="">
     </a>
     <div class="media-body">
