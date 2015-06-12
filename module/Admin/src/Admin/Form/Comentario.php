@@ -28,18 +28,6 @@ class Comentario extends Form
             )
         );        
 
-        $this->add(array(
-            'name' => 'email',
-            'type' => 'text',
-            'options' => array(
-                'label' => 'E-mail:*'
-            ),
-            'attributes' => array(
-                'placeholder' => 'Informe o e-mail',
-                'id' => 'email'
-            )
-        ));
-
          $this->add(array(
             'name' => 'comentario',
             'type' => 'text',

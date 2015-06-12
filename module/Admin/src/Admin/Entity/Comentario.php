@@ -29,18 +29,19 @@ class Comentario
     protected $inputFilter;
 
     /**
-     * @ORM\Column (type="string")
-     *
-     * @var string
-     */
-    protected $email;
-
-    /**
      * @ORM\Column (type="text")
      *
      * @var text
      */
     protected $comentario;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Usuario")
+     * @ORM\JoinColumn(name="id_usuario", referencedColumnName="id")
+     * 
+     * @var \Admin\Entity\Usuario
+     */
+    protected $usuario;
 
     /**
      * @ORM\ManyToOne(targetEntity="\Admin\Entity\Post")
@@ -64,14 +65,6 @@ class Comentario
      * @var datetime
      */
     protected $dataComentario;
-
-    /**
-     *
-     * @return void
-     */
-    public function __construct(){
-        $this->usuario = new ArrayCollection();
-    }
     
     /**
      * @return int
@@ -80,21 +73,21 @@ class Comentario
     {
         return $this->id;
     }
-    
+
     /**
-     * @return string
+     * @param Usuario $usuario
      */
-    public function getEmail()
+    public function setUsuario(\Admin\Entity\Usuario $usuario)
     {
-        return $this->email;
+        $this->usuario = $usuario;
     }
 
     /**
-     * @param string $email
+     * @return Usuario
      */
-    public function setEmail($email)
+    public function getUsuario()
     {
-        $this->email = $email;
+        return $this->usuario;
     }
 
     /**
@@ -114,7 +107,7 @@ class Comentario
     }
 
     /**
-     * @param Usuario $evento
+     * @param $evento
      */
     public function setEvento(\Admin\Entity\Evento $evento)
     {
@@ -130,7 +123,7 @@ class Comentario
     }
 
     /**
-     * @param Usuario $post
+     * @param $post
      */
     public function setPost(\Admin\Entity\Post $post)
     {
@@ -188,37 +181,6 @@ class Comentario
                 'required' => false,
                 'filters' => array(
                     array('name' => 'Int'),
-                ),
-            )));
-
-            $inputFilter->add($factory->createInput(array(
-                'name' => 'email',
-                'required' => true,
-                'validators' => array(
-                    array(
-                        'name' => 'NotEmpty',
-                        'options' => array('message' => 'O campo E-mail não pode estar vazio')
-                    ),
-                    array(
-                        'name' => 'StringLength',
-                        'options' => array(
-                            'encoding' => 'UTF-8',
-                            'min' => 3,
-                            'max' => 255,
-                            'message' => 'O campo E-mail deve ter mais que 3 caracteres e menos que 255',
-                        ),
-                    ),
-                    array(
-                        'name' => 'EmailAddress',
-                        'options' => array('message' => 'NÃ£o parece ser um e-mail válido')
-                    ),
-                ),
-                'filters' => array(
-                    array('name' => 'StripTags'),
-                    array('name' => 'StringTrim'),
-                    array('name' => 'StringToLower',
-                        'options' => array('encoding' => 'UTF-8')
-                    ),
                 ),
             )));
 

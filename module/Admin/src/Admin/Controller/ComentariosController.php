@@ -58,6 +58,9 @@ class ComentariosController extends AbstractActionController
     public function saveAction()
     {
         $em =  $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+        $session = $this->getServiceLocator()->get('Session');
+        $usuario = $session->offsetGet('user');
+        $usuario = $em->find('\Admin\Entity\Usuario', $usuario->getId()); 
        
         $request = $this->getRequest();
 
@@ -83,9 +86,9 @@ class ComentariosController extends AbstractActionController
 
 
                 if ( (int) $values['id'] > 0)
-                $comentario = $em->find('\Admin\Entity\Comentario', $values['id']);
-                $comentario->setEmail($values['email']);
+                $comentario = $em->find('\Admin\Entity\Comentario', $values['id']); 
                 $comentario->setComentario($values['comentario']);
+                $comentario->setUsuario($usuario);
                 $comentario->setDataComentario(new \DateTime('now'));
                // $user = $session->offsetGet('user');
                 //SE CHEGAR ALGUMA COISA EM COMO 'id_post' ENTAO ARMAZENARA NA VARIAVEL $id_post, 
@@ -146,8 +149,10 @@ class ComentariosController extends AbstractActionController
 
     public function novoAction()
     {   
-
-         $em =  $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+        $em =  $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+        $session = $this->getServiceLocator()->get('Session');
+        $usuario = $session->offsetGet('user');
+        $usuario = $em->find('\Admin\Entity\Usuario', $usuario->getId()); 
        
         $request = $this->getRequest();
         if ($request->isPost()) {
@@ -156,8 +161,8 @@ class ComentariosController extends AbstractActionController
         }
    
        
-        $comentario->setEmail($values['email']);
         $comentario->setComentario($values['comentario']);
+        $comentario->setUsuario($usuario);
         $comentario->setDataComentario(new \DateTime('now'));
         $id_post = $request->getPost('id_post');
         $post = new Post();
@@ -180,6 +185,9 @@ class ComentariosController extends AbstractActionController
     {   
 
          $em =  $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+        $session = $this->getServiceLocator()->get('Session');
+        $usuario = $session->offsetGet('user');
+        $usuario = $em->find('\Admin\Entity\Usuario', $usuario->getId()); 
        
         $request = $this->getRequest();
         if ($request->isPost()) {
@@ -188,8 +196,8 @@ class ComentariosController extends AbstractActionController
         }
    
        
-        $comentario->setEmail($values['email']);
         $comentario->setComentario($values['comentario']);
+        $comentario->setUsuario($usuario);
         $comentario->setDataComentario(new \DateTime('now'));
         $id_evento = $request->getPost('id_evento');
         $evento = new Evento();

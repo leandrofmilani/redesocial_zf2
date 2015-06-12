@@ -44,7 +44,7 @@
         <img class="media-object" style="width:64px;height:64px" src="/img/profile.jpg" alt="">
     </a>
     <div class="media-body">
-        <h4 class="media-heading"><?php echo $comentario->getEmail(); ?>
+        <h4 class="media-heading"><?php echo $comentario->getUsuario()->getNome(); ?>
             <small><?php echo $comentario->getDataComentario(); ?></small>
         </h4>
         <?php  echo $comentario->getComentario(); ?>
@@ -62,11 +62,6 @@
         <h4>Deixe seu comentário</h4>
      
         <form method="POST" action="/admin/comentarios/novo/" role="form" class="clearfix">
-     
-            <div class="col-md-4 form-group">
-                <label class="sr-only" for="email">Email</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Email">
-            </div>
      
             <div class="col-md-12 form-group">
                 <label class="sr-only" for="email">Comentário</label>
