@@ -37,23 +37,21 @@
 
        <?php
       $contSolicitacoes=1;
-      if(isset($meusdados)){
    foreach($meusdados as $userlogado) { 
-           foreach($userlogado->getSolicitacoes() as $jasolicitou) {
-           
+           foreach($userlogado->getSolicitacoes() as $solicitou) {
             ?>
                 <div class="row"> 
                      <h3>Solicitação <?php echo $contSolicitacoes ?>:</h3> 
-                     <h4><br>Perfil: <a href="/admin/exibirperfil/index/id/<?php echo $jasolicitou->getId(); ?>">Ver Perfil,</a>
+                     <h4><br>Perfil: <a href="/admin/exibirperfil/index/id/<?php echo $solicitou->getId(); ?>">Ver Perfil,</a>
                     aceitar amizade?</h4>
                   <form method="POST" action="/admin/usuarios/solicitaramizade" role="form" class="clearfix">
                     <input type="hidden" name="opcao" value="aceitar"  id="opcao">
-                     <input type="hidden" name="id_usuario" value=<?php echo $jasolicitou->getId(); ?>  id="id_usuario">
+                     <input type="hidden" name="id_usuario" value=<?php echo $solicitou->getId(); ?>  id="id_usuario">
                     <button type="submit" class="btn btn-primary">Sim</button>
                   </form>  
                   <form method="POST" action="/admin/usuarios/solicitaramizade" role="form" class="clearfix">
                     <input type="hidden" name="opcao" value="negar"  id="opcao">
-                     <input type="hidden" name="id_usuario" value=<?php echo $jasolicitou->getId(); ?>  id="id_usuario">
+                     <input type="hidden" name="id_usuario" value=<?php echo $solicitou->getId(); ?>  id="id_usuario">
                     <button type="submit" class="btn btn-primary">Não</button>
                   </form> 
                 </div>
@@ -62,8 +60,6 @@
                 }  
 
          }
-       }
-
 
 
       foreach($posts as $post) { ?>

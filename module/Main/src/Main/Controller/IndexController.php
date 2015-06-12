@@ -35,6 +35,7 @@ class IndexController extends AbstractActionController
         ->setCurrentPageNumber($this->params()->fromRoute('page'))
         ->setItemCountPerPage(10);
 
+        if(is_object($usuario)) {
         //passando meus dados para a view para comprar se a pessoa ja solicitou minha amizade
         $id2 = $usuario->getId();
         $em =  $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
@@ -46,18 +47,23 @@ class IndexController extends AbstractActionController
 
         $paginator2->setCurrentPageNumber($this->params()->fromRoute('page'))
         ->setItemCountPerPage(10);
+        }
 
-
-
-
-
+        if(isset($id2)){
         return new ViewModel(
             array(
                 'posts' => $paginator,
                 'meusdados' => $paginator2,
             )
         );
-    
+        }else{
+        return new ViewModel(
+            array(
+                'posts' => $paginator,
+            )
+        );
+
+        }
     }
 
     public function comentarAction()
