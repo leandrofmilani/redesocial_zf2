@@ -22,7 +22,6 @@ class IndexController extends AbstractActionController
         $em =  $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
         $session = $this->getServiceLocator()->get('Session');
         $usuario = $session->offsetGet('user');
-        
 
 
         $em =  $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
@@ -36,35 +35,28 @@ class IndexController extends AbstractActionController
         ->setCurrentPageNumber($this->params()->fromRoute('page'))
         ->setItemCountPerPage(10);
 
-      if (is_object($usuario)){
-            $id2 = $usuario->getId();
-            $em =  $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-            $query2 = $em->createQuery('SELECT Usuario FROM \Admin\Entity\Usuario Usuario WHERE Usuario.id = :id2');         
-            $query2->setParameters(array('id2' => $id2));
-            $paginator2 = new Paginator(
-                new DoctrinePaginator(new ORMPaginator($query2))
-            );
+        //passando meus dados para a view para comprar se a pessoa ja solicitou minha amizade
+        $id2 = $usuario->getId();
+        $em =  $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+        $query2 = $em->createQuery('SELECT Usuario FROM \Admin\Entity\Usuario Usuario WHERE Usuario.id = :id2');         
+        $query2->setParameters(array('id2' => $id2));
+        $paginator2 = new Paginator(
+            new DoctrinePaginator(new ORMPaginator($query2))
+        );
 
-            $paginator2->setCurrentPageNumber($this->params()->fromRoute('page'))
-            ->setItemCountPerPage(10);
-        }
-        
-   
+        $paginator2->setCurrentPageNumber($this->params()->fromRoute('page'))
+        ->setItemCountPerPage(10);
 
-        if(isset($id2)){
-            return new ViewModel(
-                 array(
+
+
+
+
+        return new ViewModel(
+            array(
                 'posts' => $paginator,
                 'meusdados' => $paginator2,
-                 )
-            );
-         }else{
-            return new ViewModel(
-                array(
-                'posts' => $paginator,
-                )
-            );
-        }
+            )
+        );
     
     }
 
