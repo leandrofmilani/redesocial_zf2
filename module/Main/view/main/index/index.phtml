@@ -36,13 +36,13 @@
         <div class="panel-body">     
 
        <?php
-      $contSolic=1;
+      $contSolicitacoes=1;
    foreach($meusdados as $userlogado) { 
            foreach($userlogado->getSolicitacoes() as $jasolicitou) {
            
             ?>
                 <div class="row"> 
-                     <h3>Solicitação <?php echo $contSolic ?>:</h3> 
+                     <h3>Solicitação <?php echo $contSolicitacoes ?>:</h3> 
                      <h4><br>Perfil: <a href="/admin/exibirperfil/index/id/<?php echo $jasolicitou->getId(); ?>">Ver Perfil,</a>
                     aceitar amizade?</h4>
                   <form method="POST" action="/admin/usuarios/solicitaramizade" role="form" class="clearfix">
@@ -57,7 +57,7 @@
                   </form> 
                 </div>
             <?php
-            $contSolic++;
+            $contSolicitacoes++;
                 }  
 
          }
