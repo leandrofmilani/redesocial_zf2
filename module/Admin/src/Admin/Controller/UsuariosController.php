@@ -69,62 +69,27 @@ class UsuariosController extends AbstractActionController
         if ($request->isPost()) {
             $usuario = new Usuario();
             $values = $request->getPost();
+            // Funcao para verificacao da idade
+            $this->getIdade(new \DateTime($values['dataNasc']));
             $form->setInputFilter($usuario->getInputFilter());
             $form->setData($values);
             
-            if ($form->isValid()) {             
+            if ($form->isValid()) {        
                 $values = $form->getData();
-
-                if ( (int) $values['id'] > 0)
-                    $usuario = $em->find('\Admin\Entity\Usuario', $values['id']);
-
-                //Logica para pegar idade (fazer function)
-                $data_atual = (new \DateTime("now"));
-                $datanascimento = (new \DateTime($values['dataNasc']));
-                $intervalo = date_diff($data_atual, $datanascimento);
-                $idade = $intervalo->y;
-
-                if ($idade < 16) {
-                    echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=/admin/usuarios/save'>";
-                    $this->flashMessenger()->addErrorMessage('Não é possivel cadastrar menores de 16 anos de idade!');
-                    
-                    return new ViewModel(
-                        array('form' => $form)
-                    );
-                }
-
-                $usuario->setNome($values['nome']);
-                $usuario->setSobrenome($values['sobrenome']);
-                $usuario->setEmail($values['email']);
-                $usuario->setCelular($values['celular']);
-                $usuario->setSenha($values['senha']);
-                $usuario->setRole($values['role']);
-                $usuario->setDataNasc(new \DateTime($values['dataNasc']));
-                $sexo = $em->find('\Admin\Entity\Sexo', $values['sexo']);
-                $usuario->setSexo($sexo);
-                $em->persist($usuario);
-
+                
                 try {
-                    $em->flush();
+                    $this->getServiceUser()->save($values);
                     $this->flashMessenger()->addSuccessMessage('Usuário armazenado com sucesso');
                 } catch (\Exception $e) {
-                    $this->flashMessenger()->addErrorMessage('Erro ao armazenar usuário');
+                    $this->flashMessenger()->addErrorMessage($e->getMessage());
                 }
-
                 return $this->redirect()->toUrl('/admin/usuarios');
             }
-            else{
-                echo"<center><b>FORM INVALIDO</b></center>";
-            }
         }
-
         $id = $this->params()->fromRoute('id', 0);
-
         if ((int) $id > 0) {
-            $usuario = $em->find('\Admin\Entity\Usuario', $id);
-            $form->bind($usuario);
+            $form->bind($this->getServiceUser()->get($id));
         }
-
         return new ViewModel(
             array('form' => $form)
         );
@@ -268,6 +233,27 @@ class UsuariosController extends AbstractActionController
 
             }    
 
+    }
+
+    private function getIdade($datanascimento)
+    {
+        $data_atual = (new \DateTime("now"));
+        $intervalo = date_diff($data_atual, $datanascimento);
+        $idade = $intervalo->y;
+
+        if ($idade < 16) {
+            $this->flashMessenger()->addErrorMessage('Não é possivel cadastrar menores de 16 anos de idade!');
+            header("location:/admin/usuarios/save");
+            die();
+        }
+    }
+
+    /**
+     * @return object
+     */
+    private function getServiceUser()
+    {
+        return $this->getServiceLocator()->get('Admin\Service\Usuario');
     }
 
 }
