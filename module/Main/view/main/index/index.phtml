@@ -36,12 +36,33 @@
         <div class="panel-body">     
 
        <?php
-      
-      foreach($this->session()->offsetGet('user')->getSolicitacoes() as $solicitou) {
-                    ?>
-                    <h3>Quer ser seu amigo: href="/admin/exibirerfil/index/id/ <?php echo $solicitou->getId(); ?>"</h3>
-                    <?php
-                }
+      $contSolic=1;
+   foreach($meusdados as $userlogado) { 
+           foreach($userlogado->getSolicitacoes() as $jasolicitou) {
+           
+            ?>
+                <div class="row"> 
+                     <h3>Solicitação <?php echo $contSolic ?>:</h3> 
+                     <h4><br>Perfil: <a href="/admin/exibirperfil/index/id/<?php echo $jasolicitou->getId(); ?>">Ver Perfil,</a>
+                    aceitar amizade?</h4>
+                  <form method="POST" action="/admin/usuarios/solicitaramizade" role="form" class="clearfix">
+                    <input type="hidden" name="opcao" value="aceitar"  id="opcao">
+                     <input type="hidden" name="id_usuario" value=<?php echo $jasolicitou->getId(); ?>  id="id_usuario">
+                    <button type="submit" class="btn btn-primary">Sim</button>
+                  </form>  
+                  <form method="POST" action="/admin/usuarios/solicitaramizade" role="form" class="clearfix">
+                    <input type="hidden" name="opcao" value="negar"  id="opcao">
+                     <input type="hidden" name="id_usuario" value=<?php echo $jasolicitou->getId(); ?>  id="id_usuario">
+                    <button type="submit" class="btn btn-primary">Não</button>
+                  </form> 
+                </div>
+            <?php
+            $contSolic++;
+                }  
+
+         }
+
+
 
       foreach($posts as $post) { ?>
       <div class="row">    

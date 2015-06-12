@@ -15,12 +15,30 @@
               <h3>Sobrenome: <?php echo $usuario->getSobrenome(); ?></h3>
             </div>
           </div>
-          <hr>
-          <a class="btn btn-success" href="/admin/perfil/save/id/<?php echo $usuario->getId(); ?>">Editar perfil</a>
-    <?php } ?>       
+          
+          
           
         </div>
       </div>
+
+      
+      <div class="row">    
+            <br>
+            <div class="col-md-10 col-sm-9">
+              <h2>Amigos:</h2>
+              <?php
+              foreach($usuario->getAmigos() as $amigo) {
+                   ?>
+                   <h4><br>Amigo: <a href="/admin/exibirperfil/index/id/<?php echo $amigo->getId() ?>">Ver Perfil</a></h4>
+                   <?php
+                }
+               ?> 
+              
+            </div>
+          </div>
+          <hr>
+    <?php }//fim foreach usuarios
+     ?>
                                       
     </div><!--/col-12-->
   </div>
@@ -28,9 +46,21 @@
 </hr>
 <br><br>
 
+
+
+
 <?php       
 
         $flag="naoeamigo";
+
+      foreach($meusdados as $userlogado) { 
+           foreach($userlogado->getSolicitacoes() as $jasolicitou) {
+                      if($jasolicitou->getId() == $usuario->getId()){
+                      $flag="usuariojasolicitou";
+                      }
+                }  
+         }
+
 
         if($usuario->getId()==$this->session()->offsetGet('user')->getId()){
           $flag="evc";
@@ -42,11 +72,7 @@
                     }
                 }
 
-        foreach($this->session()->offsetGet('user')->getSolicitacoes() as $jasolicitou) {
-                    if($jasolicitou->getId() == $usuario->getId()){
-                      $flag="usuariojasolicitou";
-                    }
-                }        
+              
 
           foreach($usuario->getAmigos() as $amigo) {
                     if($amigo->getId() == $this->session()->offsetGet('user')->getId()){
@@ -93,6 +119,9 @@
 
         if($flag=="evc"){
            echo"<h4>Esse é seu perfil</h4>"; 
+           ?>
+           <a class="btn btn-success" href="/admin/perfil/save/id/<?php echo $usuario->getId(); ?>">Editar perfil</a>
+           <?php
         }
 
 
@@ -106,7 +135,12 @@
                 <input type="hidden" name="id_usuario" value=<?php echo $usuario->getId(); ?>  id="id_usuario">
                 <button type="submit" class="btn btn-primary">Sim</button>
             </div>
-        </form>  
+        </form>
+        <form method="POST" action="/admin/usuarios/solicitaramizade" role="form" class="clearfix">
+                    <input type="hidden" name="opcao" value="negar"  id="opcao">
+                     <input type="hidden" name="id_usuario" value=<?php echo $usuario->getId(); ?>  id="id_usuario">
+                    <button type="submit" class="btn btn-primary">Não</button>
+        </form>   
 
         <?php     
 

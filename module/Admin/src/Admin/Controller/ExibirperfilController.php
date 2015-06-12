@@ -19,9 +19,13 @@ class ExibirperfilController extends AbstractActionController
 {
     public function indexAction()
     {
+        $em =  $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+        $session = $this->getServiceLocator()->get('Session');
+        $usuario = $session->offsetGet('user');
+
+
 
         $id = $this->params()->fromRoute('id', 0);
-        
         $em =  $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
         $query = $em->createQuery('SELECT Usuario FROM \Admin\Entity\Usuario Usuario WHERE Usuario.id = :id');         
         $query->setParameters(array('id' => $id));
@@ -35,9 +39,23 @@ class ExibirperfilController extends AbstractActionController
         ->setItemCountPerPage(10);
 
 
+        //passando meus dados para a view para comprar se a pessoa ja solicitou minha amizade
+        $id2 = $usuario->getId();
+        $em =  $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+        $query2 = $em->createQuery('SELECT Usuario FROM \Admin\Entity\Usuario Usuario WHERE Usuario.id = :id2');         
+        $query2->setParameters(array('id2' => $id2));
+        $paginator2 = new Paginator(
+            new DoctrinePaginator(new ORMPaginator($query2))
+        );
+
+        $paginator2->setCurrentPageNumber($this->params()->fromRoute('page'))
+        ->setItemCountPerPage(10);
+
+
         return new ViewModel(
             array(
                 'usuarios' => $paginator,
+                'meusdados' => $paginator2,
 
             )
         );

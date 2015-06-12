@@ -248,7 +248,25 @@ class UsuariosController extends AbstractActionController
                 
                 return $this->redirect()->toUrl('/admin/exibirperfil/index/id/'.$values['id_usuario']);
 
-            }     
+            } 
+            if($values['opcao']=="negar"){
+
+                 $usuarioNegar = $em->find('\Admin\Entity\Usuario', $values['id_usuario']);
+                    //IF CONSTEIN SE JA TIVER ACEITADO..
+                    $usuario->getSolicitacoes()->removeElement($usuarioNegar);
+                     $em->persist($usuario);
+
+                try {
+                    $em->flush();
+                    $this->flashMessenger()->addSuccessMessage('Amizade negada com sucesso');
+                } catch (\Exception $e) {
+                    
+                    $this->flashMessenger()->addErrorMessage('Erro ao negar amizade');
+                }
+                
+                return $this->redirect()->toUrl('/admin/exibirperfil/index/id/'.$values['id_usuario']);
+
+            }    
 
     }
 
