@@ -206,7 +206,7 @@ class Post
     }
 
     /**
-     * @return text
+     * @return Usuario
      */
     public function getDono()
     {
