@@ -13,6 +13,7 @@ class Perfil extends Form
         parent::__construct('usuario');
         $this->setAttribute('action', '');
         $this->setAttribute('method', 'post');
+        $this->setAttribute('enctype', 'multipart/form-data');
 
         $this->add(
             array(
@@ -188,6 +189,14 @@ class Perfil extends Form
             'attributes' => array(
                 'placeholder' => 'Ex.: Celesc',
                 'id' => 'localtrabalho'
+            )
+        ));
+
+        $this->add(array(
+            'name' => 'photo',
+            'type' => 'file',
+            'options' => array(
+                'label' => 'Foto',
             )
         ));
 

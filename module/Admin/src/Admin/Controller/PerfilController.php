@@ -9,6 +9,7 @@ use \Admin\Entity\Usuario as Usuario;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
 use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
 use Zend\Paginator\Paginator;
+use Zend\Validator\Exception\InvalidMagicMimeFileException;
 
 /**
  * Controlador que gerencia os usuÃ¡rios
@@ -69,11 +70,14 @@ class PerfilController extends AbstractActionController
         if ($request->isPost()) {
             $usuario = new Usuario();
             $values = $request->getPost();
+            $file = $request->getFiles('photo');
+            $photo = $this->getServiceUser()->uploadPhoto($file);
             $form->setInputFilter($usuario->getInputFilter());
             $form->setData($values);
             
             if ($form->isValid()) {             
                 $values = $form->getData();
+                $values['photo'] = $photo;
 
                 try {
                     $this->getServiceUser()->save($values);
@@ -137,6 +141,17 @@ class PerfilController extends AbstractActionController
         }
 
         return $this->redirect()->toUrl('/admin/usuarios');
+    }
+
+    public function getPhotoAction()
+    {
+        header('Content-Type: image');
+        $id = (int) $this->params()->fromRoute('id', 0);
+        $photo = $this->getServiceUser()->getPhoto($id);
+        $view = new ViewModel(array('photo' => $photo));
+        $view->setTerminal(true);
+
+        return $view;
     }
 
      /**

@@ -151,6 +151,14 @@ class Usuario
     */
     protected $posts;
 
+    /**
+     * @ORM\Column(type="blob", nullable=true)
+     *
+     * @var blob
+     */
+
+    protected $photo;
+
     public function __construct()
     {
     $this->amigos = new ArrayCollection();
@@ -394,6 +402,23 @@ class Usuario
     public function setRelacionamento(\Admin\Entity\Relacionamento $relacionamento)
     {
         $this->relacionamento = $relacionamento;
+    }
+
+    /**
+     * @param blob $photo
+     *
+     */
+    public function setPhoto($photo)
+    {
+        $this->photo = $photo;
+    }
+
+    /**
+     * @return blob
+     */
+    public function getPhoto()
+    {
+        return $this->photo;
     }
 
     /**
@@ -734,6 +759,13 @@ class Usuario
                     ),
                 ),
             )));
+
+            $inputFilter->add($factory->createInput(array(
+                'name' => 'photo',
+                'required' => false
+                )
+
+            ));
 
             $this->inputFilter = $inputFilter;
         }

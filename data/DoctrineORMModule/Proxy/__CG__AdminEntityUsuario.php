@@ -64,10 +64,10 @@ class Usuario extends \Admin\Entity\Usuario implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'id', 'role', 'amigos', 'solicitacoes', 'inputFilter', 'nome', 'sobrenome', 'email', 'celular', 'profissao', 'localtrabalho', 'endereco', 'formacao', 'senha', 'dataNasc', 'sexo', 'relacionamento', 'posts');
+            return array('__isInitialized__', 'id', 'role', 'amigos', 'solicitacoes', 'inputFilter', 'nome', 'sobrenome', 'email', 'celular', 'profissao', 'localtrabalho', 'endereco', 'formacao', 'senha', 'dataNasc', 'sexo', 'relacionamento', 'posts', 'photo');
         }
 
-        return array('__isInitialized__', 'id', 'role', 'amigos', 'solicitacoes', 'inputFilter', 'nome', 'sobrenome', 'email', 'celular', 'profissao', 'localtrabalho', 'endereco', 'formacao', 'senha', 'dataNasc', 'sexo', 'relacionamento', 'posts');
+        return array('__isInitialized__', 'id', 'role', 'amigos', 'solicitacoes', 'inputFilter', 'nome', 'sobrenome', 'email', 'celular', 'profissao', 'localtrabalho', 'endereco', 'formacao', 'senha', 'dataNasc', 'sexo', 'relacionamento', 'posts', 'photo');
     }
 
     /**
@@ -505,6 +505,28 @@ class Usuario extends \Admin\Entity\Usuario implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setRelacionamento', array($relacionamento));
 
         return parent::setRelacionamento($relacionamento);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setPhoto($photo)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setPhoto', array($photo));
+
+        return parent::setPhoto($photo);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getPhoto()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getPhoto', array());
+
+        return parent::getPhoto();
     }
 
     /**

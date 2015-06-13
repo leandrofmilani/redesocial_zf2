@@ -58,6 +58,7 @@ return array(
             'Admin\Controller\Sexos.delete',
             'Admin\Controller\Perfil.save',
             'Admin\Controller\Perfil.delete',
+            'Admin\Controller\Perfil.get-photo',
             'Admin\Controller\Eventos.index',
             'Admin\Controller\Eventos.save',
             'Admin\Controller\Eventos.delete',
@@ -107,6 +108,7 @@ return array(
                     'Admin\Controller\Exibirperfil.index',
                     'Admin\Controller\Eventos.confirmarpresenca',
                     'Admin\Controller\Usuarios.solicitaramizade',
+                    'Admin\Controller\Perfil.get-photo',
 
                 )
             ),
