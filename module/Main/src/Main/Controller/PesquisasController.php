@@ -35,33 +35,14 @@ class PesquisasController extends AbstractActionController
         $q_user = $query_user->getResult();
         $q_evento = $query_evento->getResult();
 
-        if ( (isset($q_user[0])) && (!isset($q_evento[0])) ) {
-            $resultado = $query_user;
-        }elseif ( (!isset($q_user[0])) && (isset($q_evento[0])) ) {
-            $resultado = $query_evento;
-        }else //( (!isset($q_user[0])) && (!isset($q_evento[0])) ) {
-            {
-            echo "<div class='alert alert-warning' align='center'><h1>@@@@@@@@@NADAAAAA '".$pesquisa."'.</h1></div>";
-            echo "<meta HTTP-EQUIV='refresh' CONTENT='3;URL=/'>";
-            $resultado = $query_evento;
+        if (count($q_user) >= count($q_evento)){
+            $paginas = $query_user;
+        }else{
+            $paginas = $query_evento;
         }
-
-        /*// Logica para verificar se obteve resultado
-        $q_user = $query_user->getResult();
-        if (isset($q_user[0]) == NULL){
-            echo "<div class='alert alert-warning' align='center'><h1>USER-Nenhum resultado encontrado para '".$pesquisa."'.</h1></div>";
-            echo "<meta HTTP-EQUIV='refresh' CONTENT='3;URL=/'>";
-        }
-
-        // Logica para verificar se obteve resultado
-        $q_evento = $query_evento->getResult();
-        if (isset($q_evento[0]) == NULL){
-            echo "<div class='alert alert-warning' align='center'><h1>EVENTO-Nenhum resultado encontrado para '".$pesquisa."'.</h1></div>";
-            echo "<meta HTTP-EQUIV='refresh' CONTENT='3;URL=/'>";
-        }*/
 
         $paginator = new Paginator(
-            new DoctrinePaginator(new ORMPaginator($resultado))
+            new DoctrinePaginator(new ORMPaginator($paginas))
         );
 
         $paginator
@@ -70,7 +51,9 @@ class PesquisasController extends AbstractActionController
 
         return new ViewModel(
             array(
-                'pesquisas' => $paginator,
+                'paginas' => $paginator,
+                'usuarios' => $q_user,
+                'eventos' => $q_evento,
             )
         );
     

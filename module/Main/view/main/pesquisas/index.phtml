@@ -1,3 +1,15 @@
+<?php
+  foreach($usuarios as $usuario) {
+    echo "<br>Chegou user:".$usuario->getNome();
+  }
+  foreach($eventos as $evento) {
+    echo "<br>Chegou evento:".$evento->getTitulo();
+  }
+
+  //die();
+?>
+
+
 <div class="container">
   <div class="row">
     
@@ -6,21 +18,20 @@
       <div class="panel">
         <div class="panel-body">     
 
-     <?php foreach($pesquisas as $pesquisa) { ?>
+     <?php foreach($usuarios as $usuario) { ?>
       <div class="row">    
             <br>
             <div class="col-md-2 col-sm-3 text-center">
               <a class="story-img" href="#"><img src="/img/postdefault.jpg" style="width:100px;height:100px" class="img-circle"></a>
             </div>
             <div class="col-md-10 col-sm-9">
-              <h3><?php echo $pesquisa->getTitulo(); ?></h3>
-              <h3><?php echo $pesquisa->getNome(); ?></h3>
+              <h3><?php echo $usuario->getNome(); ?></h3>
               <div class="row">
                 <div class="col-xs-9">
-                  <p><?php echo $pesquisa->getSobrenome(); ?></p>
-                  <p class="lead"><a class="btn btn-default" href="/admin/exibirpost/index/id/<?php echo $pesquisa->getId(); ?>">Visualizar</a></p>
-                  <p class="pull-right"><span class="label label-default">keyword</span> <span class="label label-default">tag</span> <span class="label label-default">pesquisa</span></p>
-                  <ul class="list-inline"><li><i>Ultima Edição:</i><?php echo $pesquisa->getNome(); ?></li><li><a href="/admin/exibirpost/index/id/<?php echo $pesquisa->getId(); ?>"><i class="glyphicon glyphicon-comment"></i> <?php //echo count($pesquisa->getComentarios()); ?> Comentários</a></li></ul>
+                  <p><?php echo $usuario->getSobrenome(); ?></p>
+                  <p class="lead"><a class="btn btn-default" href="/admin/exibirpost/index/id/<?php echo $usuario->getId(); ?>">Visualizar</a></p>
+                  <p class="pull-right"><span class="label label-default">keyword</span> <span class="label label-default">tag</span> <span class="label label-default">usuario</span></p>
+                  <ul class="list-inline"><li><i>Ultima Edição:</i><?php echo $usuario->getNome(); ?></li><li><a href="/admin/exibirpost/index/id/<?php echo $usuario->getId(); ?>"><i class="glyphicon glyphicon-comment"></i> <?php //echo count($usuario->getComentarios()); ?> Comentários</a></li></ul>
                   </div>
                   </div>
                 <div class="col-xs-3"></div>
@@ -29,7 +40,30 @@
             </div>
           <hr>
 
-    <?php } ?>       
+    <?php } ?>
+    <?php foreach($eventos as $evento) { ?>
+      <div class="row">    
+            <br>
+            <div class="col-md-2 col-sm-3 text-center">
+              <a class="story-img" href="#"><img src="/img/postdefault.jpg" style="width:100px;height:100px" class="img-circle"></a>
+            </div>
+            <div class="col-md-10 col-sm-9">
+              <h3><?php echo $evento->getTitulo(); ?></h3>
+              <div class="row">
+                <div class="col-xs-9">
+                  <p><?php echo $evento->getMintext(); ?></p>
+                  <p class="lead"><a class="btn btn-default" href="/admin/exibirpost/index/id/<?php echo $evento->getId(); ?>">Visualizar</a></p>
+                  <p class="pull-right"><span class="label label-default">keyword</span> <span class="label label-default">tag</span> <span class="label label-default">evento</span></p>
+                  <ul class="list-inline"><li><i>Data do evento:</i><?php echo $evento->getDataEvento(); ?></li><li><a href="/admin/exibirpost/index/id/<?php echo $evento->getId(); ?>"><i class="glyphicon glyphicon-comment"></i> <?php //echo count($evento->getComentarios()); ?> Comentários</a></li></ul>
+                  </div>
+                  </div>
+                <div class="col-xs-3"></div>
+              </div>
+              <br><br>
+            </div>
+          <hr>
+
+    <?php } ?>        
           
         </div>
       </div>
@@ -42,7 +76,7 @@
 
 echo $this->paginationControl(
     // o objeto de paginacao
-    $pesquisas,
+    $paginas,
     //tipos de paginacao (elastic, all, sliding, Juping) mais em zend/paginator exemple-pagination-controls
     'sliding',
     // a parcial usada para gerar o html para a paginacao
