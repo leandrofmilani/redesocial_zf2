@@ -62,6 +62,7 @@ class CadastrosController extends AbstractActionController
                 $usuario->setCelular($values['celular']);
                 $usuario->setSenha($values['senha']);
                 $usuario->setRole($values['role']);
+                $usuario->setVisibilidadePerfil($values['visibilidade']);
                 $usuario->setDataNasc($datanascimento);
                 $sexo = $em->find('\Admin\Entity\Sexo', $values['sexo']);
                 $usuario->setSexo($sexo);

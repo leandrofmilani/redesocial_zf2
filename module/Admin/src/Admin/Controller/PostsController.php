@@ -103,13 +103,14 @@ class PostsController extends AbstractActionController
             if ($form->isValid()) {             
                 $values = $form->getData();
 
-
                 if ( (int) $values['id'] > 0)
                 $post = $em->find('\Admin\Entity\Post', $values['id']);
 
                 $post->setTitulo($values['titulo']);
                 $post->setMinText($values['minText']);
                 $post->setPostComp($values['postComp']);
+                $post->setVisibilidade($values['visibilidade']);
+                echo "<h1>".$values['visibilidade']."</h1>";
                // $user = $session->offsetGet('user');
 
                 /*
@@ -125,7 +126,7 @@ class PostsController extends AbstractActionController
               
                 $post->setDataPost(new \DateTime('now'));
                 $em->persist($post);
-
+                
                 try {
                     $em->flush();
                     $this->flashMessenger()->addSuccessMessage('Post armazenado com sucesso');

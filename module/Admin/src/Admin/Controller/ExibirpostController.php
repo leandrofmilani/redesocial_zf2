@@ -19,26 +19,32 @@ class ExibirpostController extends AbstractActionController
 {
     public function indexAction()
     {
+        $em =  $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+        $session = $this->getServiceLocator()->get('Session');
+        $usuario = $session->offsetGet('user');
+
+        $postRequerido = NULL;
 
         $id = $this->params()->fromRoute('id', 0);
-        
-        $em =  $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
         $query = $em->createQuery('SELECT Post FROM \Admin\Entity\Post Post WHERE Post.id = :id order by Post.id DESC');         
         $query->setParameters(array('id' => $id));
+        $postRequerido = $query->getResult();
 
-        $paginator = new Paginator(
-            new DoctrinePaginator(new ORMPaginator($query))
-        );
-
-        $paginator
-        ->setCurrentPageNumber($this->params()->fromRoute('page'))
-        ->setItemCountPerPage(10);
+          $meusdados = NULL;
+        
+        if (is_object($usuario)){
+            $id2 = $usuario->getId();
+            $em =  $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+            $query2 = $em->createQuery('SELECT Usuario FROM \Admin\Entity\Usuario Usuario WHERE Usuario.id = :id2');         
+            $query2->setParameters(array('id2' => $id2));
+            $meusdados = $query2->getResult();
+        }
 
 
         return new ViewModel(
             array(
-                'posts' => $paginator,
-
+                'posts' => $postRequerido,
+                'meusdados' => $meusdados,
             )
         );
     

@@ -6,15 +6,84 @@
       <div class="panel">
         <div class="panel-body">     
 
-     <?php foreach($usuarios as $usuario) { ?>
+        <?php
+         
+
+     foreach($usuarios as $usuario) { 
+
+      $jamostrou="nao";
+       $flag="naoeamigo";
+
+      foreach($usuario->getAmigos() as $amigo) {
+                    if($amigo->getId() == $this->session()->offsetGet('user')->getId()){
+                      $flag="eamigo";
+                    }
+                }
+
+      if($usuario->getId()==$this->session()->offsetGet('user')->getId()){
+          $flag="evc";
+        }
+                
+      ?>
       <div class="row">    
             <br>
             <div class="col-md-10 col-sm-9">
               <img src="/admin/perfil/get-photo/id/<?php echo $usuario->getId(); ?>">
               <h3>Nome: <?php echo $usuario->getNome(); ?></h3>
-              <br><br>
               <h3>Sobrenome: <?php echo $usuario->getSobrenome(); ?></h3>
+              <br>
+                
+               <?php 
+                if($usuario->getVisibilidadePerfil()=="publico" OR $usuario->getVisibilidadePerfil()=="somente amigos" && $flag=="eamigo" OR $flag=="evc"){
+                ?>
+                <h4>Email: <?php echo $usuario->getEmail(); ?></h4>
+                <h4>Celular: <?php echo $usuario->getCelular(); ?></h4>
+                <h4>Profissao: <?php echo $usuario->getProfissao(); ?></h4>
+                <h4>Local de Trabalho: <?php echo $usuario->getLocaltrabalho(); ?></h4>
+                <h4>Endereço: <?php echo $usuario->getEndereco(); ?></h4>
+                <h4>Formação: <?php echo $usuario->getFormacao(); ?></h4>
+                <h4>Data de Nacimento: <?php echo $usuario->getDataNasc(); ?></h4>
                 <a href="/admin/perfil/get-photo/id/<?php echo $usuario->getId(); ?>">Ver foto</a>
+                <?php
+                $jamostrou="sim";
+                }
+                ?>
+
+                <?php 
+                if($usuario->getVisibilidadePerfil()=="publico" && $jamostrou=="nao"){
+                ?>
+                <h4>Email: <?php echo $usuario->getEmail(); ?></h4>
+                <h4>Celular: <?php echo $usuario->getCelular(); ?></h4>
+                <h4>Profissao: <?php echo $usuario->getProfissao(); ?></h4>
+                <h4>Local de Trabalho: <?php echo $usuario->getLocaltrabalho(); ?></h4>
+                <h4>Endereço: <?php echo $usuario->getEndereco(); ?></h4>
+                <h4>Formação: <?php echo $usuario->getFormacao(); ?></h4>
+                <h4>Data de Nacimento: <?php echo $usuario->getDataNasc(); ?></h4>
+                <a href="/admin/perfil/get-photo/id/<?php echo $usuario->getId(); ?>">Ver foto</a>
+                <?php
+                }
+                ?>
+
+                <?php 
+                if($usuario->getVisibilidadePerfil()=="somente amigos" && $flag=="naoeamigo"){ ?>
+                <div class="col-md-12"> 
+                  <div class="well">
+                    <h4>Somente os amigos do usuario podem ver seu perfil</h4>                 
+                  </div>
+                  </div>
+                <?php
+                } ?>
+
+                <?php 
+                if($usuario->getVisibilidadePerfil()=="somente eu"){ ?>
+                <div class="col-md-12"> 
+                  <div class="well">
+                    <h4>Somente o dono do Perfil pode ve-lo</h4>                 
+                  </div>
+                  </div>
+                <?php
+                } ?>
+            
             </div>
           </div>
           
@@ -54,8 +123,6 @@
 
 <?php       
 
-        $flag="naoeamigo";
-
       foreach($meusdados as $userlogado) { 
            foreach($userlogado->getSolicitacoes() as $jasolicitou) {
                       if($jasolicitou->getId() == $usuario->getId()){
@@ -64,22 +131,9 @@
                 }  
          }
 
-
-        if($usuario->getId()==$this->session()->offsetGet('user')->getId()){
-          $flag="evc";
-        }
-
         foreach($usuario->getSolicitacoes() as $solicitou) {
                     if($solicitou->getId() == $this->session()->offsetGet('user')->getId()){
                       $flag="jasolicitou";
-                    }
-                }
-
-              
-
-          foreach($usuario->getAmigos() as $amigo) {
-                    if($amigo->getId() == $this->session()->offsetGet('user')->getId()){
-                      $flag="eamigo";
                     }
                 }
 
@@ -111,6 +165,30 @@
                 <button type="submit" class="btn btn-primary">Sim</button>
             </div>
         </form> 
+
+         <?php foreach($usuario->getPosts() as $post) { ?>
+      <div class="row">    
+            <br>
+            <div class="col-md-2 col-sm-3 text-center">
+              <a class="story-img" href="/admin/exibirpost/index/id/<?php echo $post->getId(); ?>"><img src="/img/postdefault.jpg" style="width:100px;height:100px" class="img-circle"></a>
+            </div>
+            <div class="col-md-10 col-sm-9">
+              <h3><?php echo $post->getTitulo(); ?></h3>
+              <div class="row">
+                <div class="col-xs-9">
+                  <p><?php echo $post->getPostComp(); ?></p>
+                  <ul class="list-inline"><li><i>Ultima Edição:</i> <?php echo $post->getDataPost(); ?></li><li><a href="/admin/exibirpost/index/id/<?php echo $post->getId(); ?>"><i class="glyphicon glyphicon-comment"></i> <?php echo count($post->getComentarios()); ?> <i class="glyphicon glyphicon-thumbs-up"></i> <?php echo count($post->getCurtiram()); ?> <i class="glyphicon glyphicon-thumbs-down"></i> <?php echo count($post->getNaocurtiram()); ?> </a></li></ul>
+                  </div>
+                <div class="col-xs-3"></div>
+              </div>
+              <br><br>
+            </div>
+          </div>
+          <hr>
+
+    <?php } ?>
+
+
 
           <?php
         }

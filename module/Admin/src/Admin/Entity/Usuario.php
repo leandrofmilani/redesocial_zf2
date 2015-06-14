@@ -77,6 +77,15 @@ class Usuario
      *
      * @var string
      */
+
+    protected $visibilidadePerfil;
+
+    /**
+     * @ORM\Column (type="string")
+     *
+     * @var string
+     */
+
     protected $email;
 
     /**
@@ -225,6 +234,22 @@ class Usuario
     public function setNome($nome)
     {
         $this->nome = $nome;
+    }
+
+     /**
+     * @return string
+     */
+    public function getVisibilidadePerfil()
+    {
+        return $this->visibilidadePerfil;
+    }
+
+    /**
+     * @param string $visibilidadePerfil
+     */
+    public function setVisibilidadePerfil($visibilidadePerfil)
+    {
+        $this->visibilidadePerfil = $visibilidadePerfil;
     }
 
     /**

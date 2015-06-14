@@ -64,10 +64,10 @@ class Usuario extends \Admin\Entity\Usuario implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'id', 'role', 'amigos', 'solicitacoes', 'inputFilter', 'nome', 'sobrenome', 'email', 'celular', 'profissao', 'localtrabalho', 'endereco', 'formacao', 'senha', 'dataNasc', 'sexo', 'relacionamento', 'posts', 'photo');
+            return array('__isInitialized__', 'id', 'role', 'amigos', 'solicitacoes', 'inputFilter', 'nome', 'sobrenome', 'visibilidadePerfil', 'email', 'celular', 'profissao', 'localtrabalho', 'endereco', 'formacao', 'senha', 'dataNasc', 'sexo', 'relacionamento', 'posts', 'photo');
         }
 
-        return array('__isInitialized__', 'id', 'role', 'amigos', 'solicitacoes', 'inputFilter', 'nome', 'sobrenome', 'email', 'celular', 'profissao', 'localtrabalho', 'endereco', 'formacao', 'senha', 'dataNasc', 'sexo', 'relacionamento', 'posts', 'photo');
+        return array('__isInitialized__', 'id', 'role', 'amigos', 'solicitacoes', 'inputFilter', 'nome', 'sobrenome', 'visibilidadePerfil', 'email', 'celular', 'profissao', 'localtrabalho', 'endereco', 'formacao', 'senha', 'dataNasc', 'sexo', 'relacionamento', 'posts', 'photo');
     }
 
     /**
@@ -263,6 +263,28 @@ class Usuario extends \Admin\Entity\Usuario implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setNome', array($nome));
 
         return parent::setNome($nome);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getVisibilidadePerfil()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getVisibilidadePerfil', array());
+
+        return parent::getVisibilidadePerfil();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setVisibilidadePerfil($visibilidadePerfil)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setVisibilidadePerfil', array($visibilidadePerfil));
+
+        return parent::setVisibilidadePerfil($visibilidadePerfil);
     }
 
     /**

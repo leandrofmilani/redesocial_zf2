@@ -37,6 +37,13 @@ class Post
     protected $titulo;
 
     /**
+     * @ORM\Column (type="string")
+     *
+     * @var string
+     */
+    protected $visibilidade;
+
+    /**
      * @ORM\Column (type="text")
      *
      * @var text
@@ -144,6 +151,22 @@ class Post
     public function setTitulo($titulo)
     {
         $this->titulo = $titulo;
+    }
+
+     /**
+     * @return string
+     */
+    public function getVisibilidade()
+    {
+        return $this->visibilidade;
+    }
+
+    /**
+     * @param string $visibilidadePerfil
+     */
+    public function setVisibilidade($visibilidade)
+    {
+        $this->visibilidade = $visibilidade;
     }
 
     /**
@@ -351,8 +374,10 @@ class Post
 
 
         return $this->inputFilter;
+    
     }
   }
+
 }
 
 ?>

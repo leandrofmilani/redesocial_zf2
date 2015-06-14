@@ -60,6 +60,19 @@ class Post extends Form
                 'id' => 'postComp'
             )
         ));
+
+           $this->add(array(
+            'name' => 'visibilidade',
+            'type' => 'select',
+            'options' => array(
+                'label' => 'Visibilidade:*',
+                'value_options' => array('publico' => 'PUBLICO', 'somenet amigos' => 'SOMENTE AMIGOS', 'somente eu' => 'SOMENTE EU' )
+            ),
+            'attributes' => array(
+                'class' => 'form-control',
+                'id' => 'visibilidade'
+            )
+        ));
           
 
         $this->add(array(

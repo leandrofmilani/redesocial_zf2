@@ -6,7 +6,13 @@
       <div class="panel">
         <div class="panel-body">     
 
-     <?php foreach($posts as $post) { ?>
+     <?php foreach($posts as $post) {
+      $jamostrou="nao";
+       foreach($meusdados as $userlogado) {
+                foreach($userlogado->getAmigos() as $amigo) {
+                    if($amigo->getId() == $post->getDono()->getId()){
+        if($post->getVisibilidade()=="somente amigos" OR $post->getVisibilidade()=="publico" ){
+      ?>
       <div class="row">    
             <br>
             <div class="col-md-2 col-sm-3 text-center">
@@ -26,7 +32,39 @@
           </div>
           <hr>
 
-    <?php } ?>       
+    <?php 
+           $jamostrou="sim";
+           }//fim do if visibilidade 
+          }//fim do if verificar se é amigos
+        }//fim fo if userlogado->getAmigos
+      }//fim do if visibilidade
+
+
+       if($post->getVisibilidade()=="publico" && $jamostrou=="nao" ){
+      ?>
+      <div class="row">    
+            <br>
+            <div class="col-md-2 col-sm-3 text-center">
+              <a class="story-img" href="#"><img src="/img/postdefault.jpg" style="width:100px;height:100px" class="img-circle"></a>
+            </div>
+            <div class="col-md-10 col-sm-9">
+              <h3><?php echo $post->getTitulo(); ?></h3>
+              <div class="row">
+                <div class="col-xs-9">
+                  <p><?php echo $post->getPostComp(); ?></p>
+                  <ul class="list-inline"><li><i>Ultima Edição:</i> <?php echo $post->getDataPost(); ?></li><li><a href="/admin/exibirpost/index/id/<?php echo $post->getId(); ?>"><i class="glyphicon glyphicon-comment"></i> <?php echo count($post->getComentarios()); ?> Comentários</a></li></ul>
+                  </div>
+                <div class="col-xs-3"></div>
+              </div>
+              <br><br>
+            </div>
+          </div>
+          <hr>
+
+    <?php 
+           }//fim do if visibilidade publico
+    }//fim do foreach posts 
+    ?>       
           
         </div>
       </div>
@@ -42,8 +80,28 @@
 $flag="nada";// padrao, se nao for pessoa logada ou se nao tiver curtido/nao curtido
 
 if($post->getDono()->getId()==$this->session()->offsetGet('user')->getId()){
+    ?>
+      <div class="row">    
+            <br>
+            <div class="col-md-2 col-sm-3 text-center">
+              <a class="story-img" href="#"><img src="/img/postdefault.jpg" style="width:100px;height:100px" class="img-circle"></a>
+            </div>
+            <div class="col-md-10 col-sm-9">
+              <h3><?php echo $post->getTitulo(); ?></h3>
+              <div class="row">
+                <div class="col-xs-9">
+                  <p><?php echo $post->getPostComp(); ?></p>
+                  <ul class="list-inline"><li><i>Ultima Edição:</i> <?php echo $post->getDataPost(); ?></li><li><a href="/admin/exibirpost/index/id/<?php echo $post->getId(); ?>"><i class="glyphicon glyphicon-comment"></i> <?php echo count($post->getComentarios()); ?> Comentários</a></li></ul>
+                  </div>
+                <div class="col-xs-3"></div>
+              </div>
+              <br><br>
+            </div>
+          </div>
+          <hr>
+    <?php
   $flag="postDoUserLogado";
-}
+}// fim do if verifica se é meu post
 
 //começo verifica se ja curtiu ou se ja nao curtiu o post
   foreach($post->getCurtiram() as $curtiu) { 
@@ -67,6 +125,15 @@ if($flag=="postDoUserLogado"){ ?>
 </div>
 <?php
 } /*fim do if flag postDoUserLogado*/ 
+
+if($post->getVisibilidade()=="somente eu"){ ?>
+  <div class="col-md-12"> 
+    <div class="well">
+        <h4>Somente o dono do Post pode ve-lo</h4>                 
+    </div>
+</div>
+<?php
+} /*fim do if flag postDoUserLogado*/
 
 if($flag=="nada"){
 ?>
@@ -187,18 +254,3 @@ if($flag=="jaNaoCurtiu"){
     </div>
 </div>
 </div>
-<?php
-
-echo $this->paginationControl(
-    // o objeto de paginacao
-    $posts,
-    //tipos de paginacao (elastic, all, sliding, Juping) mais em zend/paginator exemple-pagination-controls
-    'sliding',
-    // a parcial usada para gerar o html para a paginacao
-    'admin/partials/paginator/paginator.phtml',
-    //a rota utulizada na paginacao
-    array(
-        'route' => 'comentarios_post'
-    )
-);
-?>

@@ -125,6 +125,18 @@ class Usuario extends Form
         ));
 
         $this->add(array(
+            'name' => 'visibilidade',
+            'type' => 'select',
+            'options' => array(
+                'label' => 'Perfil:*',
+                'value_options' => array('publico' => 'PUBLICO', 'somenet amigos' => 'SOMENTE AMIGOS', 'somente eu' => 'SOMENTE EU')
+            ),
+            'attributes' => array(
+                'class' => 'form-control'
+            )
+        ));
+
+        $this->add(array(
             'name' => 'submit',
             'type' => 'submit',
             'attributes' => array(

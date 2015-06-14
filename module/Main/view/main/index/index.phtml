@@ -62,7 +62,16 @@
          }
 
 
-      foreach($posts as $post) { ?>
+      foreach($posts as $post) { 
+
+         foreach($meusdados as $userlogado) {
+                foreach($userlogado->getAmigos() as $amigo) {
+                    if($amigo->getId() == $post->getDono()->getId()){
+          
+          /* quando chega dentro desse if temos os posts (atualizações) de somente amigos do usuario logado*/
+                        
+          if($post->getVisibilidade()=="somente amigos" OR $post->getVisibilidade()=="publico" ){
+        ?>
       <div class="row">    
             <br>
             <div class="col-md-2 col-sm-3 text-center">
@@ -75,7 +84,7 @@
                   <p><?php echo $post->getMinText(); ?></p>
                   <p class="lead"><a class="btn btn-default" href="/admin/exibirpost/index/id/<?php echo $post->getId(); ?>">Visualizar</a></p>
                   <p class="pull-right"><span class="label label-default">keyword</span> <span class="label label-default">tag</span> <span class="label label-default">post</span></p>
-                  <ul class="list-inline"><li><i>Ultima Edição:</i> <?php echo $post->getDataPost(); ?></li><li><a href="/admin/exibirpost/index/id/<?php echo $post->getId(); ?>"><i class="glyphicon glyphicon-comment"></i> <?php echo count($post->getComentarios()); ?> Comentários</a></li></ul>
+                  <ul class="list-inline"><li><i>Ultima Edição:</i> <?php echo $post->getDataPost(); ?></li><li><a href="/admin/exibirpost/index/id/<?php echo $post->getId(); ?>"><i class="glyphicon glyphicon-comment"></i> <?php echo count($post->getComentarios()); ?> <i class="glyphicon glyphicon-thumbs-up"></i> <?php echo count($post->getCurtiram()); ?> <i class="glyphicon glyphicon-thumbs-down"></i> <?php echo count($post->getNaocurtiram()); ?> </a></li></ul>
                   </div>
                 <div class="col-xs-3"></div>
               </div>
@@ -84,7 +93,18 @@
           </div>
           <hr>
 
-    <?php } ?>       
+    <?php 
+
+            }//fim do if visibilidade
+
+          }//fim do if amigo->getId
+
+        }//fim do for each user logado     
+
+      }//fim do for each de meus dados 
+
+    }//fim do for each de posts 
+    ?>       
           
         </div>
       </div>

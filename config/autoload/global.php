@@ -117,6 +117,7 @@ return array(
                     'Admin\Controller\Usuarios.index',
                     'Admin\Controller\Comentarios.index',
                     'Admin\Controller\Comentarios.delete',
+                    'Admin\Controller\Posts.save',
                     'Admin\Controller\Usuarios.save',
                     'Admin\Controller\Usuarios.delete',
                     'Admin\Controller\Administracao.index',
