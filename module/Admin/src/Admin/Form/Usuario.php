@@ -98,7 +98,7 @@ class Usuario extends Form
             'type' => 'select',
             'options' => array(
                 'label' => 'Perfil:*',
-                'value_options' => array('EDITOR' => 'EDITOR', 'ADMIN' => 'ADMIN')
+                'value_options' => array('USUARIO' => 'USUARIO', 'ADMIN' => 'ADMIN')
             ),
             'attributes' => array(
                 'class' => 'form-control'

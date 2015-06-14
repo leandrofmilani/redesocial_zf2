@@ -5,7 +5,7 @@ namespace Admin\Form;
 use \Zend\Form\Form as Form;
 use \Zend\Form\Element;
 
-class PostEditor extends Form
+class PostUsuario extends Form
 {
 
     public function __construct(\Doctrine\ORM\EntityManager $em)

@@ -15,8 +15,8 @@ return array(
     'acl' => array(
         'roles' => array(
             'VISITANTE' => null,
-            'EDITOR' => 'VISITANTE',
-            'ADMIN' => 'EDITOR',
+            'USUARIO' => 'VISITANTE',
+            'ADMIN' => 'USUARIO',
         ),
         'resources' => array(
             'Main\Index.index',
@@ -90,7 +90,7 @@ return array(
 
                 )
             ),
-            'EDITOR' => array(
+            'USUARIO' => array(
                 'allow' => array(
                     'Admin\Controller\Login.logout',
                     'Admin\Controller\Logout.index',

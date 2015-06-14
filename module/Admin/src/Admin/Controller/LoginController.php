@@ -32,7 +32,7 @@ class LoginController extends AbstractActionController
                 
                 if ($session->offsetGet('role') == 'ADMIN')
                     return $this->redirect()->toUrl('/admin/administracao');
-                elseif ($session->offsetGet('role') == 'EDITOR')
+                elseif ($session->offsetGet('role') == 'USUARIO')
                     return $this->redirect()->toUrl('/admin/posts/index');
                 else
                     return $this->redirect()->toUrl('/');

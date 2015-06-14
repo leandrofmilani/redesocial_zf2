@@ -75,9 +75,9 @@ class EventosController extends AbstractActionController
         $em =  $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
 
         /*
-        Se chegar algo em $id entao é uma edição, ainda vai comprar se é editor,
-        entao, se vier algo em $id e for editor teré um form para o editor editar sem post sem poder ativar/desativar
-        se nao obedecer ao if ou nao chegou post, entao 1- é um novo post, onde o editor podera grava-lo como ativadou ou desativado
+        Se chegar algo em $id entao é uma edição, ainda vai comprar se é usuario,
+        entao, se vier algo em $id e for usuario teré um form para o usuario editar sem post sem poder ativar/desativar
+        se nao obedecer ao if ou nao chegou post, entao 1- é um novo post, onde o usuario podera grava-lo como ativadou ou desativado
         ou 2- é somente o admin editado o post, onde o mesmo terá acesso a tudo inclusive ativar/desativar.
         */
         $id = $this->params()->fromRoute('id', 0);
