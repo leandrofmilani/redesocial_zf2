@@ -201,6 +201,18 @@ class Perfil extends Form
         ));
 
         $this->add(array(
+            'name' => 'visibilidade',
+            'type' => 'select',
+            'options' => array(
+                'label' => 'Visibilidade:*',
+                'value_options' => array('publico' => 'PUBLICO', 'somente amigos' => 'SOMENTE AMIGOS', 'somente eu' => 'SOMENTE EU')
+            ),
+            'attributes' => array(
+                'class' => 'form-control'
+            )
+        ));
+
+        $this->add(array(
             'name' => 'submit',
             'type' => 'submit',
             'attributes' => array(

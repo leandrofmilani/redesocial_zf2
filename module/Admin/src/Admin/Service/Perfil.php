@@ -76,6 +76,7 @@ class Perfil extends Service
         $usuario->setSexo($sexo);
         $usuario->setRelacionamento($relacionamento);
         $usuario->setPhoto($data['photo']);
+        $usuario->setVisibilidadePerfil($data['visibilidade']);
 
         $this->getEm()->persist($usuario);
         $this->getEm()->flush();

@@ -67,9 +67,6 @@ class Usuario extends Service
         $usuario->setRole($data['role']);        
         $usuario->setDataNasc(new \DateTime($data['dataNasc']));
         $sexo = $this->getEm()->find('\Admin\Entity\Sexo', $data['sexo']);
-        //echo "<h1>".$data['visibilidade']."</h1>";
-        //die();
-        $usuario->setVisibilidadePerfil($data['visibilidade']);
         $usuario->setSexo($sexo);
 
         $this->getEm()->persist($usuario);
