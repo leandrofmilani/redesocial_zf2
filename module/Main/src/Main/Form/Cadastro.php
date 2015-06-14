@@ -125,19 +125,6 @@ class Cadastro extends Form
         ));
 
         $this->add(array(
-            'name' => 'visibilidade',
-            'type' => 'select',
-            'options' => array(
-                'label' => 'Visibilidade Perfil:*',
-                'value_options' => array('publico' => 'PUBLICO', 'somenet amigos' => 'SOMENTE AMIGOS', 'somente eu' => 'SOMENTE EU' )
-            ),
-            'attributes' => array(
-                'class' => 'form-control',
-                'id' => 'visibilidade'
-            )
-        ));
-
-        $this->add(array(
             'name' => 'submit',
             'type' => 'submit',
             'attributes' => array(

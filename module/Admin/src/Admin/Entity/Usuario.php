@@ -500,6 +500,13 @@ class Usuario
             )));
             
             $inputFilter->add($factory->createInput(array(
+                'name' => 'visibilidade',
+                'required' => false
+                )
+
+            ));
+
+            $inputFilter->add($factory->createInput(array(
                 'name' => 'sobrenome',
                 'required' => true,
                 'validators' => array(
