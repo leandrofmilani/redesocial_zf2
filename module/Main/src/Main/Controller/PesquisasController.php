@@ -35,6 +35,11 @@ class PesquisasController extends AbstractActionController
         $q_user = $query_user->getResult();
         $q_evento = $query_evento->getResult();
 
+        $resultado = TRUE;
+        if ((!$q_user) && (!$q_evento)) {
+            $resultado = FALSE;
+        }
+
         if (count($q_user) >= count($q_evento)){
             $paginas = $query_user;
         }else{
@@ -54,6 +59,7 @@ class PesquisasController extends AbstractActionController
                 'paginas' => $paginator,
                 'usuarios' => $q_user,
                 'eventos' => $q_evento,
+                'resultado' => $resultado,
             )
         );
     

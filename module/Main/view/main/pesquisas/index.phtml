@@ -1,12 +1,10 @@
 <?php
-  foreach($usuarios as $usuario) {
-    echo "<br>Chegou user:".$usuario->getNome();
-  }
-  foreach($eventos as $evento) {
-    echo "<br>Chegou evento:".$evento->getTitulo();
-  }
 
-  //die();
+  if ($resultado == FALSE){
+    echo "<div class='alert alert-warning' align='center'><h1>Desculpe não encontramos que você procura :(</h1></div>";
+    echo "<meta HTTP-EQUIV='refresh' CONTENT='3;URL=/'>";
+  }
+  
 ?>
 
 
@@ -22,23 +20,20 @@
       <div class="row">    
             <br>
             <div class="col-md-2 col-sm-3 text-center">
-              <a class="story-img" href="#"><img src="/img/postdefault.jpg" style="width:100px;height:100px" class="img-circle"></a>
+              <a class="story-img" href="#"><img src="/admin/perfil/get-photo/id/<?php echo $usuario->getId(); ?>" style="width:100px;height:100px" class="img-circle"></a>
             </div>
             <div class="col-md-10 col-sm-9">
-              <h3><?php echo $usuario->getNome(); ?></h3>
+              <h3><?php echo $usuario->getNome()." ".$usuario->getSobrenome(); ?></h3>
               <div class="row">
                 <div class="col-xs-9">
-                  <p><?php echo $usuario->getSobrenome(); ?></p>
-                  <p class="lead"><a class="btn btn-default" href="/admin/exibirpost/index/id/<?php echo $usuario->getId(); ?>">Visualizar</a></p>
-                  <p class="pull-right"><span class="label label-default">keyword</span> <span class="label label-default">tag</span> <span class="label label-default">usuario</span></p>
-                  <ul class="list-inline"><li><i>Ultima Edição:</i><?php echo $usuario->getNome(); ?></li><li><a href="/admin/exibirpost/index/id/<?php echo $usuario->getId(); ?>"><i class="glyphicon glyphicon-comment"></i> <?php //echo count($usuario->getComentarios()); ?> Comentários</a></li></ul>
-                  </div>
-                  </div>
-                <div class="col-xs-3"></div>
+                  <p class="lead"><a class="btn btn-default" href="/admin/exibirperfil/index/id/<?php echo $usuario->getId(); ?>">Ver perfil</a></p>
+                </div>
               </div>
-              <br><br>
-            </div>
-          <hr>
+            <div class="col-xs-3"></div>
+          </div>
+        <br><br>
+      </div>
+    <hr>
 
     <?php } ?>
     <?php foreach($eventos as $evento) { ?>
@@ -52,9 +47,9 @@
               <div class="row">
                 <div class="col-xs-9">
                   <p><?php echo $evento->getMintext(); ?></p>
-                  <p class="lead"><a class="btn btn-default" href="/admin/exibirpost/index/id/<?php echo $evento->getId(); ?>">Visualizar</a></p>
+                  <p class="lead"><a class="btn btn-default" href="/admin/exibirevento/index/id/<?php echo $evento->getId(); ?>">Visualizar</a></p>
                   <p class="pull-right"><span class="label label-default">keyword</span> <span class="label label-default">tag</span> <span class="label label-default">evento</span></p>
-                  <ul class="list-inline"><li><i>Data do evento:</i><?php echo $evento->getDataEvento(); ?></li><li><a href="/admin/exibirpost/index/id/<?php echo $evento->getId(); ?>"><i class="glyphicon glyphicon-comment"></i> <?php //echo count($evento->getComentarios()); ?> Comentários</a></li></ul>
+                  <ul class="list-inline"><li><i>Data do evento: </i><?php echo $evento->getDataEvento(); ?></li><li><a href="/admin/exibirevento/index/id/<?php echo $evento->getId(); ?>"><i class="glyphicon glyphicon-comment"></i> <?php //echo count($evento->getComentarios()); ?> Comentários</a></li></ul>
                   </div>
                   </div>
                 <div class="col-xs-3"></div>
