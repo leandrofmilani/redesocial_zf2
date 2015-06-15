@@ -27,8 +27,6 @@ foreach($usuarios as $usuario) {
                       $flag="jasolicitou";
                     }
                 }
-
-
         ?>
          
 <div class="container">
@@ -37,7 +35,7 @@ foreach($usuarios as $usuario) {
 			<div class="row clearfix">
 				<div class="col-md-2 column">
 					<div class="fotoPerfil">	
-					<a class="img-thumbnail" href="#"><img src="/admin/perfil/get-photo/id/<?php echo $usuario->getId(); ?>" style="width:100px;height:100px"></a>
+            <img src="/admin/perfil/get-photo/id/<?php echo $usuario->getId(); ?>" style="width:160px;height:160px" class="img-thumbnail">
 					</div>
 					<div class="panel panel-default">
 						<?php if($flag=="evc"){?>
@@ -109,7 +107,7 @@ foreach($usuarios as $usuario) {
                 <h4>Endereço: <?php echo $usuario->getEndereco(); ?></h4>
                 <h4>Formação: <?php echo $usuario->getFormacao(); ?></h4>
                 <h4>Data de Nacimento: <?php echo $usuario->getDataNasc(); ?></h4>
-                <a href="/admin/perfil/get-photo/id/<?php echo $usuario->getId(); ?>">Ver foto</a>
+
                 <?php
                 $jamostrou="sim";
                 }
