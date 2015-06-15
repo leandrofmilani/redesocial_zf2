@@ -136,7 +136,7 @@ if($flag=="postDoUserLogado"){ ?>
 <?php
 } /*fim do if flag postDoUserLogado*/ 
 
-if($post->getVisibilidade()=="somente eu"){ ?>
+if($post->getVisibilidade()=="somente eu" && $post->getDono()->getId()!=$this->session()->offsetGet('user')->getId()){ ?>
   <div class="col-md-12"> 
     <div class="well">
         <h4>Somente o dono do Post pode ve-lo</h4>                 
