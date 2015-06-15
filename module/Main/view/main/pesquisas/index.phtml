@@ -49,7 +49,9 @@
                   <p><?php echo $evento->getMintext(); ?></p>
                   <p class="lead"><a class="btn btn-default" href="/admin/exibirevento/index/id/<?php echo $evento->getId(); ?>">Visualizar</a></p>
                   <p class="pull-right"><span class="label label-default">keyword</span> <span class="label label-default">tag</span> <span class="label label-default">evento</span></p>
-                  <ul class="list-inline"><li><i>Data do evento: </i><?php echo $evento->getDataEvento(); ?></li><li><a href="/admin/exibirevento/index/id/<?php echo $evento->getId(); ?>"><i class="glyphicon glyphicon-comment"></i> <?php //echo count($evento->getComentarios()); ?> Comentários</a></li></ul>
+                  <ul class="list-inline"><li><i>Ultima Edição:</i> <?php echo $evento->getDataEvento(); ?></li><li><a href="/admin/exibirevento/index/id/<?php echo $evento->getId(); ?>"><i class="glyphicon glyphicon-comment"></i> <?php echo count($evento->getComentarios()); ?> Comentários</li>
+                    <li>Participantes: <?php echo count($evento->getParticipantes()); ?></li></a>
+                  </ul>
                   </div>
                   </div>
                 <div class="col-xs-3"></div>

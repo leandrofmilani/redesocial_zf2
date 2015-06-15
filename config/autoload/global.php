@@ -85,6 +85,16 @@ return array(
             ),
             'USUARIO' => array(
                 'allow' => array(
+                    'Admin\Controller\Comentarios.index',
+                    'Admin\Controller\Comentarios.save',
+                    'Admin\Controller\Comentarios.novo',
+                    'Admin\Controller\Comentarios.novocomentevento',
+                    'Admin\Controller\Exibirpost.index',
+                    'Admin\Controller\Exibirpost.exibir',
+                    'Admin\Controller\Exibirpost.id',
+                    'Admin\Controller\Exibirevento.index',
+                    'Main\Controller\Pesquisas.index',
+                    'Main\Index.index',
                     'Admin\Controller\Login.logout',
                     'Admin\Controller\Logout.index',
                     'Admin\Controller\Posts.index',

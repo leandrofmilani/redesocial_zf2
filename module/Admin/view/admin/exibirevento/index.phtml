@@ -17,7 +17,9 @@
               <div class="row">
                 <div class="col-xs-9">
                   <p><?php  echo $evento->getEventoComp(); ?></p>
-                  <ul class="list-inline"><li><i>Ultima Edição:</i> <?php echo $evento->getDataEvento(); ?></li><li><a href="/admin/exibirevento/index/id/<?php echo $evento->getId(); ?>"><i class="glyphicon glyphicon-comment"></i> <?php echo count($evento->getComentarios()); ?> Comentários</a></li></ul>
+                  <ul class="list-inline"><li><i>Ultima Edição:</i> <?php echo $evento->getDataEvento(); ?></li><li><a href="/admin/exibirevento/index/id/<?php echo $evento->getId(); ?>"><i class="glyphicon glyphicon-comment"></i> <?php echo count($evento->getComentarios()); ?> Comentários</li>
+                    <li>Participantes: <?php echo count($evento->getParticipantes()); ?></li></a>
+                  </ul>
                   </div>
                 <div class="col-xs-3"></div>
               </div>

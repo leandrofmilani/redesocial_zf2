@@ -52,6 +52,9 @@ foreach($usuarios as $usuario) {
 		                		<button type="submit" class="btn btn-danger">Remover Amizade</button>
 		            			</div>
 		        				</form>
+                    <div class="panel-footer">
+                      <a href="/admin/album/index/id/<?php echo $usuario->getId(); ?>">Álbum</a>
+                    </div>
 		        		<?php }
 		        		if($flag=="naoeamigo"){ ?>
 		        			<form method="POST" action="/admin/usuarios/solicitaramizade" role="form" class="clearfix">
