@@ -67,7 +67,7 @@ class Post extends Form
             'type' => 'select',
             'options' => array(
                 'label' => 'Visibilidade:*',
-                'value_options' => array('publico' => 'PUBLICO', 'somenet amigos' => 'SOMENTE AMIGOS', 'somente eu' => 'SOMENTE EU' )
+                'value_options' => array('publico' => 'PUBLICO', 'somente amigos' => 'SOMENTE AMIGOS', 'somente eu' => 'SOMENTE EU' )
             ),
             'attributes' => array(
                 'class' => 'form-control',

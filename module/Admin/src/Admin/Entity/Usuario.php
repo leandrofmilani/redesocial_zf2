@@ -766,7 +766,7 @@ class Usuario
             
             $inputFilter->add($factory->createInput(array(
                 'name' => 'role',
-                'required' => true,
+                'required' => false,
                 'validators' => array(
                     array(
                         'name' => 'NotEmpty',

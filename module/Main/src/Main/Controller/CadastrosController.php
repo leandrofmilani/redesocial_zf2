@@ -55,15 +55,14 @@ class CadastrosController extends AbstractActionController
                         array('form' => $form)
                     );
                 }
-                $visibilidadePadrao="publico";
-                $rolePadrao="usuario";
+
                 $usuario->setNome($values['nome']);
                 $usuario->setSobrenome($values['sobrenome']);
                 $usuario->setEmail($values['email']);
                 $usuario->setCelular($values['celular']);
                 $usuario->setSenha($values['senha']);
-                $usuario->setRole($rolePadrao);
-                $usuario->setVisibilidadePerfil($visibilidadePadrao);
+                $usuario->setRole('USUARIO');
+                $usuario->setVisibilidadePerfil('publico');
                 $usuario->setDataNasc($datanascimento);
                 $sexo = $em->find('\Admin\Entity\Sexo', $values['sexo']);
                 $usuario->setSexo($sexo);

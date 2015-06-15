@@ -62,17 +62,19 @@ class Usuario extends Service
         $usuario->setEmail($data['email']);
         $usuario->setCelular($data['celular']);
         $usuario->setSenha($data['senha']);
-        if($data['visibilidadePerfil']!=null){
-        $usuario->setVisibilidadePerfil($data['visibilidadePerfil']);
-        }else{
-         $visibilidade="publico";   
-        $usuario->setVisibilidadePerfil($visibilidade);
+        if($data['visibilidadePerfil'] != null )
+        {
+            $usuario->setVisibilidadePerfil($data['visibilidadePerfil']);
+        }else
+        {   
+            $usuario->setVisibilidadePerfil('publico');
         }
-        if($data['role']!=null){
-        $usuario->setRole($data['role']);
-        }else{
-        $role="usuario";   
-        $usuario->setRole($role);
+        if($data['role'] != null) 
+        {
+            $usuario->setRole($data['role']);
+        }else
+        {   
+            $usuario->setRole('USUARIO');
         }       
         $usuario->setDataNasc(new \DateTime($data['dataNasc']));
         $sexo = $this->getEm()->find('\Admin\Entity\Sexo', $data['sexo']);

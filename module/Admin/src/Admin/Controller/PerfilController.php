@@ -74,7 +74,7 @@ class PerfilController extends AbstractActionController
             $photo = $this->getServiceUser()->uploadPhoto($file);
             $form->setInputFilter($usuario->getInputFilter());
             $form->setData($values);
-            
+
             if ($form->isValid()) {             
                 $values = $form->getData();
                 $values['photo'] = $photo;
@@ -85,7 +85,7 @@ class PerfilController extends AbstractActionController
                 } catch (\Exception $e) {
                     $this->flashMessenger()->addErrorMessage($e->getMessage());
                 }
-                return $this->redirect()->toUrl('/admin/usuarios');
+                return $this->redirect()->toUrl('/');
             }
         }
         $id = $this->params()->fromRoute('id', 0);

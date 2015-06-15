@@ -50,7 +50,7 @@ class Perfil extends Service
         $usuario = new $this->entity();
         $filters = $usuario->getInputFilter();
         $filters->setData($data);
-
+        
         if (!$filters->isValid())
             throw new \InvalidArgumentException('Dados inválidos');
 
@@ -67,7 +67,13 @@ class Perfil extends Service
         $usuario->setProfissao($data['profissao']);
         $usuario->setLocaltrabalho($data['localtrabalho']);
         $usuario->setFormacao($data['formacao']);
-        $usuario->setRole($data['role']);
+        if($data['role'] != null) 
+        {
+            $usuario->setRole($data['role']);
+        }else
+        {   
+            $usuario->setRole('USUARIO');
+        }
         $usuario->setDataNasc(new \DateTime($data['dataNasc']));
         $sexo = $this->getEm()->find('\Admin\Entity\Sexo', $data['sexo']);
         $relacionamento = $this->getEm()->find('\Admin\Entity\Relacionamento', $data['relacionamento']);

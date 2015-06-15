@@ -8,6 +8,7 @@
 
      <?php foreach($posts as $post) {
       $jamostrou="nao";
+      $amigo="nao";
        foreach($meusdados as $userlogado) {
                 foreach($userlogado->getAmigos() as $amigo) {
                     if($amigo->getId() == $post->getDono()->getId()){

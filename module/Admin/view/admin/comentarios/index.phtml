@@ -3,7 +3,7 @@
 <table class="table">
     <thead>
     <tr>
-       <b> <td>Id</td><td>Email</td><td>Comentario</td><td>Data Comentario</td><td>Editar</td><td>Excluir</td></tr></b>
+       <b> <td>Id</td><td>Comentario</td><td>Data Comentario</td><td>Editar</td><td>Excluir</td></tr></b>
     </tr>
     </thead>
     <tbody>
@@ -12,9 +12,6 @@
         <tr>
             <td>
                 <?php echo $comentario->getId(); ?>
-            </td>
-            <td>
-                <?php echo $comentario->getEmail(); ?>
             </td>
             <td>
                 <?php echo $comentario->getComentario(); ?>
@@ -30,7 +27,7 @@
             </td>
         </tr>
     <?php 
-		}
+  }
     ?>
     </tbody>
 

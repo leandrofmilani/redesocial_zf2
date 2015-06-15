@@ -106,18 +106,6 @@ class Perfil extends Form
             )
         ));
 
-         $this->add(array(
-            'name' => 'role',
-            'type' => 'select',
-            'options' => array(
-                'label' => 'Perfil:*',
-                'value_options' => array('USUARIO' => 'USUARIO', 'ADMIN' => 'ADMIN')
-            ),
-            'attributes' => array(
-                'class' => 'form-control'
-            )
-        ));
-
         $this->add(array(
             'type' => 'DoctrineModule\Form\Element\ObjectRadio',
             'name' => 'sexo',
@@ -141,7 +129,7 @@ class Perfil extends Form
             'type' => 'DoctrineModule\Form\Element\ObjectRadio',
             'name' => 'relacionamento',
             'options' => array(
-                'label' => 'Relacionamento: ',
+                'label' => 'Relacionamento:* ',
                 'object_manager' => $em,
                 'target_class' => 'Admin\Entity\Relacionamento',
                 'property' => 'descricao',
@@ -172,7 +160,7 @@ class Perfil extends Form
             'name' => 'profissao',
             'type' => 'text',
             'options' => array(
-                'label' => 'Profição: '
+                'label' => 'Profissão: '
             ),
             'attributes' => array(
                 'placeholder' => 'Ex.: Eletricista',
