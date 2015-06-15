@@ -23,7 +23,8 @@
               <div class="row">
                 <div class="col-xs-9">
                   <p><?php echo $post->getPostComp(); ?></p>
-                  <ul class="list-inline"><li><i>Ultima Edição:</i> <?php echo $post->getDataPost(); ?></li><li><a href="/admin/exibirpost/index/id/<?php echo $post->getId(); ?>"><i class="glyphicon glyphicon-comment"></i> <?php echo count($post->getComentarios()); ?> Comentários</a></li></ul>
+                  <ul class="list-inline"><li><i>Ultima Edição:</i> <?php echo $post->getDataPost(); ?></li><li><a href="/admin/exibirpost/index/id/<?php echo $post->getId(); ?>"><i class="glyphicon glyphicon-comment"></i> <?php echo count($post->getComentarios()); ?> <i class="glyphicon glyphicon-thumbs-up"></i> <?php echo count($post->getCurtiram()); ?> <i class="glyphicon glyphicon-thumbs-down"></i> <?php echo count($post->getNaocurtiram()); ?> </a></li></ul>
+                  <ul>Postado por: <a href="/admin/exibirperfil/index/id/<?php echo $post->getDono()->getId(); ?>"><?php echo $post->getDono()->getNome() ?></a></ul>
                   </div>
                 <div class="col-xs-3"></div>
               </div>
@@ -40,7 +41,7 @@
       }//fim do if visibilidade
 
 
-       if($post->getVisibilidade()=="publico" && $jamostrou=="nao" ){
+       if($post->getVisibilidade()=="publico" && $jamostrou=="nao" && $post->getDono()->getId()!=$this->session()->offsetGet('user')->getId() ){
       ?>
       <div class="row">    
             <br>
@@ -52,7 +53,7 @@
               <div class="row">
                 <div class="col-xs-9">
                   <p><?php echo $post->getPostComp(); ?></p>
-                  <ul class="list-inline"><li><i>Ultima Edição:</i> <?php echo $post->getDataPost(); ?></li><li><a href="/admin/exibirpost/index/id/<?php echo $post->getId(); ?>"><i class="glyphicon glyphicon-comment"></i> <?php echo count($post->getComentarios()); ?> Comentários</a></li></ul>
+                  <ul class="list-inline"><li><i>Ultima Edição:</i> <?php echo $post->getDataPost(); ?></li><li><a href="/admin/exibirpost/index/id/<?php echo $post->getId(); ?>"><i class="glyphicon glyphicon-comment"></i> <?php echo count($post->getComentarios()); ?> <i class="glyphicon glyphicon-thumbs-up"></i> <?php echo count($post->getCurtiram()); ?> <i class="glyphicon glyphicon-thumbs-down"></i> <?php echo count($post->getNaocurtiram()); ?> </a></li></ul>
                   </div>
                 <div class="col-xs-3"></div>
               </div>
@@ -91,7 +92,7 @@ if($post->getDono()->getId()==$this->session()->offsetGet('user')->getId()){
               <div class="row">
                 <div class="col-xs-9">
                   <p><?php echo $post->getPostComp(); ?></p>
-                  <ul class="list-inline"><li><i>Ultima Edição:</i> <?php echo $post->getDataPost(); ?></li><li><a href="/admin/exibirpost/index/id/<?php echo $post->getId(); ?>"><i class="glyphicon glyphicon-comment"></i> <?php echo count($post->getComentarios()); ?> Comentários</a></li></ul>
+                  <ul class="list-inline"><li><i>Ultima Edição:</i> <?php echo $post->getDataPost(); ?></li><li><a href="/admin/exibirpost/index/id/<?php echo $post->getId(); ?>"><i class="glyphicon glyphicon-comment"></i> <?php echo count($post->getComentarios()); ?> <i class="glyphicon glyphicon-thumbs-up"></i> <?php echo count($post->getCurtiram()); ?> <i class="glyphicon glyphicon-thumbs-down"></i> <?php echo count($post->getNaocurtiram()); ?> </a></li></ul>
                   </div>
                 <div class="col-xs-3"></div>
               </div>
@@ -194,22 +195,34 @@ if($flag=="jaNaoCurtiu"){
 <!-- likes -->
 <div class="row">
 <div class="col-md-10 col-sm-9">
-<?php foreach($post->getCurtiram() as $curtiu) { ?>
-<h5>Quem Curtiu:</h5>
-    <?php echo "<h4>".$curtiu->getNome()."</h4>"; ?>
-
-<?php } ?>
+<?php 
+if(count($post->getCurtiram())>0){
+    ?>
+   <h4>Quem Curtiu(<?php echo count($post->getCurtiram()); ?>):</h4>
+    <?php
+foreach($post->getCurtiram() as $curtiu) { ?>
+   <h5> <a href="/admin/exibirperfil/index/id/<?php echo $curtiu->getId(); ?>"><?php echo $curtiu->getNome()?></a></h5>
+<?php 
+  }//fim do foreach
+}//fim do if
+ ?>
 </div>
 </div>
 
 <!-- likes -->
 <div class="row">
 <div class="col-md-10 col-sm-9">
-<?php foreach($post->getNaocurtiram() as $naoCurtiu) { ?>
-<h5>Quem Não Curtiu:</h5>
-    <?php echo "<h4>".$naoCurtiu->getNome()."</h4>"; ?>
-
-<?php } ?>
+<?php 
+if(count($post->getNaoCurtiram())>0){
+    ?>
+    <h4>Quem Nao-Curtiu(<?php echo count($post->getNaoCurtiram()); ?>):</h4>
+    <?php
+ foreach($post->getNaocurtiram() as $naoCurtiu) { ?>
+     <h5> <a href="/admin/exibirperfil/index/id/<?php echo $naoCurtiu->getId(); ?>"><?php echo $naoCurtiu->getNome()?></a></h5>
+<?php 
+ }//fim do foreach
+}//fim do if
+?>
 </div>
 </div>
 
