@@ -39,7 +39,7 @@
     <?php 
            $jamostrou="sim";
            }//fim do if visibilidade 
-          }//fim do if verificar se é amigos
+          }else{$amigo="nao";}//fim do if verificar se é amigos
         }//fim fo if userlogado->getAmigos
       }//fim do if visibilidade
 
@@ -140,6 +140,15 @@ if($post->getVisibilidade()=="somente eu"){ ?>
   <div class="col-md-12"> 
     <div class="well">
         <h4>Somente o dono do Post pode ve-lo</h4>                 
+    </div>
+</div>
+<?php
+} /*fim do if flag postDoUserLogado*/
+
+if($post->getVisibilidade()=="somente amigos" && $amigo=="nao"){ ?>
+  <div class="col-md-12"> 
+    <div class="well">
+        <h4>Somente os amigos do usuario podem ver o post</h4>                 
     </div>
 </div>
 <?php
