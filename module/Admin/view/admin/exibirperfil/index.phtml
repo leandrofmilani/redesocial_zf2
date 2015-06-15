@@ -28,7 +28,7 @@
       <div class="row">    
             <br>
             <div class="col-md-10 col-sm-9">
-              <img src="/admin/perfil/get-photo/id/<?php echo $usuario->getId(); ?>">
+            <a class="story-img" href="#"><img src="/admin/perfil/get-photo/id/<?php echo $usuario->getId(); ?>" style="width:100px;height:100px" class="img-circle"></a>
               <h3>Nome: <?php echo $usuario->getNome(); ?></h3>
               <h3>Sobrenome: <?php echo $usuario->getSobrenome(); ?></h3>
               <br>
@@ -92,23 +92,25 @@
         </div>
       </div>
 
-      
-      <div class="row">    
-            <br>
-            <div class="col-md-10 col-sm-9">
-              <h2>Amigos:</h2>
-              <?php
-              echo "<h1>".count($usuario->getAmigos())."</h1>";
-              foreach($usuario->getAmigos() as $amigo) {
-                   ?>
-                   <h4><br>Amigo: <a href="/admin/exibirperfil/index/id/<?php echo $amigo->getId() ?>">Ver Perfil</a></h4>
-                   <?php
-                }
-               ?> 
-              
-            </div>
-          </div>
-          <hr>
+
+<!-- amigos -->
+<div class="row">
+<div class="col-md-10 col-sm-9">
+<?php 
+if(count($usuario->getAmigos())>0){
+    ?>
+    <h4>Amigos(<?php echo count($usuario->getAmigos()); ?>):</h4>
+    <?php
+ foreach($usuario->getAmigos() as $amigo) { ?>
+     <h5> <a href="/admin/exibirperfil/index/id/<?php echo $amigo->getId(); ?>"><?php echo $amigo->getNome()?></a></h5>
+<?php 
+ }//fim do foreach
+}//fim do if
+?>
+</div>
+</div>
+<hr>      
+  
     <?php }//fim foreach usuarios
      ?>
                                       
@@ -116,10 +118,6 @@
   </div>
 </div>
 </hr>
-<br><br>
-
-
-
 
 <?php       
 

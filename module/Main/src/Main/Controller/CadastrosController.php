@@ -33,7 +33,7 @@ class CadastrosController extends AbstractActionController
         if ($request->isPost()) {
             $usuario = new Usuario();
             $values = $request->getPost();
-            $form->setInputFilter($usuario->getInputFilter());
+           // $form->setInputFilter($usuario->getInputFilter());
             $form->setData($values);
             
             if ($form->isValid()) {             
@@ -55,14 +55,15 @@ class CadastrosController extends AbstractActionController
                         array('form' => $form)
                     );
                 }
-
+                $visibilidadePadrao="publico";
+                $rolePadrao="usuario";
                 $usuario->setNome($values['nome']);
                 $usuario->setSobrenome($values['sobrenome']);
                 $usuario->setEmail($values['email']);
                 $usuario->setCelular($values['celular']);
                 $usuario->setSenha($values['senha']);
-                $usuario->setRole($values['role']);
-                $usuario->setVisibilidadePerfil($values['visibilidade']);
+                $usuario->setRole($rolePadrao);
+                $usuario->setVisibilidadePerfil($visibilidadePadrao);
                 $usuario->setDataNasc($datanascimento);
                 $sexo = $em->find('\Admin\Entity\Sexo', $values['sexo']);
                 $usuario->setSexo($sexo);

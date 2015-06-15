@@ -93,18 +93,6 @@ class Cadastro extends Form
             )
         ));
 
-         $this->add(array(
-            'name' => 'role',
-            'type' => 'select',
-            'options' => array(
-                'label' => 'Perfil:*',
-                'value_options' => array('USUARIO' => 'USUARIO', 'ADMIN' => 'ADMIN')
-            ),
-            'attributes' => array(
-                'class' => 'form-control'
-            )
-        ));
-
         $this->add(array(
             'type' => 'DoctrineModule\Form\Element\ObjectRadio',
             'name' => 'sexo',
