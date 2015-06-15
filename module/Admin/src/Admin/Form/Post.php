@@ -13,6 +13,7 @@ class Post extends Form
         parent::__construct('post');
         $this->setAttribute('action', '');
         $this->setAttribute('method', 'post');
+        $this->setAttribute('enctype', 'multipart/form-data');
 
         $this->add(
             array(
@@ -71,6 +72,14 @@ class Post extends Form
             'attributes' => array(
                 'class' => 'form-control',
                 'id' => 'visibilidade'
+            )
+        ));
+
+        $this->add(array(
+            'name' => 'photo',
+            'type' => 'file',
+            'options' => array(
+                'label' => 'Foto',
             )
         ));
           

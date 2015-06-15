@@ -11,6 +11,8 @@ use \Admin\Entity\Comentario as Comentario;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
 use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
 use Zend\Paginator\Paginator;
+use Zend\Validator\Exception\InvalidMagicMimeFileException;
+use Doctrine\ORM\NoResultException;
 
 
 /**
@@ -113,6 +115,7 @@ class PostsController extends AbstractActionController
                 $post->setMinText($values['minText']);
                 $post->setPostComp($values['postComp']);
                 $post->setVisibilidade($values['visibilidade']);
+                $post->setPhoto($values['photo']);
                 if ( (int) $values['id'] > 0){
                      // se for edição nao mudará autor..
                 }else{
@@ -279,7 +282,7 @@ class PostsController extends AbstractActionController
     {
         header('Content-Type: image');
         $id = (int) $this->params()->fromRoute('id', 0);
-        $photo = $this->getServiceUser()->getPhoto($id);
+        $photo = $this->getPhoto($id);
         $view = new ViewModel(array('photo' => $photo));
         $view->setTerminal(true);
 
@@ -291,7 +294,6 @@ class PostsController extends AbstractActionController
         $target_path = $target_path . basename($file['name']);
         $validator_img = new \Zend\Validator\File\IsImage(array('image/jpg', 'image/png', 'image/jpeg'));
         move_uploaded_file($file['tmp_name'], $target_path);
-
         if (!$validator_img->isValid($target_path))
             throw new InvalidMagicMimeFileException('O arquivo enviado não é uma imagem válida');
 
@@ -311,19 +313,14 @@ class PostsController extends AbstractActionController
     public function getPhoto($id)
     {
         $em =  $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-        $autor = $em->find('\Admin\Entity\Usuario', $session->offsetGet('user'));
+        $autor = $em->find('\Admin\Entity\Post', (int) $id);
         if ((int) $id <= 0)
             throw new \InvalidArgumentException('Parâmetros inválidos');
 
-        /****$user = $this->getEm()->find($this->entity, (int) $id);*/
-
-        ***if (!$user)
-            throw new NoResultException('Usuário não existe');
-
         $base = null;
 
-        ***if ($user->getPhoto() != null) {
-            $stream = stream_get_contents($user->getPhoto());
+       if ($autor->getPhoto() != null) {
+            $stream = stream_get_contents($autor->getPhoto());
             $base = base64_decode($stream);
         }
 
@@ -333,9 +330,9 @@ class PostsController extends AbstractActionController
     private function thumb($origem)
     {
         $size =  getimagesize($origem);
-        $image_p = imagecreatetruecolor(160, 120);
+        $image_p = imagecreatetruecolor(300, 260);
         $image = imagecreatefromjpeg($origem);
-        imagecopyresampled($image_p, $image, 0, 0, 0, 0, 160, 120, $size[0], $size[1]);
+        imagecopyresampled($image_p, $image, 0, 0, 0, 0, 300, 260, $size[0], $size[1]);
         imagejpeg($image_p, $origem, 50);
     }
 
