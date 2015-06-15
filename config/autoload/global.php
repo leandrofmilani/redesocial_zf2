@@ -70,6 +70,7 @@ return array(
             'Admin\Controller\Album.index',
             'Admin\Controller\Album.save',
             'Admin\Controller\Album.get-photo',
+            'Admin\Controller\Album.delete',
 
 
         ),
@@ -118,6 +119,7 @@ return array(
                     'Admin\Controller\Album.index',
                     'Admin\Controller\Album.save',
                     'Admin\Controller\Album.get-photo',
+                    'Admin\Controller\Album.delete',
                 )
             ),
             'ADMIN' => array(

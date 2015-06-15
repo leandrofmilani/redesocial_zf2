@@ -32,6 +32,8 @@ class AlbumController extends AbstractActionController
         $query = $em->createQuery('SELECT Album FROM \Admin\Entity\Album Album WHERE Album.usuario = :id');         
         $query->setParameters(array('id' => $id));
 
+
+
         $paginator = new Paginator(
             new DoctrinePaginator(new ORMPaginator($query))
         );
@@ -43,6 +45,7 @@ class AlbumController extends AbstractActionController
         return new ViewModel(
             array(
                 'fotos' => $paginator,
+                'id_album' => $id,
             )
         );
     
@@ -74,7 +77,7 @@ class AlbumController extends AbstractActionController
                 } catch (\Exception $e) {
                     $this->flashMessenger()->addErrorMessage($e->getMessage());
                 }
-                return $this->redirect()->toUrl('/admin/usuarios');
+                return $this->redirect()->toUrl('/admin/album/index/id/'.$id);
             }
         }
 
@@ -84,6 +87,21 @@ class AlbumController extends AbstractActionController
         return new ViewModel(
             array('form' => $form)
         );
+    }
+
+    public function deleteAction()
+    {
+        $id = $this->params()->fromRoute('id', 0);
+        if ($id > 0) {
+            try {
+                $this->getServiceUser()->delete($id);
+                $this->flashMessenger()->addSuccessMessage('Imagem excluída com sucesso');
+            } catch (\Exception $e) {
+                $this->flashMessenger()->addErrorMessage($e->getMessage());
+            }
+        }
+        $id_retorno = $this->getServiceLocator()->get('Session')->offsetGet('user')->getId();
+        return $this->redirect()->toUrl('/admin/album/index/id/'.$id_retorno);
     }
 
     public function getPhotoAction()

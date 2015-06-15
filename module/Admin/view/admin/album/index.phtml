@@ -2,6 +2,14 @@
   <div class="row">
     
     <div class="col-md-12"> 
+      <?php 
+        $id_logado = $this->session()->offsetGet('user')->getId();
+        if ($id_logado == (int)$id_album){ 
+        ?>
+        <button class="btn btn-success" onclick="location.href='/admin/album/save'">Novo foto</button>
+        <?php
+        }
+      ?>
       
       <div class="panel">
         <div class="panel-body">     
@@ -18,6 +26,9 @@
                 <div class="col-xs-4">
                   <ul class="list-inline"><li><i>Upload: </i><?php echo $foto->getDataAlbum(); ?>
                   </div>
+                  <?php if ($id_logado == (int)$id_album){  ?>
+                    <button class="btn btn-danger" onclick="location.href='/admin/album/delete/id/<?php echo $foto->getId(); ?>'">Deletar</button>
+                  <?php } ?>
                   </div>
               </div>
             </div>

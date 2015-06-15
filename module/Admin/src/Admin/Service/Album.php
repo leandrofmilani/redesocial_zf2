@@ -10,7 +10,7 @@ use Zend\Validator\Exception\InvalidMagicMimeFileException;
  *
  * @category Admin
  * @package Service
- * @author 
+ * @author Leandro Fabris Milani <lfm@unochapeco.edu.br>
  */
 class Album extends Service
 {
@@ -55,12 +55,6 @@ class Album extends Service
             throw new \InvalidArgumentException('Dados inválidos');
 
         $data = $filters->getValues();
-
-        /*//ver esse if ta ok?????????
-        if ( (int) $data['id'] > 0)
-            $album = $this->getEm()->find($this->entity, $data['id']);*/
-
-            //var_dump($data);
         
         $album->setTitulo($data['titulo']);
         $album->setDataAlbum(new \DateTime("now"));
@@ -84,12 +78,12 @@ class Album extends Service
      */
     public function delete($id)
     {
-        $obj = $this->getEm()->find($this->entity, (int) $id);
+        $album = $this->getEm()->find('\Admin\Entity\Album', (int) $id);
 
-        if (!$obj)
-            throw new \NoResultException('Usuário não encontrado');
+        if (!$album)
+            throw new \NoResultException('Imagem não encontrada');
 
-        $this->getEm()->remove($obj);
+        $this->getEm()->remove($album);
         $this->getEm()->flush();
     }
 
