@@ -100,6 +100,13 @@ class Post
     */
     protected $comentarios;
 
+    /**
+     * @ORM\Column(type="blob", nullable=true)
+     *
+     * @var blob
+     */
+    protected $photo;
+
 
     public function __construct()
     {
@@ -237,6 +244,23 @@ class Post
     }
 
     /**
+     * @param blob $photo
+     *
+     */
+    public function setPhoto($photo)
+    {
+        $this->photo = $photo;
+    }
+
+    /**
+     * @return blob
+     */
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    /**
      * @return array
      */
     public function getArrayCopy()
@@ -353,6 +377,13 @@ class Post
                     ),
                 ),
             )));
+
+            $inputFilter->add($factory->createInput(array(
+                'name' => 'photo',
+                'required' => false
+                )
+
+            ));
 
            /* $inputFilter->add($factory->createInput(array(
                 'name' => 'dataPost',

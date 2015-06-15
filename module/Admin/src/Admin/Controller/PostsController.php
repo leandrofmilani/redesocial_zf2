@@ -98,10 +98,13 @@ class PostsController extends AbstractActionController
             $post = new Post();
             $values = $request->getPost();
             //$form->setInputFilter($post->getInputFilter());
+            $file = $request->getFiles('photo');
+            $photo = $this->uploadPhoto($file);
             $form->setData($values);
             
             if ($form->isValid()) {             
                 $values = $form->getData();
+                $values['photo'] = $photo;
 
                 if ( (int) $values['id'] > 0)
                 $post = $em->find('\Admin\Entity\Post', $values['id']);
@@ -270,6 +273,70 @@ class PostsController extends AbstractActionController
 
             }     
 
+    }
+
+    public function getPhotoAction()
+    {
+        header('Content-Type: image');
+        $id = (int) $this->params()->fromRoute('id', 0);
+        $photo = $this->getServiceUser()->getPhoto($id);
+        $view = new ViewModel(array('photo' => $photo));
+        $view->setTerminal(true);
+
+        return $view;
+    }
+
+    public function uploadPhoto($file) {
+        $target_path = getcwd() . '/public/temp/';
+        $target_path = $target_path . basename($file['name']);
+        $validator_img = new \Zend\Validator\File\IsImage(array('image/jpg', 'image/png', 'image/jpeg'));
+        move_uploaded_file($file['tmp_name'], $target_path);
+
+        if (!$validator_img->isValid($target_path))
+            throw new InvalidMagicMimeFileException('O arquivo enviado não é uma imagem válida');
+
+        $rand = uniqid();
+        $origem = $target_path;
+        $this->thumb($origem);
+        $novo = getcwd() . '/public/temp/' . $rand;
+        copy($origem, $novo);
+        $image = file_get_contents($novo);
+        $data = base64_encode($image);
+        unlink($origem);
+        unlink($novo);
+
+        return $data;
+    }
+
+    public function getPhoto($id)
+    {
+        $em =  $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+        $autor = $em->find('\Admin\Entity\Usuario', $session->offsetGet('user'));
+        if ((int) $id <= 0)
+            throw new \InvalidArgumentException('Parâmetros inválidos');
+
+        /****$user = $this->getEm()->find($this->entity, (int) $id);*/
+
+        ***if (!$user)
+            throw new NoResultException('Usuário não existe');
+
+        $base = null;
+
+        ***if ($user->getPhoto() != null) {
+            $stream = stream_get_contents($user->getPhoto());
+            $base = base64_decode($stream);
+        }
+
+        return $base;
+    }
+
+    private function thumb($origem)
+    {
+        $size =  getimagesize($origem);
+        $image_p = imagecreatetruecolor(160, 120);
+        $image = imagecreatefromjpeg($origem);
+        imagecopyresampled($image_p, $image, 0, 0, 0, 0, 160, 120, $size[0], $size[1]);
+        imagejpeg($image_p, $origem, 50);
     }
 
 }

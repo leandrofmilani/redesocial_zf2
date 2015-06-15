@@ -8,7 +8,7 @@
 						<?php
 						foreach($meusdados as $userlogado) { 
 							?>
-						<img src="/admin/perfil/get-photo/id/<?php echo $userlogado->getId(); ?>" style="width:120px;height:120px" class="img-circle">	
+						<img src="/admin/perfil/get-photo/id/<?php echo $userlogado->getId(); ?>" style="width:160px;height:160px" class="img-thumbnail">	
 					
 					<!-- width='40px' height='40px' -->
 					</div>
@@ -29,7 +29,7 @@
 							<a href="/admin/eventos/mostrartodos">Todos os Eventos</a>
 						</div>
 						<div class="panel-footer">
-							<a href="/admin/eventos/mostrartodos">Todos os Eventos</a>
+							<a href="/admin/album/index/id/<?php echo $userlogado->getId(); ?>">Álbum</a>
 						</div>
 					</div>
 				</div>

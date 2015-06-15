@@ -65,6 +65,9 @@ return array(
             'Admin\Controller\Eventos.confirmarpresenca',
             'Admin\Controller\Eventos.mostrartodos',
             'Admin\Controller\Exibirperfil.index',
+            'Admin\Controller\Album.index',
+            'Admin\Controller\Album.save',
+            'Admin\Controller\Album.get-photo',
 
 
         ),
@@ -87,7 +90,6 @@ return array(
                     'Main\Index.index',
                     'Main\Controller\Cadastros.index',
                     'Main\Controller\Cadastros.novo',
-
                 )
             ),
             'USUARIO' => array(
@@ -109,7 +111,9 @@ return array(
                     'Admin\Controller\Eventos.confirmarpresenca',
                     'Admin\Controller\Usuarios.solicitaramizade',
                     'Admin\Controller\Perfil.get-photo',
-
+                    'Admin\Controller\Album.index',
+                    'Admin\Controller\Album.save',
+                    'Admin\Controller\Album.get-photo',
                 )
             ),
             'ADMIN' => array(
