@@ -65,8 +65,9 @@ return array(
             'Admin\Controller\Eventos.confirmarpresenca',
             'Admin\Controller\Eventos.mostrartodos',
             'Admin\Controller\Exibirperfil.index',
-
-
+            'Admin\Controller\Album.index',
+            'Admin\Controller\Album.save',
+            'Admin\Controller\Album.get-photo',
         ),
         'privilege' => array(
             'VISITANTE' => array(
@@ -109,7 +110,9 @@ return array(
                     'Admin\Controller\Eventos.confirmarpresenca',
                     'Admin\Controller\Usuarios.solicitaramizade',
                     'Admin\Controller\Perfil.get-photo',
-
+                    'Admin\Controller\Album.index',
+                    'Admin\Controller\Album.save',
+                    'Admin\Controller\Album.get-photo',
                 )
             ),
             'ADMIN' => array(

@@ -74,7 +74,7 @@ class Relacionamento
      *
      * @return Zend/InputFilter/InputFilter
      */
-     /*
+
     public function getInputFilter(){
 
 
@@ -92,12 +92,12 @@ class Relacionamento
             )));
                  
             $inputFilter->add($factory->createInput(array(
-                'name' => 'desc_interesse',
+                'name' => 'descricao',
                 'required' => true,
                 'validators' => array(
                     array(
                         'name' => 'NotEmpty',
-                        'options' => array('message' => 'O campo DescriÃ§Ã£o interesse nÃ£o pode estar vazio')
+                        'options' => array('message' => 'O campo descricao interesse nao pode estar vazio')
                     ),
                     array(
                         'name' => 'StringLength',
@@ -105,7 +105,7 @@ class Relacionamento
                             'encoding' => 'UTF-8',
                             'min' => 3,
                             'max' => 255,
-                            'message' => 'O campo descriÃ§Ã£o interesse deve ter mais que 3 caracteres e menos que 255',
+                            'message' => 'O campo descricao interesse deve ter mais que 3 caracteres e menos que 255',
                         ),
                     ),
                 ),
@@ -122,7 +122,7 @@ class Relacionamento
         }
 
         return $this->inputFilter;
-    }*/
+    }
 }
 
 ?>

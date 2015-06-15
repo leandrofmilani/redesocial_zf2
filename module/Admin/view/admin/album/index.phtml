@@ -1,0 +1,9 @@
+<?php
+echo "Cehgou no index";
+	foreach($fotos as $foto){
+		echo $foto->getTitulo();
+		?>
+		<img src="/admin/album/get-photo/id/<?php echo $foto->getId(); ?>">
+	<?php	
+	}
+?>

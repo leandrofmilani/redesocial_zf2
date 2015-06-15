@@ -165,7 +165,6 @@ class Usuario
      *
      * @var blob
      */
-
     protected $photo;
 
     public function __construct()

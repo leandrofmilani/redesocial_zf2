@@ -221,4 +221,15 @@ class Relacionamento extends \Admin\Entity\Relacionamento implements \Doctrine\O
         return parent::getArrayCopy();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public function getInputFilter()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getInputFilter', array());
+
+        return parent::getInputFilter();
+    }
+
 }

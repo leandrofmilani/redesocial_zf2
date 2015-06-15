@@ -12,7 +12,7 @@ use Zend\Validator\Exception\InvalidMagicMimeFileException;
  * @package Service
  * @author 
  */
-class Perfil extends Service
+class Album extends Service
 {
 
     /**
@@ -31,7 +31,6 @@ class Perfil extends Service
     public function get($id)
     {
         $obj = $this->getEm()->find($this->entity, (int) $id);
-
         if (!$obj)
             throw new \NoResultException('Usuário não encontrado');
 
@@ -47,39 +46,32 @@ class Perfil extends Service
      */
     public function save($data)
     {
-        $usuario = new $this->entity();
-        $filters = $usuario->getInputFilter();
+        $entity_album = '\Admin\Entity\Album';
+        $album = new $entity_album();
+        $filters = $album->getInputFilter();
         $filters->setData($data);
 
         if (!$filters->isValid())
             throw new \InvalidArgumentException('Dados inválidos');
 
-        $data = $filters->getValues();  
-        if ( (int) $data['id'] > 0)
-            $usuario = $this->getEm()->find($this->entity, $data['id']);
-        
-        $usuario->setNome($data['nome']);
-        $usuario->setSobrenome($data['sobrenome']);
-        $usuario->setEmail($data['email']);
-        $usuario->setCelular($data['celular']);
-        $usuario->setSenha($data['senha']);
-        $usuario->setEndereco($data['endereco']);
-        $usuario->setProfissao($data['profissao']);
-        $usuario->setLocaltrabalho($data['localtrabalho']);
-        $usuario->setFormacao($data['formacao']);
-        $usuario->setRole($data['role']);
-        $usuario->setDataNasc(new \DateTime($data['dataNasc']));
-        $sexo = $this->getEm()->find('\Admin\Entity\Sexo', $data['sexo']);
-        $relacionamento = $this->getEm()->find('\Admin\Entity\Relacionamento', $data['relacionamento']);
-        $usuario->setSexo($sexo);
-        $usuario->setRelacionamento($relacionamento);
-        $usuario->setPhoto($data['photo']);
-        $usuario->setVisibilidadePerfil($data['visibilidade']);
+        $data = $filters->getValues();
 
-        $this->getEm()->persist($usuario);
+        /*//ver esse if ta ok?????????
+        if ( (int) $data['id'] > 0)
+            $album = $this->getEm()->find($this->entity, $data['id']);*/
+
+            //var_dump($data);
+        
+        $album->setTitulo($data['titulo']);
+        $album->setDataAlbum(new \DateTime("now"));
+        $album->setPhoto($data['photo']);
+        $album->setVisibilidade($data['visibilidade']);
+        $album->setUsuario($data['id']);
+
+        $this->getEm()->persist($album);
         $this->getEm()->flush();
 
-        return $usuario;
+        return $album;
     }
 
     /**

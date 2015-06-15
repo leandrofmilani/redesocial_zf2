@@ -53,9 +53,7 @@ class Usuario extends Service
         if (!$filters->isValid())
             throw new \InvalidArgumentException('Dados inválidos');
 
-        $data = $filters->getValues();
-        /*var_dump($data);
-        die();*/   
+        $data = $filters->getValues();   
         if ( (int) $data['id'] > 0)
             $usuario = $this->getEm()->find($this->entity, $data['id']);
         

@@ -110,13 +110,6 @@ class PostsController extends AbstractActionController
                 $post->setMinText($values['minText']);
                 $post->setPostComp($values['postComp']);
                 $post->setVisibilidade($values['visibilidade']);
-                echo "<h1>".$values['visibilidade']."</h1>";
-               // $user = $session->offsetGet('user');
-
-                /*
-                se for uma edição nao irá mudar o id do autor,
-                se for um novo post irá setar o id do autor
-                */
                 if ( (int) $values['id'] > 0){
                      // se for edição nao mudará autor..
                 }else{

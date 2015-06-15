@@ -19,6 +19,7 @@ return array(
             'Admin\Controller\Sexos' => 'Admin\Controller\SexosController',
             'Admin\Controller\Perfil' => 'Admin\Controller\PerfilController',
             'Admin\Controller\Eventos' => 'Admin\Controller\EventosController',
+            'Admin\Controller\Album' => 'Admin\Controller\AlbumController',
         ),
     ),
     //ConfiguraÃ§Ã£o doctrine
