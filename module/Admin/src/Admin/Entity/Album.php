@@ -109,7 +109,7 @@ class Album
      */
     public function getDataAlbum()
     {
-        $data = $this->dataDataAlbum;
+        $data = $this->dataAlbum;
         return $data->format('Y-m-d H:i');
     }
 

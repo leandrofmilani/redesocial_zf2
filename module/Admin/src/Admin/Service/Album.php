@@ -119,16 +119,11 @@ class Album extends Service
     {
         if ((int) $id <= 0)
             throw new \InvalidArgumentException('Parâmetros inválidos');
-
-        $user = $this->getEm()->find($this->entity, (int) $id);
-
-        if (!$user)
-            throw new NoResultException('Usuário não existe');
+        $album = $this->getEm()->find('\Admin\Entity\Album', (int) $id);
 
         $base = null;
-
-        if ($user->getPhoto() != null) {
-            $stream = stream_get_contents($user->getPhoto());
+        if ($album->getPhoto() != null) {
+            $stream = stream_get_contents($album->getPhoto());
             $base = base64_decode($stream);
         }
 

@@ -1,9 +1,32 @@
-<?php
-echo "Cehgou no index";
-	foreach($fotos as $foto){
-		echo $foto->getTitulo();
-		?>
-		<img src="/admin/album/get-photo/id/<?php echo $foto->getId(); ?>">
-	<?php	
-	}
-?>
+<div class="container">
+  <div class="row">
+    
+    <div class="col-md-12"> 
+      
+      <div class="panel">
+        <div class="panel-body">     
+
+     <?php foreach($fotos as $foto) { ?>
+      <div class="row">    
+            <br>
+            <div class="col-md-2 col-sm-12 text-center">
+              <img class="img-thumbnail" alt="<?php echo $foto->getTitulo();?>" src="/admin/album/get-photo/id/<?php echo $foto->getId(); ?>"/>
+            </div>
+            <div class="col-md-6 col-sm-2">
+              <h3><?php echo $foto->getTitulo(); ?></h3>
+              <div class="row">
+                <div class="col-xs-4">
+                  <ul class="list-inline"><li><i>Upload: </i><?php echo $foto->getDataAlbum(); ?>
+                  </div>
+                  </div>
+              </div>
+            </div>
+            <?php }?>
+           <hr>
+          </div>
+      </div>                              
+    </div><!--/col-12-->
+  </div>
+</div>
+</hr>
+

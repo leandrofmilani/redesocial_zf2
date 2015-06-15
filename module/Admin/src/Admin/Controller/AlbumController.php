@@ -24,10 +24,8 @@ class AlbumController extends AbstractActionController
     public function indexAction()
     {
         $em =  $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-        $session = $this->getServiceLocator()->get('Session');
-        $usuario = $session->offsetGet('user');
-
-
+        /*$session = $this->getServiceLocator()->get('Session');
+        $usuario = $session->offsetGet('user');*/
 
         $id = $this->params()->fromRoute('id', 0);
         $em =  $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
@@ -42,21 +40,9 @@ class AlbumController extends AbstractActionController
         ->setCurrentPageNumber($this->params()->fromRoute('page'))
         ->setItemCountPerPage(10);
 
-        $meusdados = NULL;
-        
-        if (is_object($usuario)){
-            $id2 = $usuario->getId();
-            $em =  $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-            $query2 = $em->createQuery('SELECT Usuario FROM \Admin\Entity\Usuario Usuario WHERE Usuario.id = :id2');         
-            $query2->setParameters(array('id2' => $id2));
-            $meusdados = $query2->getResult();
-        }
-
-
         return new ViewModel(
             array(
                 'fotos' => $paginator,
-                'meusdados' => $meusdados,
             )
         );
     
