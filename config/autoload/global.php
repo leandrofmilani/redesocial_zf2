@@ -77,21 +77,9 @@ return array(
         'privilege' => array(
             'VISITANTE' => array(
                 'allow' => array(
-                    'Admin\Controller\Usuarios.save',
                     'Admin\Controller\Login.login',
-                    'Admin\Controller\Comentarios.index',
-                    'Admin\Controller\Comentarios.save',
-                    'Admin\Controller\Comentarios.novo',
-                    'Admin\Controller\Comentarios.novocomentevento',
                     'Admin\Controller\Login.index',
-                    'Admin\Controller\Exibirpost.index',
-                    'Admin\Controller\Exibirpost.exibir',
-                    'Admin\Controller\Exibirpost.id',
-                    'Admin\Controller\Exibirevento.index',
                     'Main\Controller\Index.index',
-                    'Main\Controller\Pesquisas.index',
-                    'Main\Index.index',
-                    'Main\Controller\Cadastros.index',
                     'Main\Controller\Cadastros.novo',
                 )
             ),
