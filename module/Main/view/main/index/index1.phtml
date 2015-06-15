@@ -1,0 +1,158 @@
+<?php
+  // Caso usuário não estiver logado o index será a tela de login.
+  if(!is_object($this->session()->offsetGet('user'))) {
+?>
+
+<div class="container">
+    <div class="col-md-12 col-md-offset-4">
+        <div class="col-md-4">
+
+          <form class="form-signin" method="POST" action="/admin/login/login">
+            <h2 class="form-signin-heading">Entrar</h2>
+            <label for="inputEmail" class="sr-only">Endereço de e-mail</label>
+            <input type="email" name="email" id="email" class="form-control" placeholder="Endereço de e-mail" required autofocus>
+            <label for="inputPassword" class="sr-only">Senha</label>
+            <input type="password" name="senha" id="senha" class="form-control" placeholder="Senha" required>
+            <div class="checkbox">
+              <label>
+              </label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+          </form>
+          <a href="/main/cadastros/novo">Não tem cadastro ainda? Cadastre-se já!</a>
+        </div>
+    </div>
+</div> <!-- /container -->
+<?php
+ } else { // Senão será carregado o html da home.
+?>
+
+<div class="container">
+  <div class="row">
+    
+    <div class="col-md-12"> 
+      
+      <div class="panel">
+        <div class="panel-body">     
+
+       <?php
+      $contSolicitacoes=1;
+   foreach($meusdados as $userlogado) { 
+           foreach($userlogado->getSolicitacoes() as $solicitou) {
+            ?>
+                <div class="row"> 
+                     <h3>Solicitação <?php echo $contSolicitacoes ?>:</h3> 
+                     <h4><br>Perfil: <a href="/admin/exibirperfil/index/id/<?php echo $solicitou->getId(); ?>">Ver Perfil,</a>
+                    aceitar amizade?</h4>
+                  <form method="POST" action="/admin/usuarios/solicitaramizade" role="form" class="clearfix">
+                    <input type="hidden" name="opcao" value="aceitar"  id="opcao">
+                     <input type="hidden" name="id_usuario" value=<?php echo $solicitou->getId(); ?>  id="id_usuario">
+                    <button type="submit" class="btn btn-primary">Sim</button>
+                  </form>  
+                  <form method="POST" action="/admin/usuarios/solicitaramizade" role="form" class="clearfix">
+                    <input type="hidden" name="opcao" value="negar"  id="opcao">
+                     <input type="hidden" name="id_usuario" value=<?php echo $solicitou->getId(); ?>  id="id_usuario">
+                    <button type="submit" class="btn btn-primary">Não</button>
+                  </form> 
+                </div>
+            <?php
+            $contSolicitacoes++;
+                } ?>
+            <!-- amigos -->
+            <div class="row">
+            <div class="col-md-10 col-sm-9">
+            <?php 
+            if(count($userlogado->getAmigos())>0){
+                ?>
+                <h4>Meus Amigos(<?php echo count($userlogado->getAmigos()); ?>):</h4>
+                <?php
+             foreach($userlogado->getAmigos() as $amigo) { ?>
+                 <h5> <a class="story-img" href="/admin/exibirperfil/index/id/<?php echo $amigo->getId(); ?>"><img src="/admin/perfil/get-photo/id/<?php echo $amigo->getId(); ?>" style="width:30px;height:30px" class="img-circle"><?php echo $amigo->getNome()?></a></h5>
+            <?php 
+             }//fim do foreach
+            }//fim do if
+            ?>
+            </div>
+            </div>
+            <hr>       
+        <?php
+         }//fim foreach meus dados
+         ?>
+
+<p class="lead"><a class="btn btn-default" href="/admin/posts/save">Nova Atualização</a>
+<p class="lead"><a class="btn btn-default" href="/admin/posts">Atualizações</a>
+<p class="lead"><a class="btn btn-default" href="/admin/eventos/mostrartodos ">Todos os Eventos</a>
+
+ <?php
+ echo "<h2>Atualizações dos Amigos:</h2>";
+
+      foreach($posts as $post) { 
+
+         foreach($meusdados as $userlogado) {
+                foreach($userlogado->getAmigos() as $amigo) {
+
+                    if($amigo->getId() == $post->getDono()->getId()){
+          
+          /* quando chega dentro desse if temos os posts (atualizações) de somente amigos do usuario logado*/
+                        
+          if($post->getVisibilidade()=="somente amigos" OR $post->getVisibilidade()=="publico" ){
+        ?>
+      <div class="row">    
+            <br>
+            <div class="col-md-2 col-sm-3 text-center">
+              <a class="story-img" href="#"><img src="/img/postdefault.jpg" style="width:100px;height:100px" class="img-circle"></a>
+            </div>
+            <div class="col-md-10 col-sm-9">
+              <h3><?php echo $post->getTitulo(); ?></h3>
+              <div class="row">
+                <div class="col-xs-9">
+                  <p><?php echo $post->getMinText(); ?></p>
+                  <p class="lead"><a class="btn btn-default" href="/admin/exibirpost/index/id/<?php echo $post->getId(); ?>">Visualizar</a></p>
+                  <p class="pull-right"><span class="label label-default">keyword</span> <span class="label label-default">tag</span> <span class="label label-default">post</span></p>
+                  <ul class="list-inline"><li><i>Ultima Edição:</i> <?php echo $post->getDataPost(); ?></li><li><a href="/admin/exibirpost/index/id/<?php echo $post->getId(); ?>"><i class="glyphicon glyphicon-comment"></i> <?php echo count($post->getComentarios()); ?> <i class="glyphicon glyphicon-thumbs-up"></i> <?php echo count($post->getCurtiram()); ?> <i class="glyphicon glyphicon-thumbs-down"></i> <?php echo count($post->getNaocurtiram()); ?> </a></li></ul>
+                  </div>
+                <div class="col-xs-3"></div>
+              </div>
+              <br><br>
+            </div>
+          </div>
+          <hr>
+
+    <?php 
+
+            }//fim do if visibilidade
+
+          }//fim do if amigo->getId
+
+        }//fim do for each user logado     
+
+      }//fim do for each de meus dados 
+
+    }//fim do for each de posts 
+    ?>       
+          
+        </div>
+      </div>
+                                      
+    </div><!--/col-12-->
+  </div>
+</div>
+</hr>
+<?php
+
+echo $this->paginationControl(
+    // o objeto de paginacao
+    $posts,
+    //tipos de paginacao (elastic, all, sliding, Juping) mais em zend/paginator exemple-pagination-controls
+    'sliding',
+    // a parcial usada para gerar o html para a paginacao
+    'admin/partials/paginator/paginator.phtml',
+    //a rota utulizada na paginacao
+    array(
+        'route' => 'index'
+    )
+);
+
+} // do else
+?>
+

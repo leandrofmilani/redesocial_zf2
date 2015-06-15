@@ -102,7 +102,7 @@ if(count($usuario->getAmigos())>0){
     <h4>Amigos(<?php echo count($usuario->getAmigos()); ?>):</h4>
     <?php
  foreach($usuario->getAmigos() as $amigo) { ?>
-     <h5> <a href="/admin/exibirperfil/index/id/<?php echo $amigo->getId(); ?>"><?php echo $amigo->getNome()?></a></h5>
+     <h5> <a class="story-img" href="/admin/exibirperfil/index/id/<?php echo $amigo->getId(); ?>"><img src="/admin/perfil/get-photo/id/<?php echo $amigo->getId(); ?>" style="width:30px;height:30px" class="img-circle"><?php echo $amigo->getNome()?></a></h5>
 <?php 
  }//fim do foreach
 }//fim do if
