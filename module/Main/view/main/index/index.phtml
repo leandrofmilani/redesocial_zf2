@@ -1,3 +1,31 @@
+<?php
+  // Caso usuário não estiver logado o index será a tela de login.
+  if(!is_object($this->session()->offsetGet('user'))) {
+?>
+
+<div class="container">
+    <div class="col-md-12 col-md-offset-4">
+        <div class="col-md-4">
+
+          <form class="form-signin" method="POST" action="/admin/login/login">
+            <h2 class="form-signin-heading">Entrar</h2>
+            <label for="inputEmail" class="sr-only">Endereço de e-mail</label>
+            <input type="email" name="email" id="email" class="form-control" placeholder="Endereço de e-mail" required autofocus>
+            <label for="inputPassword" class="sr-only">Senha</label>
+            <input type="password" name="senha" id="senha" class="form-control" placeholder="Senha" required>
+            <div class="checkbox">
+              <label>
+              </label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+          </form>
+          <a href="/main/cadastros/novo">Não tem cadastro ainda? Cadastre-se já!</a>
+        </div>
+    </div>
+</div> <!-- /container -->
+<?php
+ } else { // Senão será carregado o html da home.
+?>
 <div class="container">
 	<div class="row clearfix">
 		<div class="col-md-12 column">
@@ -30,6 +58,9 @@
 						</div>
 						<div class="panel-footer">
 							<a href="/admin/album/index/id/<?php echo $userlogado->getId(); ?>">Álbum</a>
+						</div>
+						<div class="panel-footer">
+							<a href="/admin/usuarios/mostraramigos">Meus Amigos</a>
 						</div>
 					</div>
 				</div>
@@ -71,23 +102,11 @@
         <?php
          }//fim foreach meus dados
          ?>
-
-
-
-
-
-
-
-
-						<h3>Atualizações Amigos:</h3>
-
-			<?php
-			foreach($posts as $post) { 
-
-         foreach($meusdados as $userlogado) {
-                foreach($userlogado->getAmigos() as $amigo) {
-
-                    if($amigo->getId() == $post->getDono()->getId()){
+         	<h3>Atualizações Amigos:</h3>
+			<?php foreach($posts as $post) { 
+					foreach($meusdados as $userlogado) {
+		                foreach($userlogado->getAmigos() as $amigo) {
+		                	if($amigo->getId() == $post->getDono()->getId()){
           
           /* quando chega dentro desse if temos os posts (atualizações) de somente amigos do usuario logado*/
                         
@@ -126,12 +145,8 @@
 
     }//fim do for each de posts 
     ?>
-
-
-
-
-					</div>
-				</div>
+			</div>
+			</div>
 				<div class="col-md-4 column" align='auto' id="amigos">					
 						<?php 
 			            if(count($userlogado->getAmigos())>0){
@@ -142,6 +157,9 @@
 			                 <h5> <a class="story-img" href="/admin/exibirperfil/index/id/<?php echo $amigo->getId(); ?>"><img src="/admin/perfil/get-photo/id/<?php echo $amigo->getId(); ?>" style="width:30px;height:30px" class="img-circle"><?php echo $amigo->getNome()?></a></h5>
 			            <?php 
 			             }//fim do foreach
+			             ?>
+			             <a href="/admin/usuarios/mostraramigos">Mostrar Todos >></a>
+			            <?php
 			            }//fim do if
 			            ?>
 						
@@ -167,4 +185,7 @@
 				</ul>
 			</div>
 		</nav>
+<?php
+} // do else
+?>
 

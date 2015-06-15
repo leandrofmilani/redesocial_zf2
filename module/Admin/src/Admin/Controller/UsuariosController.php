@@ -256,4 +256,28 @@ class UsuariosController extends AbstractActionController
         return $this->getServiceLocator()->get('Admin\Service\Usuario');
     }
 
+    public function mostraramigosAction()
+    {
+        $em =  $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+        $session = $this->getServiceLocator()->get('Session');
+        $usuario = $session->offsetGet('user');
+        $meusdados = NULL;
+        
+        if (is_object($usuario)){
+            $id2 = $usuario->getId();
+            $em =  $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+            $query2 = $em->createQuery('SELECT Usuario FROM \Admin\Entity\Usuario Usuario WHERE Usuario.id = :id2');         
+            $query2->setParameters(array('id2' => $id2));
+            $meusdados = $query2->getResult();
+        }
+
+
+        return new ViewModel(
+            array(
+               
+                'meusdados' => $meusdados,
+            )
+        );
+    }
+
 }

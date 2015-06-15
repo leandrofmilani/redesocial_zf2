@@ -1,0 +1,45 @@
+<table class="table">
+    <thead>
+    <tr>
+       <b> <td>Id</td><td>Nome</td><td>Sobrenome</td><td>E-mail</td><td>Data Nasc</td></tr></b>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach($meusdados as $userlogado) {
+        foreach($userlogado->getAmigos() as $amigo) {
+        ?>
+        <tr>
+            <td>
+                <?php echo $amigo->getId(); ?>
+            </td>
+            <td>
+                <?php echo $amigo->getNome(); ?>
+            </td>
+             <td>
+                <?php echo $amigo->getSobrenome(); ?>
+            </td>
+            <td>
+                <?php echo $amigo->getEmail(); ?>
+            </td>
+              <td>
+                <?php echo $amigo->getDataNasc(); ?>
+            </td>
+            <td>
+                <a class="btn btn-success" href="/admin/exibirperfil/index/id/<?php echo $amigo->getId(); ?>">Ver Perfil</a>
+            </td>
+            <td>
+                <form method="POST" action="/admin/usuarios/solicitaramizade" role="form" class="clearfix">
+            <div class="col-md-6 form-group">
+            <input type="hidden" name="opcao" value="remover"  id="opcao">
+                <input type="hidden" name="id_usuario" value=<?php echo $amigo->getId(); ?>  id="id_usuario">
+                <button type="submit" class="btn btn-danger">Remover Amizade</button>
+            </div>
+        </form>
+            </td>
+        </tr>
+    <?php }//fim do if user logado
+        }//fim do if meus dados
+    ?>
+    </tbody>
+
+</table>
