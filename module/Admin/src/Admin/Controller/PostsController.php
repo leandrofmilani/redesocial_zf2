@@ -101,7 +101,12 @@ class PostsController extends AbstractActionController
             $values = $request->getPost();
             //$form->setInputFilter($post->getInputFilter());
             $file = $request->getFiles('photo');
-            $photo = $this->uploadPhoto($file);
+            if (!$file['name'] == NULL){
+                $photo = $this->uploadPhoto($file);
+            }else{
+                $photo == NULL;
+            }
+            
             $form->setData($values);
             
             if ($form->isValid()) {             
