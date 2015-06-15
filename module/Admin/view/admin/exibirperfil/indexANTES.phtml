@@ -1,0 +1,227 @@
+<div class="container">
+  <div class="row">
+    
+    <div class="col-md-12"> 
+      
+      <div class="panel">
+        <div class="panel-body">     
+
+        <?php
+         
+
+     foreach($usuarios as $usuario) { 
+
+      $jamostrou="nao";
+       $flag="naoeamigo";
+
+      foreach($usuario->getAmigos() as $amigo) {
+                    if($amigo->getId() == $this->session()->offsetGet('user')->getId()){
+                      $flag="eamigo";
+                    }
+                }
+
+      if($usuario->getId()==$this->session()->offsetGet('user')->getId()){
+          $flag="evc";
+        }
+                
+      ?>
+      <div class="row">    
+            <br>
+            <div class="col-md-10 col-sm-9">
+            <a class="img-thumbnail" href="#"><img src="/admin/perfil/get-photo/id/<?php echo $usuario->getId(); ?>" style="width:100px;height:100px"></a>
+              <h3>Nome: <?php echo $usuario->getNome(); ?></h3>
+              <h3>Sobrenome: <?php echo $usuario->getSobrenome(); ?></h3>
+              <br>
+                
+               <?php 
+                if($usuario->getVisibilidadePerfil()=="publico" OR $usuario->getVisibilidadePerfil()=="somente amigos" && $flag=="eamigo" OR $flag=="evc"){
+                ?>
+                <h4>Email: <?php echo $usuario->getEmail(); ?></h4>
+                <h4>Celular: <?php echo $usuario->getCelular(); ?></h4>
+                <h4>Profissao: <?php echo $usuario->getProfissao(); ?></h4>
+                <h4>Local de Trabalho: <?php echo $usuario->getLocaltrabalho(); ?></h4>
+                <h4>Endereço: <?php echo $usuario->getEndereco(); ?></h4>
+                <h4>Formação: <?php echo $usuario->getFormacao(); ?></h4>
+                <h4>Data de Nacimento: <?php echo $usuario->getDataNasc(); ?></h4>
+                <a href="/admin/perfil/get-photo/id/<?php echo $usuario->getId(); ?>">Ver foto</a>
+                <?php
+                $jamostrou="sim";
+                }
+                ?>
+
+                <?php 
+                if($usuario->getVisibilidadePerfil()=="publico" && $jamostrou=="nao"){
+                ?>
+                <h4>Email: <?php echo $usuario->getEmail(); ?></h4>
+                <h4>Celular: <?php echo $usuario->getCelular(); ?></h4>
+                <h4>Profissao: <?php echo $usuario->getProfissao(); ?></h4>
+                <h4>Local de Trabalho: <?php echo $usuario->getLocaltrabalho(); ?></h4>
+                <h4>Endereço: <?php echo $usuario->getEndereco(); ?></h4>
+                <h4>Formação: <?php echo $usuario->getFormacao(); ?></h4>
+                <h4>Data de Nacimento: <?php echo $usuario->getDataNasc(); ?></h4>
+                <a href="/admin/perfil/get-photo/id/<?php echo $usuario->getId(); ?>">Ver foto</a>
+                <?php
+                }
+                ?>
+
+                <?php 
+                if($usuario->getVisibilidadePerfil()=="somente amigos" && $flag=="naoeamigo"){ ?>
+                <div class="col-md-12"> 
+                  <div class="well">
+                    <h4>Somente os amigos do usuario podem ver seu perfil</h4>                 
+                  </div>
+                  </div>
+                <?php
+                } ?>
+
+                <?php 
+                if($usuario->getVisibilidadePerfil()=="somente eu"){ ?>
+                <div class="col-md-12"> 
+                  <div class="well">
+                    <h4>Somente o dono do Perfil pode ve-lo</h4>                 
+                  </div>
+                  </div>
+                <?php
+                } ?>
+            
+            </div>
+          </div>
+          
+          
+          
+        </div>
+      </div>
+
+
+<!-- amigos -->
+<div class="row">
+<div class="col-md-10 col-sm-9">
+<?php 
+if(count($usuario->getAmigos())>0){
+    ?>
+    <h4>Amigos(<?php echo count($usuario->getAmigos()); ?>):</h4>
+    <?php
+ foreach($usuario->getAmigos() as $amigo) { ?>
+     <h5> <a class="story-img" href="/admin/exibirperfil/index/id/<?php echo $amigo->getId(); ?>"><img src="/admin/perfil/get-photo/id/<?php echo $amigo->getId(); ?>" style="width:30px;height:30px" class="img-circle"><?php echo $amigo->getNome()?></a></h5>
+<?php 
+ }//fim do foreach
+}//fim do if
+?>
+</div>
+</div>
+<hr>      
+  
+    <?php }//fim foreach usuarios
+     ?>
+                                      
+    </div><!--/col-12-->
+  </div>
+</div>
+</hr>
+
+<?php       
+
+      foreach($meusdados as $userlogado) { 
+           foreach($userlogado->getSolicitacoes() as $jasolicitou) {
+                      if($jasolicitou->getId() == $usuario->getId()){
+                      $flag="usuariojasolicitou";
+                      }
+                }  
+         }
+
+        foreach($usuario->getSolicitacoes() as $solicitou) {
+                    if($solicitou->getId() == $this->session()->offsetGet('user')->getId()){
+                      $flag="jasolicitou";
+                    }
+                }
+
+
+          if($flag=="naoeamigo"){     
+              ?>
+
+        <h4>Solicitar amizade?</h4>
+        <form method="POST" action="/admin/usuarios/solicitaramizade" role="form" class="clearfix">
+            <div class="col-md-6 form-group">
+            <input type="hidden" name="opcao" value="solicitar"  id="opcao">
+                <input type="hidden" name="id_usuario" value=<?php echo $usuario->getId(); ?>  id="id_usuario">
+                <button type="submit" class="btn btn-primary">Sim</button>
+            </div>
+        </form>  
+
+        <?php     
+
+          }
+
+          if($flag=="eamigo"){
+          ?>
+            <h5>Atenção!, vc ja é amigo dessa pessoa.</h5>
+           <h4>Remover amizade?</h4>
+        <form method="POST" action="/admin/usuarios/solicitaramizade" role="form" class="clearfix">
+            <div class="col-md-6 form-group">
+            <input type="hidden" name="opcao" value="remover"  id="opcao">
+                <input type="hidden" name="id_usuario" value=<?php echo $usuario->getId(); ?>  id="id_usuario">
+                <button type="submit" class="btn btn-primary">Sim</button>
+            </div>
+        </form> 
+
+         <?php foreach($usuario->getPosts() as $post) { ?>
+      <div class="row">    
+            <br>
+            <div class="col-md-2 col-sm-3 text-center">
+              <a class="story-img" href="/admin/exibirpost/index/id/<?php echo $post->getId(); ?>"><img src="/img/postdefault.jpg" style="width:100px;height:100px" class="img-circle"></a>
+            </div>
+            <div class="col-md-10 col-sm-9">
+              <h3><?php echo $post->getTitulo(); ?></h3>
+              <div class="row">
+                <div class="col-xs-9">
+                  <p><?php echo $post->getPostComp(); ?></p>
+                  <ul class="list-inline"><li><i>Ultima Edição:</i> <?php echo $post->getDataPost(); ?></li><li><a href="/admin/exibirpost/index/id/<?php echo $post->getId(); ?>"><i class="glyphicon glyphicon-comment"></i> <?php echo count($post->getComentarios()); ?> <i class="glyphicon glyphicon-thumbs-up"></i> <?php echo count($post->getCurtiram()); ?> <i class="glyphicon glyphicon-thumbs-down"></i> <?php echo count($post->getNaocurtiram()); ?> </a></li></ul>
+                  </div>
+                <div class="col-xs-3"></div>
+              </div>
+              <br><br>
+            </div>
+          </div>
+          <hr>
+
+    <?php } ?>
+
+
+
+          <?php
+        }
+
+        if($flag=="jasolicitou"){
+           echo"<h4>Vc ja solicitou amizade com essa pessoa</h4>"; 
+        }
+        
+
+        if($flag=="evc"){
+           echo"<h4>Esse é seu perfil</h4>"; 
+           ?>
+           <a class="btn btn-success" href="/admin/perfil/save/id/<?php echo $usuario->getId(); ?>">Editar perfil</a>
+           <?php
+        }
+
+
+        if($flag=="usuariojasolicitou"){     
+              ?>
+        <h5>Atenção!, essa pessoa ja solicitou sua amizade.</h5>
+        <h4>aceitar amizade?</h4>
+        <form method="POST" action="/admin/usuarios/solicitaramizade" role="form" class="clearfix">
+            <div class="col-md-6 form-group">
+            <input type="hidden" name="opcao" value="aceitar"  id="opcao">
+                <input type="hidden" name="id_usuario" value=<?php echo $usuario->getId(); ?>  id="id_usuario">
+                <button type="submit" class="btn btn-primary">Sim</button>
+            </div>
+        </form>
+        <form method="POST" action="/admin/usuarios/solicitaramizade" role="form" class="clearfix">
+                    <input type="hidden" name="opcao" value="negar"  id="opcao">
+                     <input type="hidden" name="id_usuario" value=<?php echo $usuario->getId(); ?>  id="id_usuario">
+                    <button type="submit" class="btn btn-primary">Não</button>
+        </form>   
+
+        <?php     
+
+          }
+            ?>
