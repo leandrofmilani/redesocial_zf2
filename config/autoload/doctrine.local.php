@@ -1,0 +1,23 @@
+<?php
+return array(
+    'doctrine' => array(
+        'connection' => array(
+            'orm_default' => array(
+                'driverClass' => 'Doctrine\DBAL\Driver\PDOMySql\Driver',
+                'params' => array(
+                    'host' => 'localhost',
+                    'port' => '3306',
+                    'user' => 'root',
+                    'password' => '',
+                    'dbname' => 'redesocial_zf2',)
+            )
+        ),
+        'authentication' => array(
+            'orm_default' => array(
+                'object_manager' => 'Doctrine\ORM\EntityManager',
+                'identity_class' => 'Admin\Entity\Usuario',
+                'identity_property' => 'email',
+                'credential_property' => 'senha',
+            ),
+        ),
+    ));
